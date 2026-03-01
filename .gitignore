@@ -7,3 +7,8 @@ dist/
 build/
 .vscode/
 .idea/
+
+# Firebase
+.firebase/
+firebase-debug.log
+.firebaserc
