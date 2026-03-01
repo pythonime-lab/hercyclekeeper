@@ -58,17 +58,8 @@ python -m http.server 8000
 # or
 npx http-server
 
-# Visit: http://localhost:8000/public/
+# Visit: http://localhost:8000/luna-cycle/
 ```
-
-Why run locally?
-
-- To test changes before pushing to GitHub.
-- PWA features (Service Worker, installability, notifications) do not work reliably on file://.
-- A local server gives you http://localhost so behavior matches production more closely.
-
-If you just want to use Luna (not develop), open the deployed app directly:
-https://pythonime-lab.github.io/luna-cycle/
 
 ## Technical Details
 
