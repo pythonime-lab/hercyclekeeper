@@ -2694,14 +2694,30 @@
             deferredPrompt = null;
           });
         } else {
-          console.warn("No deferredPrompt - cannot install. This means:");
-          console.warn("1. beforeinstallprompt event never fired");
-          console.warn(
-            "2. Likely causes: already installed, Safari, Firefox, or not HTTPS"
-          );
-          alert(
-            "PWA installation not available in this browser/device configuration."
-          );
+          console.warn("No deferredPrompt available");
+          // App might already be installed, or check if it's installed
+          if (
+            window.navigator.standalone === true ||
+            window.matchMedia("(display-mode: standalone)").matches
+          ) {
+            // Already running as installed app
+            showModal({
+              icon: "✅",
+              title: "Already Installed",
+              msg: "Luna is already installed on your device! You can see it in your app drawer.",
+              cancelText: "",
+              confirmText: "OK",
+            });
+          } else {
+            // Show manual install instructions
+            showModal({
+              icon: "📱",
+              title: "Install Luna as App",
+              msg: 'Your browser doesn\'t support the install prompt.\n\nManual install:\n1. Tap the menu (⋮) in Chrome\n2. Tap "Install app"\n3. Confirm',
+              cancelText: "",
+              confirmText: "OK",
+            });
+          }
         }
       }
       async function testNotification() {
