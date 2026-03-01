@@ -2728,14 +2728,21 @@
           );
         }
 
-        // Fallback: show error (direct Notification API not allowed on mobile)
-        showModal({
-          icon: "⚠️",
-          title: "Service Worker Required",
-          msg: "Notifications require the Service Worker. Please make sure you're on HTTPS and the app is properly installed.",
-          cancelText: "",
-          confirmText: "OK",
-        });
+        // Fallback: use direct notification API (works on web, fails on mobile)
+        console.log("Using direct Notification API as fallback...");
+        try {
+          const notification = new Notification(title, options);
+          console.log("Direct notification created successfully");
+        } catch (err) {
+          console.error("Direct notification failed:", err);
+          showModal({
+            icon: "⚠️",
+            title: "Notification Failed",
+            msg: "Could not display notification: " + err.message,
+            cancelText: "",
+            confirmText: "OK",
+          });
+        }
       }
 
       async function scheduleNotification() {
