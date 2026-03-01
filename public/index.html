@@ -1,0 +1,3227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+    default-src 'none';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    font-src 'self' data:;
+    img-src 'self' data:;
+    connect-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'none';
+  "
+    />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Luna" />
+    <meta
+      name="description"
+      content="Luna — Private, AES-encrypted period and cycle tracker. Zero data collection. Forever free."
+    />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Luna — Private Period & Cycle Tracker" />
+    <meta
+      property="og:description"
+      content="AES-encrypted period tracker. Track your cycle with complete privacy. No accounts, no tracking, forever free."
+    />
+    <meta property="og:url" content="https://luna-cycle.app" />
+    <meta
+      property="og:image"
+      content="https://luna-cycle.app/icons/icon-192.png"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Luna — Private Period & Cycle Tracker"
+    />
+    <meta
+      name="twitter:description"
+      content="AES-encrypted period tracker with zero data collection. Track your cycle privately, forever free."
+    />
+    <meta
+      name="twitter:image"
+      content="https://luna-cycle.app/icons/icon-192.png"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://luna-cycle.app" />
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <title>Luna — Period & Cycle Calendar</title>
+
+    <!-- JSON-LD Schema for Search Engines -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Luna",
+        "description": "Private, AES-encrypted period and cycle tracker. Zero data collection, forever free.",
+        "url": "https://luna-cycle.app",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "ratingCount": "1"
+        },
+        "image": "https://luna-cycle.app/icons/icon-192.png"
+      }
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "LunaDisplay";
+        src: local("Georgia"), local("Times New Roman");
+        font-weight: 400 700;
+      }
+
+      :root {
+        --rose: #ff3d6b;
+        --rose-light: #ff7096;
+        --rose-pale: #ffe8ee;
+        --coral: #ff6b4a;
+        --amber: #ffb347;
+        --lavender: #a78bfa;
+        --teal: #2dd4bf;
+        --fertile-green: #34d399;
+        --ovulation: #f59e0b;
+        --bg: #0f0a14;
+        --bg2: #1a1025;
+        --bg3: #231530;
+        --card: #1e1428;
+        --text: #f9f0ff;
+        --text-muted: #9b89b4;
+        --border: rgba(167, 139, 250, 0.15);
+        --danger: #ff3d6b;
+        --success: #34d399;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        font-family: "DM Sans", "Segoe UI", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      #app {
+        position: relative;
+        z-index: 1;
+        max-width: 30rem;
+        margin: 0 auto;
+        padding: 0 0 6.25rem;
+      }
+
+      #lock-screen {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 300;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+      #lock-screen.hidden {
+        display: none;
+      }
+
+      .lock-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-0.5rem);
+        }
+      }
+
+      .lock-logo {
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 2.375rem;
+        background: linear-gradient(135deg, var(--rose), var(--lavender));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+      }
+      .lock-sub {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .pin-label {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+        margin-bottom: 0.625rem;
+      }
+      .pin-dots {
+        display: flex;
+        gap: 0.875rem;
+        justify-content: center;
+        margin-bottom: 1.75rem;
+      }
+      .pin-dot {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        border: 0.0625rem solid var(--text-muted);
+        background: transparent;
+        transition: all 0.2s;
+      }
+      .pin-dot.filled {
+        background: var(--rose);
+        border-color: var(--rose);
+        box-shadow: 0 0 0.625rem rgba(255, 61, 107, 0.6);
+      }
+      .pin-dot.error {
+        background: var(--danger);
+        border-color: var(--danger);
+        animation: shake 0.4s ease;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-0.375rem);
+        }
+        75% {
+          transform: translateX(0.375rem);
+        }
+      }
+
+      .numpad {
+        display: grid;
+        grid-template-columns: repeat(3, 4.5rem);
+        gap: 0.75rem;
+        justify-content: center;
+      }
+      .num-btn {
+        width: 4.5rem;
+        height: 4.5rem;
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        user-select: none;
+        color: var(--text);
+      }
+      .num-btn:active {
+        transform: scale(0.88);
+        background: rgba(255, 61, 107, 0.2);
+        border-color: var(--rose);
+      }
+      .num-btn.del {
+        font-size: 1.125rem;
+      }
+      .num-btn.empty {
+        visibility: hidden;
+      }
+
+      .lock-error {
+        margin-top: 1rem;
+        font-size: 0.8125rem;
+        color: var(--danger);
+        min-height: 1.25rem;
+        transition: opacity 0.3s;
+      }
+
+      .lock-first-time {
+        margin-top: 1.25rem;
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .lock-first-time strong {
+        color: var(--lavender);
+      }
+
+      #onboarding {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        overflow-y: auto;
+      }
+      #onboarding.hidden {
+        display: none;
+      }
+
+      .onboard-moon {
+        font-size: 4rem;
+        margin-bottom: 1.25rem;
+        animation: pulse 3s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+      }
+      .onboard-logo {
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, var(--rose), var(--lavender));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.625rem;
+      }
+      .onboard-sub {
+        font-size: 0.9375rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        max-width: 20rem;
+      }
+      .onboard-form {
+        width: 100%;
+        max-width: 21.25rem;
+        text-align: left;
+      }
+      .onboard-form label {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 0.375rem;
+      }
+      .onboard-form input {
+        width: 100%;
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 0.875rem;
+        padding: 0.875rem 1rem;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 1rem;
+        outline: none;
+        margin-bottom: 1rem;
+        -webkit-appearance: none;
+      }
+      .onboard-form input:focus {
+        border-color: rgba(255, 61, 107, 0.6);
+      }
+
+      .pin-setup-title {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        margin: 0.5rem 0 0.375rem;
+        color: var(--text);
+      }
+      .pin-setup-sub {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 0.875rem;
+        line-height: 1.5;
+      }
+
+      .setup-pin-wrap {
+        display: flex;
+        gap: 0.625rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .setup-pin-dot {
+        width: 0.875rem;
+        height: 0.875rem;
+        border-radius: 50%;
+        border: 0.125rem solid var(--text-muted);
+        background: transparent;
+        transition: all 0.2s;
+      }
+      .setup-pin-dot.filled {
+        background: var(--lavender);
+        border-color: var(--lavender);
+      }
+
+      .onboard-numpad {
+        display: grid;
+        grid-template-columns: repeat(3, 3.75rem);
+        gap: 0.625rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .onboard-numpad .num-btn {
+        width: 3.75rem;
+        height: 3.75rem;
+        font-size: 1.25rem;
+      }
+
+      .onboard-start {
+        width: 100%;
+        background: linear-gradient(135deg, var(--rose), #c82050);
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 0.375rem 1.5625rem rgba(255, 61, 107, 0.45);
+        transition: all 0.2s;
+        margin-top: 0.25rem;
+      }
+      .onboard-start:active {
+        transform: scale(0.97);
+      }
+      .onboard-start:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .privacy-note {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        margin-top: 0.875rem;
+        line-height: 1.6;
+        max-width: 20rem;
+      }
+      .privacy-note span {
+        color: var(--teal);
+      }
+
+      #timeout-banner {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 30rem;
+        background: rgba(245, 158, 11, 0.15);
+        border-bottom: 0.0625rem solid rgba(245, 158, 11, 0.4);
+        padding: 0.625rem 1rem;
+        font-size: 0.8125rem;
+        color: var(--amber);
+        display: none;
+        z-index: 99;
+        text-align: center;
+      }
+      #timeout-banner.visible {
+        display: block;
+      }
+
+      #modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(0.5rem);
+        z-index: 400;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+      }
+      #modal-overlay.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .modal-box {
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 1.5rem;
+        padding: 1.75rem 1.5rem;
+        max-width: 20rem;
+        width: 100%;
+        text-align: center;
+        transform: translateY(1.25rem);
+        transition: transform 0.25s;
+      }
+      #modal-overlay.visible .modal-box {
+        transform: translateY(0);
+      }
+      .modal-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .modal-title {
+        font-family: Georgia, serif;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .modal-msg {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 1.375rem;
+      }
+      .modal-btns {
+        display: flex;
+        gap: 0.625rem;
+      }
+      .modal-btn {
+        flex: 1;
+        padding: 0.8125rem;
+        border-radius: 0.875rem;
+        border: none;
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .modal-btn.primary {
+        background: linear-gradient(135deg, var(--rose), #c82050);
+        color: white;
+      }
+      .modal-btn.secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+      .modal-btn:active {
+        transform: scale(0.95);
+      }
+
+      .header {
+        padding: 1.25rem 1.25rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 1.75rem;
+        background: linear-gradient(135deg, var(--rose), var(--lavender));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .status-card {
+        margin: 1.25rem 1rem 0;
+        background: linear-gradient(135deg, #2a1040 0%, #1a0828 100%);
+        border: 0.0625rem solid var(--border);
+        border-radius: 1.5rem;
+        padding: 1.375rem 1.375rem 1.25rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .status-phase {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.125rem;
+        color: var(--text-muted);
+        margin-bottom: 0.375rem;
+      }
+      .status-title {
+        font-family: Georgia, serif;
+        font-size: 1.625rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .status-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 1.125rem;
+      }
+      .status-row {
+        display: flex;
+        gap: 0.75rem;
+      }
+      .status-pill {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 0.875rem;
+        padding: 0.625rem 0.75rem;
+        text-align: center;
+      }
+      .status-pill .val {
+        font-size: 1.375rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .status-pill .lbl {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        margin-top: 0.1875rem;
+      }
+
+      .cycle-bar-wrap {
+        margin: 1.125rem 1rem 0;
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 1rem;
+        padding: 1rem 1.125rem;
+      }
+      .cycle-bar-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        margin-bottom: 0.625rem;
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+      }
+      .cycle-bar {
+        height: 0.625rem;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+      }
+      .bar-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.3125rem;
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+      }
+      .legend-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .today-marker {
+        position: absolute;
+        top: -0.1875rem;
+        width: 0.125rem;
+        height: 1rem;
+        background: white;
+        border-radius: 0.125rem;
+        box-shadow: 0 0 0.375rem rgba(255, 255, 255, 0.8);
+      }
+
+      .calendar-wrap {
+        margin: 2rem 1rem 0;
+      }
+      .cal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+      .cal-month {
+        font-family: Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+      .cal-nav {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .cal-nav-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 0.625rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.2s;
+        color: var(--text);
+      }
+      .cal-nav-btn:active {
+        transform: scale(0.9);
+        background: var(--rose);
+      }
+      .cal-weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        padding: 0 0.125rem;
+      }
+      .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.1875rem;
+        padding: 0 0.125rem;
+      }
+      .cal-day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.18s;
+        user-select: none;
+      }
+      .cal-day:active {
+        transform: scale(0.85);
+      }
+      .cal-day.empty {
+        pointer-events: none;
+      }
+      .cal-day.other-month {
+        color: rgba(255, 255, 255, 0.2);
+      }
+      .cal-day.period {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 61, 107, 0.85),
+          rgba(255, 107, 74, 0.85)
+        );
+        color: white;
+        box-shadow: 0 0.125rem 0.625rem rgba(255, 61, 107, 0.4);
+      }
+      .cal-day.fertile {
+        background: rgba(52, 211, 153, 0.2);
+        color: #34d399;
+        border: 0.09375rem solid rgba(52, 211, 153, 0.4);
+      }
+      .cal-day.ovulation {
+        background: rgba(245, 158, 11, 0.85);
+        color: white;
+        box-shadow: 0 0.125rem 0.75rem rgba(245, 158, 11, 0.5);
+      }
+      .cal-day.predicted-period {
+        background: rgba(255, 61, 107, 0.15);
+        color: var(--rose-light);
+        border: 0.09375rem dashed rgba(255, 61, 107, 0.5);
+      }
+      .cal-day.today::after {
+        content: "";
+        position: absolute;
+        bottom: 0.125rem;
+        width: 0.25rem;
+        height: 0.25rem;
+        background: white;
+        border-radius: 50%;
+      }
+      .cal-day.has-log::before {
+        content: "";
+        position: absolute;
+        top: 0.125rem;
+        right: 0.125rem;
+        width: 0.3125rem;
+        height: 0.3125rem;
+        background: var(--lavender);
+        border-radius: 50%;
+      }
+      .cal-day.selected-log {
+        box-shadow: 0 0 0 0.15625rem var(--lavender);
+      }
+
+      .log-panel {
+        margin: 0.875rem 1rem 0;
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 1.25rem;
+        padding: 1.125rem;
+        display: none;
+        animation: slideUp 0.25s ease;
+      }
+      .log-panel.visible {
+        display: block;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(0.75rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .log-date-title {
+        font-family: Georgia, serif;
+        font-size: 1.125rem;
+        margin-bottom: 0.875rem;
+      }
+      .log-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 0.875rem;
+      }
+      .log-btn {
+        padding: 0.625rem 0.375rem;
+        border-radius: 0.75rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.06);
+        border: 0.09375rem solid var(--border);
+        cursor: pointer;
+        font-size: 0.75rem;
+        transition: all 0.2s;
+        user-select: none;
+      }
+      .log-btn .icon {
+        font-size: 1.25rem;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+      .log-btn:active {
+        transform: scale(0.93);
+      }
+      .log-btn.active-flow {
+        border-color: var(--rose);
+        background: rgba(255, 61, 107, 0.15);
+        color: var(--rose-light);
+      }
+      .log-btn.active-symptom {
+        border-color: var(--lavender);
+        background: rgba(167, 139, 250, 0.15);
+        color: var(--lavender);
+      }
+      .log-btn.active-mood {
+        border-color: var(--teal);
+        background: rgba(45, 212, 191, 0.15);
+        color: var(--teal);
+      }
+      .log-note {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 0.0625rem solid var(--border);
+        border-radius: 0.75rem;
+        padding: 0.625rem 0.875rem;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.875rem;
+        resize: none;
+        outline: none;
+        margin-bottom: 0.625rem;
+      }
+      .log-note:focus {
+        border-color: rgba(167, 139, 250, 0.5);
+      }
+      .log-save-btn {
+        width: 100%;
+        background: linear-gradient(135deg, var(--rose), #c82050);
+        color: white;
+        border: none;
+        border-radius: 0.875rem;
+        padding: 0.8125rem;
+        font-family: inherit;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 0.25rem 0.9375rem rgba(255, 61, 107, 0.3);
+      }
+      .log-save-btn:active {
+        transform: scale(0.97);
+      }
+      .note-limit {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        text-align: right;
+        margin-top: -0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .insights-wrap {
+        margin: 1rem 1rem 0;
+        display: none;
+      }
+      .insights-wrap.visible {
+        display: block;
+      }
+      .insight-card {
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 1.25rem;
+        padding: 1.125rem;
+        margin-bottom: 0.75rem;
+      }
+      .insight-card h3 {
+        font-family: Georgia, serif;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.625rem;
+      }
+      .stat-box {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 0.875rem;
+        padding: 0.875rem;
+        text-align: center;
+      }
+      .stat-box .big {
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+      }
+      .stat-box .sm {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+      }
+      .history-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.625rem 0;
+        border-bottom: 0.0625rem solid var(--border);
+        font-size: 0.875rem;
+      }
+      .history-row:last-child {
+        border-bottom: none;
+      }
+      .history-len {
+        font-weight: 600;
+        padding: 0.1875rem 0.625rem;
+        border-radius: 0.5rem;
+        font-size: 0.8125rem;
+      }
+      .info-box {
+        background: rgba(167, 139, 250, 0.1);
+        border: 0.0625rem solid rgba(167, 139, 250, 0.25);
+        border-radius: 0.875rem;
+        padding: 0.875rem;
+        font-size: 0.8125rem;
+        color: #c4b5fd;
+        line-height: 1.6;
+      }
+
+      .settings-wrap {
+        margin: 1rem 1rem 0;
+        display: none;
+      }
+      .settings-wrap.visible {
+        display: block;
+      }
+      .settings-section {
+        background: var(--card);
+        border: 0.0625rem solid var(--border);
+        border-radius: 1.25rem;
+        padding: 1.125rem;
+        margin-bottom: 0.75rem;
+      }
+      .settings-section h3 {
+        font-family: Georgia, serif;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      .field-label {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+        margin-bottom: 0.375rem;
+      }
+      .field-input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 0.0625rem solid var(--border);
+        border-radius: 0.75rem;
+        padding: 0.75rem 0.875rem;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.9375rem;
+        outline: none;
+        margin-bottom: 0.875rem;
+        -webkit-appearance: none;
+      }
+      .field-input:focus {
+        border-color: rgba(255, 61, 107, 0.5);
+      }
+      .apply-btn {
+        width: 100%;
+        background: linear-gradient(135deg, var(--rose), #c82050);
+        color: white;
+        border: none;
+        border-radius: 0.875rem;
+        padding: 0.8125rem;
+        font-family: inherit;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 0.25rem 0.9375rem rgba(255, 61, 107, 0.3);
+      }
+      .apply-btn:active {
+        transform: scale(0.97);
+      }
+      .danger-btn {
+        width: 100%;
+        background: rgba(255, 61, 107, 0.1);
+        border: 0.0625rem solid rgba(255, 61, 107, 0.4);
+        color: var(--rose);
+        border-radius: 0.875rem;
+        padding: 0.8125rem;
+        font-family: inherit;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 0.625rem;
+      }
+      .danger-btn:active {
+        transform: scale(0.97);
+      }
+      .sec-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        background: rgba(52, 211, 153, 0.12);
+        border: 0.0625rem solid rgba(52, 211, 153, 0.3);
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.625rem;
+        font-size: 0.6875rem;
+        color: var(--teal);
+        margin-bottom: 0.75rem;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 30rem;
+        background: rgba(26, 16, 37, 0.92);
+        backdrop-filter: blur(1.25rem);
+        -webkit-backdrop-filter: blur(1.25rem);
+        border-top: 0.0625rem solid var(--border);
+        display: flex;
+        padding: 0.625rem 0 max(0.625rem, env(safe-area-inset-bottom));
+        z-index: 100;
+      }
+      .bnav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1875rem;
+        cursor: pointer;
+        font-size: 0.625rem;
+        color: var(--text-muted);
+        transition: all 0.2s;
+        user-select: none;
+        padding: 0.25rem 0;
+      }
+      .bnav-item .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+        line-height: 1;
+      }
+      .bnav-item.active {
+        color: var(--rose-light);
+      }
+
+      @media (min-width: 600px) {
+        #app,
+        .bottom-nav {
+          max-width: 37.5rem;
+        }
+        .cal-day {
+          font-size: 0.9375rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="timeout-banner">
+      ⏱️ Session expires in <span id="timeout-count">60</span>s of inactivity —
+      tap to reset
+    </div>
+
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-icon" id="modal-icon">⚠️</div>
+        <div class="modal-title" id="modal-title">Are you sure?</div>
+        <div class="modal-msg" id="modal-msg"></div>
+        <div class="modal-btns">
+          <button class="modal-btn secondary" id="modal-cancel">Cancel</button>
+          <button class="modal-btn primary" id="modal-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="lock-screen">
+      <div class="lock-icon" id="lock-icon">🔐</div>
+      <div class="lock-logo">Luna</div>
+      <div class="lock-sub" id="lock-sub">
+        Enter your PIN to unlock<br />your private health data
+      </div>
+      <div class="pin-label" id="pin-label">PIN</div>
+      <div class="pin-dots" id="pin-dots">
+        <div class="pin-dot" id="d0"></div>
+        <div class="pin-dot" id="d1"></div>
+        <div class="pin-dot" id="d2"></div>
+        <div class="pin-dot" id="d3"></div>
+      </div>
+      <div class="numpad" id="numpad">
+        <div class="num-btn" onclick="pinInput('1')">1</div>
+        <div class="num-btn" onclick="pinInput('2')">2</div>
+        <div class="num-btn" onclick="pinInput('3')">3</div>
+        <div class="num-btn" onclick="pinInput('4')">4</div>
+        <div class="num-btn" onclick="pinInput('5')">5</div>
+        <div class="num-btn" onclick="pinInput('6')">6</div>
+        <div class="num-btn" onclick="pinInput('7')">7</div>
+        <div class="num-btn" onclick="pinInput('8')">8</div>
+        <div class="num-btn" onclick="pinInput('9')">9</div>
+        <div class="num-btn empty"></div>
+        <div class="num-btn" onclick="pinInput('0')">0</div>
+        <div class="num-btn del" onclick="pinDelete()">⌫</div>
+      </div>
+      <div class="lock-error" id="lock-error"></div>
+      <div style="text-align: center; margin-top: 1.25rem">
+        <button
+          onclick="forgotPinFlow()"
+          style="
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+          "
+        >
+          Forgot PIN?
+        </button>
+      </div>
+    </div>
+
+    <!-- ONBOARDING -->
+    <div id="onboarding" class="hidden">
+      <div class="onboard-moon">🌙</div>
+      <div class="onboard-logo">Luna</div>
+      <p class="onboard-sub">
+        Your private cycle companion. 100% free. Encrypted on your device.
+      </p>
+      <div class="onboard-form">
+        <label>First day of your last period</label>
+        <input type="date" id="ob-last-period" autocomplete="off" />
+        <label>Average cycle length (days)</label>
+        <input
+          type="number"
+          id="ob-cycle-len"
+          value="28"
+          min="20"
+          max="45"
+          autocomplete="off"
+        />
+        <label>Average period duration (days)</label>
+        <input
+          type="number"
+          id="ob-period-dur"
+          value="5"
+          min="1"
+          max="10"
+          autocomplete="off"
+        />
+
+        <div class="pin-setup-title">🔒 Set a 4-digit PIN</div>
+        <div class="pin-setup-sub">
+          Your PIN encrypts all data locally.
+          <strong>Luna never sends data anywhere.</strong> If you forget your
+          PIN, data will be erased.
+        </div>
+        <div class="setup-pin-wrap" id="setup-pin-dots">
+          <div class="setup-pin-dot" id="sp0"></div>
+          <div class="setup-pin-dot" id="sp1"></div>
+          <div class="setup-pin-dot" id="sp2"></div>
+          <div class="setup-pin-dot" id="sp3"></div>
+        </div>
+        <div class="onboard-numpad">
+          <div class="num-btn" onclick="setupPinInput('1')">1</div>
+          <div class="num-btn" onclick="setupPinInput('2')">2</div>
+          <div class="num-btn" onclick="setupPinInput('3')">3</div>
+          <div class="num-btn" onclick="setupPinInput('4')">4</div>
+          <div class="num-btn" onclick="setupPinInput('5')">5</div>
+          <div class="num-btn" onclick="setupPinInput('6')">6</div>
+          <div class="num-btn" onclick="setupPinInput('7')">7</div>
+          <div class="num-btn" onclick="setupPinInput('8')">8</div>
+          <div class="num-btn" onclick="setupPinInput('9')">9</div>
+          <div class="num-btn empty"></div>
+          <div class="num-btn" onclick="setupPinInput('0')">0</div>
+          <div class="num-btn del" onclick="setupPinDelete()">⌫</div>
+        </div>
+        <button
+          class="onboard-start"
+          id="onboard-start-btn"
+          onclick="startApp()"
+          disabled
+        >
+          Begin my journey ✨
+        </button>
+      </div>
+      <p class="privacy-note">
+        🔒 <span>AES-256-GCM encrypted.</span> Data never leaves your device. No
+        accounts, no tracking, forever free.
+      </p>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="app" style="display: none">
+      <div class="header">
+        <div class="logo">Luna</div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-phase" id="status-phase">Current Phase</div>
+        <div class="status-title" id="status-title">—</div>
+        <div class="status-subtitle" id="status-subtitle">Loading…</div>
+        <div class="status-row">
+          <div class="status-pill">
+            <div class="val" id="cycle-day">—</div>
+            <div class="lbl">Cycle Day</div>
+          </div>
+          <div class="status-pill">
+            <div class="val" id="days-until-next">—</div>
+            <div class="lbl">Until Next</div>
+          </div>
+          <div class="status-pill">
+            <div class="val" id="cycle-len-disp">—</div>
+            <div class="lbl">Avg Length</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle-bar-wrap">
+        <div class="cycle-bar-labels">
+          <span>Day 1</span><span id="bar-cycle-end">Day 28</span>
+        </div>
+        <div class="cycle-bar" id="cycle-bar"></div>
+        <div class="bar-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--rose)"></div>
+            Period
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-dot"
+              style="background: var(--fertile-green)"
+            ></div>
+            Fertile
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--ovulation)"></div>
+            Ovulation
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--lavender)"></div>
+            Luteal
+          </div>
+        </div>
+      </div>
+
+      <!-- CALENDAR VIEW -->
+      <div id="view-calendar">
+        <div class="calendar-wrap">
+          <div class="cal-header">
+            <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+            <div class="cal-month" id="cal-month-label">—</div>
+            <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <div>Su</div>
+            <div>Mo</div>
+            <div>Tu</div>
+            <div>We</div>
+            <div>Th</div>
+            <div>Fr</div>
+            <div>Sa</div>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="log-panel" id="log-panel">
+          <div class="log-date-title" id="log-panel-date">Log for Today</div>
+          <div class="log-options">
+            <div class="log-btn" id="log-flow" onclick="toggleLog('flow')">
+              <span class="icon">🩸</span>Flow
+            </div>
+            <div class="log-btn" id="log-cramp" onclick="toggleLog('cramp')">
+              <span class="icon">⚡</span>Cramps
+            </div>
+            <div
+              class="log-btn"
+              id="log-headache"
+              onclick="toggleLog('headache')"
+            >
+              <span class="icon">🤯</span>Headache
+            </div>
+            <div
+              class="log-btn"
+              id="log-bloating"
+              onclick="toggleLog('bloating')"
+            >
+              <span class="icon">💨</span>Bloating
+            </div>
+            <div
+              class="log-btn"
+              id="log-mood-happy"
+              onclick="toggleLog('mood-happy')"
+            >
+              <span class="icon">😊</span>Happy
+            </div>
+            <div
+              class="log-btn"
+              id="log-mood-low"
+              onclick="toggleLog('mood-low')"
+            >
+              <span class="icon">😔</span>Low Mood
+            </div>
+          </div>
+          <textarea
+            class="log-note"
+            id="log-note"
+            rows="2"
+            placeholder="Add a note…"
+            maxlength="500"
+            oninput="updateNoteCount()"
+          ></textarea>
+          <div class="note-limit" id="note-limit">0 / 500</div>
+          <button class="log-save-btn" onclick="saveLog()">Save Entry</button>
+        </div>
+      </div>
+
+      <!-- INSIGHTS VIEW -->
+      <div class="insights-wrap" id="view-insights">
+        <div class="insight-card">
+          <h3>📈 Cycle Stats</h3>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div class="big" id="avg-cycle" style="color: var(--rose)">—</div>
+              <div class="sm">Avg Length</div>
+            </div>
+            <div class="stat-box">
+              <div class="big" id="avg-period" style="color: var(--lavender)">
+                —
+              </div>
+              <div class="sm">Avg Period</div>
+            </div>
+            <div class="stat-box">
+              <div class="big" id="tracked-cycles" style="color: var(--teal)">
+                —
+              </div>
+              <div class="sm">Cycles Logged</div>
+            </div>
+            <div class="stat-box">
+              <div
+                class="big"
+                id="fertile-window"
+                style="color: var(--fertile-green)"
+              >
+                —
+              </div>
+              <div class="sm">Fertile Days</div>
+            </div>
+          </div>
+        </div>
+        <div class="insight-card">
+          <h3>How Luna Works</h3>
+          <div class="info-box">
+            Luna estimates your fertile window by tracking cycle patterns.
+            <strong>Ovulation</strong> is estimated ~14 days before your next
+            period. <strong>Fertile days</strong> are calculated as day 8
+            through (cycle length − 11).<br /><br />
+            For regular 28-day cycles, this means days 8–17 are typically
+            fertile, with ovulation around day 14.<br /><br />
+            ⚠️ <strong>This is an estimation tool only.</strong> Not for
+            contraception. Stress, illness &amp; medications can shift timing.
+          </div>
+        </div>
+        <div class="insight-card">
+          <h3>Cycle History</h3>
+          <div id="cycle-history">
+            <p style="color: var(--text-muted); font-size: 0.875rem">
+              No history yet.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS VIEW -->
+      <div class="settings-wrap" id="view-settings">
+        <div class="settings-section">
+          <h3>Cycle Settings</h3>
+          <div class="field-label">Last period start date</div>
+          <input
+            class="field-input"
+            type="date"
+            id="s-last-period"
+            autocomplete="off"
+          />
+          <div class="field-label">Average cycle length (days)</div>
+          <input
+            class="field-input"
+            type="number"
+            id="s-cycle-len"
+            min="20"
+            max="45"
+            autocomplete="off"
+          />
+          <div class="field-label">Period duration (days)</div>
+          <input
+            class="field-input"
+            type="number"
+            id="s-period-dur"
+            min="1"
+            max="10"
+            autocomplete="off"
+          />
+          <button class="apply-btn" onclick="applySettings()">
+            Update Predictions
+          </button>
+        </div>
+        <div class="settings-section">
+          <h3>Notifications</h3>
+          <div class="field-label">Notify me before period starts</div>
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem">
+            <label
+              style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="radio"
+                name="notif-days"
+                value="0"
+                id="notif-0"
+                onchange="updateNotificationPref(0)"
+                style="cursor: pointer"
+              />
+              <span>Off</span>
+            </label>
+            <label
+              style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="radio"
+                name="notif-days"
+                value="1"
+                id="notif-1"
+                onchange="updateNotificationPref(1)"
+                style="cursor: pointer"
+              />
+              <span>1 day</span>
+            </label>
+            <label
+              style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="radio"
+                name="notif-days"
+                value="2"
+                id="notif-2"
+                onchange="updateNotificationPref(2)"
+                style="cursor: pointer"
+              />
+              <span>2 days</span>
+            </label>
+            <label
+              style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="radio"
+                name="notif-days"
+                value="3"
+                id="notif-3"
+                onchange="updateNotificationPref(3)"
+                style="cursor: pointer"
+              />
+              <span>3 days</span>
+            </label>
+          </div>
+          <div
+            class="info-box"
+            style="
+              font-size: 0.75rem;
+              margin-bottom: 0.75rem;
+              color: var(--text-muted);
+            "
+          >
+            💡 Notifications use your device's settings. You control when and
+            how you're reminded.
+          </div>
+          <button
+            class="apply-btn"
+            onclick="testNotification()"
+            style="
+              background: linear-gradient(135deg, var(--amber), #f59e0b);
+              font-size: 0.8125rem;
+              padding: 0.5rem 1rem;
+            "
+          >
+            Test Notification
+          </button>
+        </div>
+        <div class="settings-section">
+          <h3>Security &amp; Privacy</h3>
+          <div class="sec-badge">AES-256-GCM Encrypted</div>
+          <div class="info-box" style="margin-bottom: 0.75rem">
+            All data is encrypted with your PIN before being stored. Luna uses
+            the <strong>Web Crypto API</strong> — the same standard used by
+            browsers for HTTPS.<br /><br />
+            Zero data is sent to any server. No accounts. No analytics.
+          </div>
+          <button
+            class="apply-btn"
+            onclick="showChangePinModal()"
+            style="
+              background: linear-gradient(135deg, var(--lavender), #6d28d9);
+              margin-bottom: 0;
+            "
+          >
+            Change PIN
+          </button>
+          <button
+            class="apply-btn"
+            onclick="exportData()"
+            style="
+              background: linear-gradient(135deg, var(--teal), #0d9488);
+              margin-top: 0.625rem;
+              margin-bottom: 0.625rem;
+            "
+          >
+            Export Encrypted Backup
+          </button>
+          <button
+            class="apply-btn"
+            onclick="importData()"
+            style="
+              background: linear-gradient(135deg, #34d399, #0d9488);
+              margin-bottom: 0;
+            "
+          >
+            Import Encrypted Backup
+          </button>
+          <button class="danger-btn" onclick="confirmClear()">
+            Erase All Data
+          </button>
+        </div>
+        <div class="settings-section">
+          <h3>Medical Disclaimer</h3>
+          <div
+            class="info-box"
+            style="
+              border-color: rgba(255, 179, 71, 0.35);
+              background: rgba(255, 179, 71, 0.08);
+              color: #fcd68a;
+              margin-bottom: 0.75rem;
+            "
+          >
+            ⚠️
+            <strong
+              >This app provides cycle estimations based on average biological
+              patterns.</strong
+            >
+            It is <em>not</em> medical advice and must not be used as a
+            substitute for professional medical consultation.<br /><br />
+            Luna predicts your cycle by tracking patterns and estimating
+            ovulation timing. Actual cycle timing can vary due to stress,
+            illness, medications, and many other factors.<br /><br />
+            Do <strong>not</strong> use this app as a contraceptive or fertility
+            guarantee. Always consult a qualified healthcare professional for
+            medical decisions.
+          </div>
+          <div
+            class="info-box"
+            style="
+              border-color: rgba(52, 211, 153, 0.3);
+              background: rgba(52, 211, 153, 0.07);
+              color: #6ee7b7;
+            "
+          >
+            <strong>Privacy Guarantee</strong><br /><br />
+            Luna collects <strong>zero data</strong>. This app:<br />
+            &nbsp;• Stores all data locally on your device only<br />
+            &nbsp;• Has no servers, no accounts, no cloud storage<br />
+            &nbsp;• Has no analytics, no tracking, no telemetry<br />
+            &nbsp;• Has no ads, no third-party code<br />
+            &nbsp;• Never transmits any data anywhere<br />
+            &nbsp;• Is encrypted with your PIN via AES-256-GCM<br /><br />
+            Your health data is yours alone.
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3>About Luna</h3>
+          <div class="info-box">
+            Luna is free software built with care for privacy. Based on the
+            <strong>Calendar Rhythm Method</strong> and
+            <strong>Standard Days Method</strong> for cycle estimation. For
+            informational purposes only.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav" id="bottom-nav" style="display: none">
+      <div
+        class="bnav-item active"
+        id="bnav-calendar"
+        onclick="switchTab('calendar')"
+      >
+        <span class="icon"
+          ><svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="1.5"
+            fill="none"
+            stroke-linecap="round"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line></svg></span
+        >Calendar
+      </div>
+      <div class="bnav-item" id="bnav-insights" onclick="switchTab('insights')">
+        <span class="icon"
+          ><svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 21H3.8a.8.8 0 0 1-.8-.8V3"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+            ></path>
+            <path
+              d="M5.47 13.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06ZM10 10l.53-.53a.75.75 0 0 0-1.06 0L10 10Zm4 4-.53.53a.75.75 0 0 0 1.06 0L14 14Zm7.53-6.47a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-15 7 4-4-1.06-1.06-4 4 1.06 1.06Zm2.94-4 4 4 1.06-1.06-4-4-1.06 1.06Zm5.06 4 7-7-1.06-1.06-7 7 1.06 1.06Z"
+              stroke="currentColor"
+              stroke-width="1"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path></svg></span
+        >Insights
+      </div>
+      <div class="bnav-item" id="bnav-settings" onclick="switchTab('settings')">
+        <span class="icon"
+          ><svg viewBox="0 0 50 50" width="24" height="24" fill="currentColor">
+            <path
+              d="M 22.205078 2 A 1.0001 1.0001 0 0 0 21.21875 2.8378906 L 20.246094 8.7929688 C 19.076509 9.1331971 17.961243 9.5922728 16.910156 10.164062 L 11.996094 6.6542969 A 1.0001 1.0001 0 0 0 10.708984 6.7597656 L 6.8183594 10.646484 A 1.0001 1.0001 0 0 0 6.7070312 11.927734 L 10.164062 16.873047 C 9.583454 17.930271 9.1142098 19.051824 8.765625 20.232422 L 2.8359375 21.21875 A 1.0001 1.0001 0 0 0 2.0019531 22.205078 L 2.0019531 27.705078 A 1.0001 1.0001 0 0 0 2.8261719 28.691406 L 8.7597656 29.742188 C 9.1064607 30.920739 9.5727226 32.043065 10.154297 33.101562 L 6.6542969 37.998047 A 1.0001 1.0001 0 0 0 6.7597656 39.285156 L 10.648438 43.175781 A 1.0001 1.0001 0 0 0 11.927734 43.289062 L 16.882812 39.820312 C 17.936999 40.39548 19.054994 40.857928 20.228516 41.201172 L 21.21875 47.164062 A 1.0001 1.0001 0 0 0 22.205078 48 L 27.705078 48 A 1.0001 1.0001 0 0 0 28.691406 47.173828 L 29.751953 41.1875 C 30.920633 40.838997 32.033372 40.369697 33.082031 39.791016 L 38.070312 43.291016 A 1.0001 1.0001 0 0 0 39.351562 43.179688 L 43.240234 39.287109 A 1.0001 1.0001 0 0 0 43.34375 37.996094 L 39.787109 33.058594 C 40.355783 32.014958 40.813915 30.908875 41.154297 29.748047 L 47.171875 28.693359 A 1.0001 1.0001 0 0 0 47.998047 27.707031 L 47.998047 22.207031 A 1.0001 1.0001 0 0 0 47.160156 21.220703 L 41.152344 20.238281 C 40.80968 19.078827 40.350281 17.974723 39.78125 16.931641 L 43.289062 11.933594 A 1.0001 1.0001 0 0 0 43.177734 10.652344 L 39.287109 6.7636719 A 1.0001 1.0001 0 0 0 37.996094 6.6601562 L 33.072266 10.201172 C 32.023186 9.6248101 30.909713 9.1579916 29.738281 8.8125 L 28.691406 2.828125 A 1.0001 1.0001 0 0 0 27.705078 2 L 22.205078 2 z M 23.056641 4 L 26.865234 4 L 27.861328 9.6855469 A 1.0001 1.0001 0 0 0 28.603516 10.484375 C 30.066026 10.848832 31.439607 11.426549 32.693359 12.185547 A 1.0001 1.0001 0 0 0 33.794922 12.142578 L 38.474609 8.7792969 L 41.167969 11.472656 L 37.835938 16.220703 A 1.0001 1.0001 0 0 0 37.796875 17.310547 C 38.548366 18.561471 39.118333 19.926379 39.482422 21.380859 A 1.0001 1.0001 0 0 0 40.291016 22.125 L 45.998047 23.058594 L 45.998047 26.867188 L 40.279297 27.871094 A 1.0001 1.0001 0 0 0 39.482422 28.617188 C 39.122545 30.069817 38.552234 31.434687 37.800781 32.685547 A 1.0001 1.0001 0 0 0 37.845703 33.785156 L 41.224609 38.474609 L 38.53125 41.169922 L 33.791016 37.84375 A 1.0001 1.0001 0 0 0 32.697266 37.808594 C 31.44975 38.567585 30.074755 39.148028 28.617188 39.517578 A 1.0001 1.0001 0 0 0 27.876953 40.3125 L 26.867188 46 L 23.052734 46 L 22.111328 40.337891 A 1.0001 1.0001 0 0 0 21.365234 39.53125 C 19.90185 39.170557 18.522094 38.59371 17.259766 37.835938 A 1.0001 1.0001 0 0 0 16.171875 37.875 L 11.46875 41.169922 L 8.7734375 38.470703 L 12.097656 33.824219 A 1.0001 1.0001 0 0 0 12.138672 32.724609 C 11.372652 31.458855 10.793319 30.079213 10.427734 28.609375 A 1.0001 1.0001 0 0 0 9.6328125 27.867188 L 4.0019531 26.867188 L 4.0019531 23.052734 L 9.6289062 22.117188 A 1.0001 1.0001 0 0 0 10.435547 21.373047 C 10.804273 19.898143 11.383325 18.518729 12.146484 17.255859 A 1.0001 1.0001 0 0 0 12.111328 16.164062 L 8.8261719 11.46875 L 11.523438 8.7734375 L 16.185547 12.105469 A 1.0001 1.0001 0 0 0 17.28125 12.148438 C 18.536908 11.394293 19.919867 10.822081 21.384766 10.462891 A 1.0001 1.0001 0 0 0 22.132812 9.6523438 L 23.056641 4 z M 25 17 C 20.593567 17 17 20.593567 17 25 C 17 29.406433 20.593567 33 25 33 C 29.406433 33 33 29.406433 33 25 C 33 20.593567 29.406433 17 25 17 z M 25 19 C 28.325553 19 31 21.674447 31 25 C 31 28.325553 28.325553 31 25 31 C 21.674447 31 19 28.325553 19 25 C 19 21.674447 21.674447 19 25 19 z"
+            ></path></svg></span
+        >Settings
+      </div>
+    </div>
+
+    <script>
+      "use strict";
+
+      const STORE_KEY = "luna_enc_v1"; // encrypted blob
+      const SALT_KEY = "luna_salt_v1"; // random salt (not secret)
+      const PINHASH_KEY = "luna_ph_v1"; // HMAC of PIN for fast wrong-PIN detection
+      const SCHEMA_VERSION = 1; // bump when state shape changes
+
+      async function deriveKey(pin, salt) {
+        const enc = new TextEncoder();
+        const keyMat = await crypto.subtle.importKey(
+          "raw",
+          enc.encode(pin),
+          "PBKDF2",
+          false,
+          ["deriveKey"]
+        );
+        return crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt, iterations: 250000, hash: "SHA-256" }, // ← 250k
+          keyMat,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["encrypt", "decrypt"]
+        );
+      }
+
+      async function encryptData(data, pin, salt) {
+        const key = await deriveKey(pin, salt);
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const enc = new TextEncoder();
+        // Schema envelope: version + payload. Allows future migrations.
+        const envelope = JSON.stringify({ v: SCHEMA_VERSION, payload: data });
+        const ct = await crypto.subtle.encrypt(
+          { name: "AES-GCM", iv },
+          key,
+          enc.encode(envelope)
+        );
+        const combined = new Uint8Array(iv.byteLength + ct.byteLength);
+        combined.set(iv, 0);
+        combined.set(new Uint8Array(ct), iv.byteLength);
+        return btoa(String.fromCharCode(...combined));
+      }
+
+      async function decryptData(b64, pin, salt) {
+        const key = await deriveKey(pin, salt);
+        const combined = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+        const iv = combined.slice(0, 12);
+        const ct = combined.slice(12);
+        const pt = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv },
+          key,
+          ct
+        );
+        const parsed = JSON.parse(new TextDecoder().decode(pt));
+        // Schema version gate — future-proof for data shape changes
+        if (parsed.v === undefined) {
+          // Legacy blob (pre-schema): treat entire object as payload
+          return parsed;
+        }
+        if (parsed.v !== SCHEMA_VERSION) {
+          throw new Error(
+            `Unsupported data schema version: ${parsed.v}. Please update the app.`
+          );
+        }
+        return parsed.payload;
+      }
+
+      async function hashPin(pin, salt) {
+        const enc = new TextEncoder();
+        const keyMat = await crypto.subtle.importKey(
+          "raw",
+          enc.encode(pin),
+          { name: "HMAC", hash: "SHA-256" },
+          false,
+          ["sign"]
+        );
+        const sig = await crypto.subtle.sign("HMAC", keyMat, salt);
+        return btoa(String.fromCharCode(...new Uint8Array(sig)));
+      }
+
+      function getOrCreateSalt() {
+        let s = localStorage.getItem(SALT_KEY);
+        if (s) return Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        localStorage.setItem(SALT_KEY, btoa(String.fromCharCode(...salt)));
+        return salt;
+      }
+
+      let state = {
+        lastPeriodStart: null,
+        cycleLength: 28,
+        periodDuration: 5,
+        logs: {},
+        cycleHistory: [],
+        notificationDaysBefore: 0, // 0, 1, 2, or 3 days
+      };
+
+      let sessionPin = null; // PIN held only in JS memory (never persisted)
+      let viewMonth = new Date();
+      let selectedDate = null;
+      let currentTab = "calendar";
+
+      const SESSION_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+      const WARN_AT_MS = SESSION_TIMEOUT_MS - 60000; // warn at 4 min
+      let sessionTimer = null;
+      let warnTimer = null;
+      let lastActivity = Date.now();
+
+      function resetSessionTimer() {
+        lastActivity = Date.now();
+        clearTimeout(sessionTimer);
+        clearTimeout(warnTimer);
+        hideBanner();
+        warnTimer = setTimeout(() => {
+          document.getElementById("timeout-banner").classList.add("visible");
+          startCountdown(60);
+        }, WARN_AT_MS);
+        sessionTimer = setTimeout(() => {
+          lockApp();
+        }, SESSION_TIMEOUT_MS);
+      }
+
+      let countdownInterval = null;
+      function startCountdown(seconds) {
+        clearInterval(countdownInterval);
+        let s = seconds;
+        document.getElementById("timeout-count").textContent = s;
+        countdownInterval = setInterval(() => {
+          s--;
+          document.getElementById("timeout-count").textContent = s;
+          if (s <= 0) clearInterval(countdownInterval);
+        }, 1000);
+      }
+
+      function hideBanner() {
+        document.getElementById("timeout-banner").classList.remove("visible");
+        clearInterval(countdownInterval);
+      }
+
+      // Reset on any user interaction
+      [
+        "touchstart",
+        "touchend",
+        "click",
+        "keydown",
+        "mousemove",
+        "scroll",
+      ].forEach((ev) =>
+        document.addEventListener(
+          ev,
+          () => {
+            if (sessionPin) resetSessionTimer();
+          },
+          { passive: true }
+        )
+      );
+      document
+        .getElementById("timeout-banner")
+        .addEventListener("click", () => {
+          hideBanner();
+          resetSessionTimer();
+        });
+
+      function showModal({
+        icon = "⚠️",
+        title = "",
+        msg = "",
+        confirmText = "Confirm",
+        cancelText = "Cancel",
+        onConfirm,
+        onCancel,
+      } = {}) {
+        document.getElementById("modal-icon").textContent = icon;
+        document.getElementById("modal-title").textContent = title;
+        document.getElementById("modal-msg").textContent = msg;
+        document.getElementById("modal-confirm").textContent = confirmText;
+        document.getElementById("modal-cancel").textContent = cancelText;
+        const overlay = document.getElementById("modal-overlay");
+        overlay.classList.add("visible");
+        document.getElementById("modal-confirm").onclick = () => {
+          overlay.classList.remove("visible");
+          onConfirm && onConfirm();
+        };
+        document.getElementById("modal-cancel").onclick = () => {
+          overlay.classList.remove("visible");
+          onCancel && onCancel();
+        };
+      }
+
+      let pinBuffer = "";
+      let pinAttempts = 0;
+      let pinLockUntil = 0; // timestamp: locked until this ms (brute-force delay)
+      const MAX_ATTEMPTS = 5;
+      const LOCKOUT_MS = 60000; // 60-second lockout after 5 failed attempts
+
+      function updatePinDots(buf, prefix = "d") {
+        for (let i = 0; i < 4; i++) {
+          const el = document.getElementById(prefix + i);
+          if (!el) return;
+          el.classList.toggle("filled", i < buf.length);
+        }
+      }
+
+      function pinInput(digit) {
+        if (pinBuffer.length >= 4) return;
+        pinBuffer += digit;
+        updatePinDots(pinBuffer);
+        if (pinBuffer.length === 4) submitPin();
+      }
+
+      function pinDelete() {
+        pinBuffer = pinBuffer.slice(0, -1);
+        updatePinDots(pinBuffer);
+        document.getElementById("lock-error").textContent = "";
+      }
+
+      async function submitPin() {
+        const pin = pinBuffer;
+        pinBuffer = "";
+        updatePinDots("");
+
+        // Brute-force time-delay: refuse entry while locked out
+        if (pinLockUntil && Date.now() < pinLockUntil) {
+          const secsLeft = Math.ceil((pinLockUntil - Date.now()) / 1000);
+          document.getElementById(
+            "lock-error"
+          ).textContent = `Too many attempts. Try again in ${secsLeft}s.`;
+          return;
+        }
+
+        const salt = getOrCreateSalt();
+        const storedHash = localStorage.getItem(PINHASH_KEY);
+        const attemptHash = await hashPin(pin, salt);
+
+        if (attemptHash !== storedHash) {
+          pinAttempts++;
+          const remaining = MAX_ATTEMPTS - pinAttempts;
+          const dots = document.querySelectorAll("#pin-dots .pin-dot");
+          dots.forEach((d) => {
+            d.classList.add("error");
+            setTimeout(() => d.classList.remove("error"), 500);
+          });
+          if (remaining <= 0) {
+            pinLockUntil = Date.now() + LOCKOUT_MS;
+            document.getElementById("lock-error").textContent =
+              "🚫 Too many attempts. Locked for 60 seconds.";
+            setTimeout(() => {
+              // After lockout period: reset and allow retry without erasing
+              pinAttempts = 0;
+              pinLockUntil = 0;
+              document.getElementById("lock-error").textContent =
+                "Lockout ended. Try again.";
+            }, LOCKOUT_MS);
+          } else {
+            document.getElementById(
+              "lock-error"
+            ).textContent = `Incorrect PIN. ${remaining} attempt${
+              remaining === 1 ? "" : "s"
+            } remaining.`;
+          }
+          return;
+        }
+
+        // PIN correct — decrypt data
+        const blob = localStorage.getItem(STORE_KEY);
+        if (blob) {
+          try {
+            state = await decryptData(blob, pin, salt);
+          } catch {
+            document.getElementById("lock-error").textContent =
+              "Decryption failed. Data may be corrupted.";
+            return;
+          }
+        }
+        pinAttempts = 0;
+        sessionPin = pin;
+        document.getElementById("lock-screen").classList.add("hidden");
+        document.getElementById("app").style.display = "block";
+        document.getElementById("bottom-nav").style.display = "flex";
+        resetSessionTimer();
+        viewMonth = new Date();
+        updateStatusCard();
+        renderCalendar();
+        checkForUpcomingPeriod();
+        switchTab("calendar");
+      }
+
+      function lockApp() {
+        sessionPin = null;
+        state = {
+          lastPeriodStart: null,
+          cycleLength: 28,
+          periodDuration: 5,
+          logs: {},
+          cycleHistory: [],
+        };
+        clearTimeout(sessionTimer);
+        clearTimeout(warnTimer);
+        clearInterval(countdownInterval);
+        hideBanner();
+        document.getElementById("app").style.display = "none";
+        document.getElementById("bottom-nav").style.display = "none";
+        document.getElementById("lock-screen").classList.remove("hidden");
+        document.getElementById("log-panel").classList.remove("visible");
+        pinBuffer = "";
+        updatePinDots("");
+        document.getElementById("lock-error").textContent = "";
+      }
+
+      function forgotPinFlow() {
+        showModal({
+          icon: "⚠️",
+          title: "Forgot PIN?",
+          msg: "This will permanently erase all your cycle data and reset Luna. This cannot be undone. Are you sure?",
+          confirmText: "Yes, erase and reset",
+          cancelText: "Cancel",
+          onConfirm: () => {
+            localStorage.clear();
+            sessionStorage.clear();
+            state = {
+              lastPeriodStart: null,
+              cycleLength: 28,
+              periodDuration: 5,
+              logs: {},
+              cycleHistory: [],
+            };
+            pinAttempts = 0;
+            pinLockUntil = 0;
+            sessionPin = null;
+            document.getElementById("lock-screen").classList.add("hidden");
+            document.getElementById("onboarding").classList.remove("hidden");
+            document.getElementById("app").style.display = "none";
+            document.getElementById("bottom-nav").style.display = "none";
+            document.getElementById("lock-error").textContent = "";
+            showModal({
+              icon: "✅",
+              title: "Reset Complete",
+              msg: "Luna has been reset. Please set a new PIN to get started.",
+              cancelText: "",
+              confirmText: "OK",
+            });
+          },
+        });
+      }
+
+      async function save() {
+        if (!sessionPin) return;
+        const salt = getOrCreateSalt();
+        const enc = await encryptData(state, sessionPin, salt);
+        localStorage.setItem(STORE_KEY, enc);
+      }
+
+      let setupPin = "";
+
+      function setupPinInput(digit) {
+        if (setupPin.length >= 4) return;
+        setupPin += digit;
+        for (let i = 0; i < 4; i++) {
+          const el = document.getElementById("sp" + i);
+          if (el) el.classList.toggle("filled", i < setupPin.length);
+        }
+        if (setupPin.length === 4) {
+          document.getElementById("onboard-start-btn").disabled = false;
+        }
+      }
+
+      function setupPinDelete() {
+        setupPin = setupPin.slice(0, -1);
+        for (let i = 0; i < 4; i++) {
+          const el = document.getElementById("sp" + i);
+          if (el) el.classList.toggle("filled", i < setupPin.length);
+        }
+        document.getElementById("onboard-start-btn").disabled = true;
+      }
+
+      async function startApp() {
+        const lp = document.getElementById("ob-last-period").value;
+        const cl = parseInt(document.getElementById("ob-cycle-len").value);
+        const pd = parseInt(document.getElementById("ob-period-dur").value);
+        if (!lp) {
+          showModal({
+            icon: "📅",
+            title: "Missing Date",
+            msg: "Please enter the first day of your last period.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+        if (setupPin.length < 4) {
+          showModal({
+            icon: "🔢",
+            title: "Set a PIN",
+            msg: "Enter a 4-digit PIN to protect your data.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+
+        state.lastPeriodStart = lp;
+        state.cycleLength = cl || 28;
+        state.periodDuration = pd || 5;
+        state.cycleHistory = [{ start: lp, length: cl || 28 }];
+        sessionPin = setupPin;
+
+        const salt = getOrCreateSalt();
+        const pinHash = await hashPin(setupPin, salt);
+        localStorage.setItem(PINHASH_KEY, pinHash);
+        await save();
+
+        document.getElementById("onboarding").classList.add("hidden");
+        document.getElementById("lock-screen").classList.add("hidden");
+        document.getElementById("app").style.display = "block";
+        document.getElementById("bottom-nav").style.display = "flex";
+        resetSessionTimer();
+        viewMonth = new Date();
+        updateStatusCard();
+        renderCalendar();
+        switchTab("calendar");
+      }
+
+      function toISO(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}-${String(date.getDate()).padStart(2, "0")}`;
+      }
+      function fromISO(s) {
+        const [y, m, d] = s.split("-").map(Number);
+        return new Date(y, m - 1, d);
+      }
+      function addDays(date, n) {
+        const d = new Date(date);
+        d.setDate(d.getDate() + n);
+        return d;
+      }
+      function diffDays(a, b) {
+        return Math.round((b - a) / 86400000);
+      }
+      function today() {
+        return toISO(new Date());
+      }
+
+      function getCycleInfo() {
+        if (!state.lastPeriodStart) return null;
+        const startDate = fromISO(state.lastPeriodStart);
+        const cl = state.cycleLength;
+        const pd = state.periodDuration;
+        const todayDate = new Date();
+        todayDate.setHours(0, 0, 0, 0);
+
+        let cycleStart = new Date(startDate);
+        while (addDays(cycleStart, cl) <= todayDate)
+          cycleStart = addDays(cycleStart, cl);
+
+        const cycleDay = diffDays(cycleStart, todayDate) + 1;
+        const nextPeriod = addDays(cycleStart, cl);
+        const daysUntilNext = diffDays(todayDate, nextPeriod);
+
+        // Standard Days Method: fertile days 8-19 (adjusted to cycle length)
+        const fertileStart = Math.max(8, cl - 18);
+        const fertileEnd = cl - 11;
+        const ovulationDay = cl - 14;
+
+        let phase = "Luteal";
+        let phaseColor = "var(--lavender)";
+        if (cycleDay >= 1 && cycleDay <= pd) {
+          phase = "Menstruation";
+          phaseColor = "var(--rose)";
+        } else if (cycleDay < fertileStart) {
+          phase = "Follicular";
+          phaseColor = "var(--amber)";
+        } else if (cycleDay === ovulationDay) {
+          phase = "Ovulation Day";
+          phaseColor = "var(--ovulation)";
+        } else if (cycleDay >= fertileStart && cycleDay <= fertileEnd) {
+          phase = "Fertile Window";
+          phaseColor = "var(--fertile-green)";
+        }
+
+        return {
+          cycleStart,
+          cycleDay,
+          nextPeriod,
+          daysUntilNext,
+          cl,
+          pd,
+          fertileStart,
+          fertileEnd,
+          ovulationDay,
+          phase,
+          phaseColor,
+        };
+      }
+
+      /* Build 6 predicted cycle windows starting from lastPeriodStart */
+      function calculatePredictions() {
+        if (!state.lastPeriodStart) return [];
+        const cl = state.cycleLength;
+        const pd = state.periodDuration;
+        const ovOffset = cl - 14;
+        const fertStartOff = Math.max(8, cl - 18);
+        const fertEndOff = cl - 11;
+        const base = fromISO(state.lastPeriodStart);
+        const predictions = [];
+
+        for (let i = 0; i < 6; i++) {
+          const periodStart = addDays(base, cl * i);
+          const periodEnd = addDays(periodStart, pd - 1);
+          const ovulation = addDays(periodStart, ovOffset);
+          const fertileStart = addDays(periodStart, fertStartOff);
+          const fertileEnd = addDays(periodStart, fertEndOff);
+          predictions.push({
+            periodStart,
+            periodEnd,
+            ovulation,
+            fertileStart,
+            fertileEnd,
+          });
+        }
+        return predictions;
+      }
+
+      /* Classify a date string across all 6 predicted windows */
+      function getDayType(dateStr) {
+        if (!state.lastPeriodStart) return "normal";
+        const d = fromISO(dateStr);
+        const preds = calculatePredictions();
+
+        for (const p of preds) {
+          if (d >= p.periodStart && d <= p.periodEnd) return "period";
+          if (toISO(d) === toISO(p.ovulation)) return "ovulation";
+          if (d >= p.fertileStart && d <= p.fertileEnd) return "fertile";
+        }
+        return "normal";
+      }
+
+      function isPredictedFuturePeriod(dateStr) {
+        const d = fromISO(dateStr);
+        const todayD = fromISO(today());
+        if (d <= todayD) return false;
+        return getDayType(dateStr) === "period";
+      }
+
+      function sanitize(str) {
+        if (typeof str !== "string") return "";
+        const div = document.createElement("div");
+        div.textContent = str.slice(0, 500); // hard cap
+        return div.innerHTML;
+      }
+
+      // Safe DOM text setter — uses textContent, never innerHTML for user data
+      function safeText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = String(value);
+      }
+
+      function updateNoteCount() {
+        const ta = document.getElementById("log-note");
+        const el = document.getElementById("note-limit");
+        if (ta && el) el.textContent = `${ta.value.length} / 500`;
+      }
+
+      function updateStatusCard() {
+        const info = getCycleInfo();
+        if (!info) return;
+        safeText("status-phase", "● " + info.phase.toUpperCase());
+        safeText("status-title", getPhaseMessage(info));
+        safeText("status-subtitle", getPhaseSubtitle(info));
+        safeText("cycle-day", info.cycleDay);
+        safeText(
+          "days-until-next",
+          info.daysUntilNext > 0 ? info.daysUntilNext : "Now"
+        );
+        safeText("cycle-len-disp", info.cl);
+        updateCycleBar(info);
+      }
+
+      function getPhaseMessage(info) {
+        if (info.phase === "Menstruation") return "Your period 🩸";
+        if (info.phase === "Follicular") return "Building up ✨";
+        if (info.phase === "Fertile Window") return "Fertile days 🌿";
+        if (info.phase === "Ovulation Day") return "Ovulation day 🌟";
+        return "Luteal phase 🌙";
+      }
+      function getPhaseSubtitle(info) {
+        if (info.phase === "Menstruation")
+          return `Day ${info.cycleDay} of your period`;
+        if (info.phase === "Fertile Window")
+          return `Days ${info.fertileStart}–${info.fertileEnd} are fertile`;
+        if (info.phase === "Ovulation Day") return "Peak fertility today";
+        return `Next period in ${info.daysUntilNext} days`;
+      }
+
+      function updateCycleBar(info) {
+        const bar = document.getElementById("cycle-bar");
+        safeText("bar-cycle-end", `Day ${info.cl}`);
+        const segs = [
+          { c: "linear-gradient(90deg,#FF3D6B,#FF6B4A)", w: info.pd },
+          {
+            c: "linear-gradient(90deg,#FF6B4A,#FFB347)",
+            w: info.fertileStart - info.pd - 1,
+          },
+          {
+            c: "linear-gradient(90deg,#34D399,#2DD4BF)",
+            w: info.fertileEnd - info.fertileStart + 1,
+          },
+          { c: "#F59E0B", w: 1 },
+          {
+            c: "linear-gradient(90deg,#A78BFA,#7C3AED)",
+            w: info.cl - info.fertileEnd - 1,
+          },
+        ];
+        bar.innerHTML = "";
+        let left = 0;
+        segs.forEach((s) => {
+          if (s.w <= 0) {
+            left += s.w;
+            return;
+          }
+          const seg = document.createElement("div");
+          seg.style.cssText = `position:absolute;top:0;height:100%;border-radius:999px;left:${(
+            (left / info.cl) *
+            100
+          ).toFixed(2)}%;width:${((s.w / info.cl) * 100).toFixed(
+            2
+          )}%;background:${s.c};`;
+          bar.appendChild(seg);
+          left += s.w;
+        });
+        const todayPct = ((getCycleInfo().cycleDay - 1) / info.cl) * 100;
+        if (todayPct >= 0 && todayPct <= 100) {
+          const m = document.createElement("div");
+          m.className = "today-marker";
+          m.style.left = todayPct.toFixed(2) + "%";
+          bar.appendChild(m);
+        }
+      }
+
+      function updateInsights() {
+        const info = getCycleInfo();
+        if (!info) return;
+        safeText("avg-cycle", info.cl + "d");
+        safeText("avg-period", info.pd + "d");
+        safeText("tracked-cycles", state.cycleHistory.length || 1);
+        safeText("fertile-window", info.fertileEnd - info.fertileStart + 1);
+
+        const hist = document.getElementById("cycle-history");
+        if (!state.cycleHistory || state.cycleHistory.length === 0) {
+          hist.innerHTML = "";
+          const p = document.createElement("p");
+          p.style.cssText = "color:var(--text-muted);font-size:0.875rem";
+          p.textContent =
+            "Log at least 2 period start dates to see cycle history.";
+          hist.appendChild(p);
+          return;
+        }
+        hist.innerHTML = "";
+        [...state.cycleHistory]
+          .slice(-6)
+          .reverse()
+          .forEach((c) => {
+            const row = document.createElement("div");
+            row.className = "history-row";
+            const dateSpan = document.createElement("span");
+            dateSpan.textContent = c.start; // sanitized via textContent
+            const lenSpan = document.createElement("span");
+            lenSpan.className = "history-len";
+            const col =
+              c.length < 26 ? "#34D399" : c.length > 32 ? "#FF6B4A" : "#A78BFA";
+            lenSpan.style.cssText = `background:${col}22;color:${col}`;
+            lenSpan.textContent = `${parseInt(c.length)} days`; // parseInt guards injections
+            row.appendChild(dateSpan);
+            row.appendChild(lenSpan);
+            hist.appendChild(row);
+          });
+      }
+
+      function renderCalendar() {
+        const grid = document.getElementById("cal-grid");
+        const year = viewMonth.getFullYear();
+        const month = viewMonth.getMonth();
+        const todayStr = today();
+
+        // Safe month label using Intl — no user input
+        document.getElementById("cal-month-label").textContent = new Date(
+          year,
+          month,
+          1
+        ).toLocaleString("default", { month: "long", year: "numeric" });
+
+        grid.innerHTML = "";
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+          const el = document.createElement("div");
+          el.className = "cal-day empty";
+          grid.appendChild(el);
+        }
+
+        for (let d = 1; d <= daysInMonth; d++) {
+          const dateStr = `${year}-${String(month + 1).padStart(
+            2,
+            "0"
+          )}-${String(d).padStart(2, "0")}`;
+          const cell = document.createElement("div");
+          const dayType = getDayType(dateStr);
+          let cls = "cal-day";
+          if (dayType === "period") cls += " period";
+          else if (dayType === "ovulation") cls += " ovulation";
+          else if (dayType === "fertile") cls += " fertile";
+          else if (isPredictedFuturePeriod(dateStr)) cls += " predicted-period";
+          if (dateStr === todayStr) cls += " today";
+          if (dateStr === selectedDate) cls += " selected-log";
+          if (state.logs[dateStr]) cls += " has-log";
+          cell.className = cls;
+          cell.textContent = d; // safe: numeric only
+          cell.dataset.date = dateStr; // used internally only
+          cell.addEventListener("click", () => selectDay(dateStr));
+          grid.appendChild(cell);
+        }
+      }
+
+      function changeMonth(dir) {
+        viewMonth = new Date(
+          viewMonth.getFullYear(),
+          viewMonth.getMonth() + dir,
+          1
+        );
+        renderCalendar();
+      }
+
+      function selectDay(dateStr) {
+        // Validate dateStr format before using
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return;
+        selectedDate = dateStr;
+        renderCalendar();
+        const panel = document.getElementById("log-panel");
+        panel.classList.add("visible");
+        const d = fromISO(dateStr);
+        document.getElementById("log-panel-date").textContent =
+          d.toLocaleDateString("default", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+          });
+
+        const log = state.logs[dateStr] || {};
+        [
+          "flow",
+          "cramp",
+          "headache",
+          "bloating",
+          "mood-happy",
+          "mood-low",
+        ].forEach((k) => {
+          const el = document.getElementById("log-" + k);
+          if (!el) return;
+          el.classList.remove("active-flow", "active-symptom", "active-mood");
+          if (log[k])
+            el.classList.add(
+              k === "flow"
+                ? "active-flow"
+                : k.startsWith("mood")
+                ? "active-mood"
+                : "active-symptom"
+            );
+        });
+        // Safe value — textContent for note
+        const noteEl = document.getElementById("log-note");
+        noteEl.value = (log.note || "").slice(0, 500);
+        updateNoteCount();
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function toggleLog(key) {
+        const allowed = [
+          "flow",
+          "cramp",
+          "headache",
+          "bloating",
+          "mood-happy",
+          "mood-low",
+        ];
+        if (!allowed.includes(key)) return;
+        const el = document.getElementById("log-" + key);
+        const ac =
+          key === "flow"
+            ? "active-flow"
+            : key.startsWith("mood")
+            ? "active-mood"
+            : "active-symptom";
+        el.classList.toggle(ac);
+      }
+
+      async function saveLog() {
+        if (!selectedDate || !/^\d{4}-\d{2}-\d{2}$/.test(selectedDate)) return;
+        const log = {};
+        [
+          "flow",
+          "cramp",
+          "headache",
+          "bloating",
+          "mood-happy",
+          "mood-low",
+        ].forEach((k) => {
+          const el = document.getElementById("log-" + k);
+          if (
+            el &&
+            (el.classList.contains("active-flow") ||
+              el.classList.contains("active-symptom") ||
+              el.classList.contains("active-mood"))
+          ) {
+            log[k] = true;
+          }
+        });
+        const rawNote = document.getElementById("log-note").value;
+        log.note = rawNote.slice(0, 500).replace(/[<>]/g, ""); // strip < > as extra guard
+
+        state.logs[selectedDate] = log;
+        if (log.flow) updateCycleHistory(selectedDate);
+        await save();
+
+        renderCalendar();
+        document.getElementById("log-panel").classList.remove("visible");
+        updateStatusCard();
+        updateInsights();
+        if (navigator.vibrate) navigator.vibrate(40);
+      }
+
+      function updateCycleHistory(dateStr) {
+        if (!state.cycleHistory) state.cycleHistory = [];
+        const hist = state.cycleHistory;
+        if (hist.length > 0) {
+          const last = hist[hist.length - 1];
+          if (last.start === dateStr) return;
+          const len = diffDays(fromISO(last.start), fromISO(dateStr));
+          if (len > 14 && len < 60) {
+            hist[hist.length - 1].length = len;
+            hist.push({ start: dateStr, length: state.cycleLength });
+            const lens = hist.filter((c) => c.length > 14).map((c) => c.length);
+            if (lens.length >= 2) {
+              state.cycleLength = Math.round(
+                lens.reduce((a, b) => a + b, 0) / lens.length
+              );
+              state.lastPeriodStart = dateStr;
+            }
+          }
+        } else {
+          hist.push({ start: dateStr, length: state.cycleLength });
+          state.lastPeriodStart = dateStr;
+        }
+      }
+
+      async function applySettings() {
+        const lp = document.getElementById("s-last-period").value;
+        const cl = parseInt(document.getElementById("s-cycle-len").value);
+        const pd = parseInt(document.getElementById("s-period-dur").value);
+        if (!lp || !/^\d{4}-\d{2}-\d{2}$/.test(lp)) {
+          showModal({
+            icon: "📅",
+            title: "Invalid Date",
+            msg: "Please enter a valid last period date.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+        if (cl < 20 || cl > 45) {
+          showModal({
+            icon: "⚠️",
+            title: "Invalid Cycle Length",
+            msg: "Cycle length must be between 20 and 45 days.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+        if (pd < 1 || pd > 10) {
+          showModal({
+            icon: "⚠️",
+            title: "Invalid Duration",
+            msg: "Period duration must be between 1 and 10 days.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+        state.lastPeriodStart = lp;
+        state.cycleLength = cl;
+        state.periodDuration = pd;
+        await save();
+        updateStatusCard();
+        renderCalendar();
+        updateInsights();
+        switchTab("calendar");
+      }
+
+      function loadSettingsFields() {
+        document.getElementById("s-last-period").value =
+          state.lastPeriodStart || "";
+        document.getElementById("s-cycle-len").value = state.cycleLength;
+        document.getElementById("s-period-dur").value = state.periodDuration;
+
+        // Load notification preference
+        const notifDays = state.notificationDaysBefore || 0;
+        document.getElementById(`notif-${notifDays}`).checked = true;
+      }
+
+      async function updateNotificationPref(days) {
+        state.notificationDaysBefore = days;
+        await save();
+
+        if (days > 0) {
+          if (
+            "Notification" in window &&
+            Notification.permission === "default"
+          ) {
+            const permission = await Notification.requestPermission();
+            if (permission === "granted") {
+              scheduleNotification();
+              showModal({
+                icon: "✅",
+                title: "Notifications Enabled",
+                msg: `You'll be notified ${days} day${
+                  days > 1 ? "s" : ""
+                } before your period.`,
+                cancelText: "",
+                confirmText: "OK",
+              });
+            }
+          } else {
+            scheduleNotification();
+          }
+        }
+      }
+
+      async function testNotification() {
+        console.log("testNotification() called");
+
+        if (!("Notification" in window)) {
+          console.error("Notifications not supported");
+          showModal({
+            icon: "❌",
+            title: "Not Supported",
+            msg: "Notifications are not supported in this browser.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+
+        console.log("Notification permission:", Notification.permission);
+
+        if (Notification.permission === "default") {
+          console.log("Requesting notification permission...");
+          const permission = await Notification.requestPermission();
+          console.log("Permission result:", permission);
+          if (permission !== "granted") {
+            showModal({
+              icon: "⚠️",
+              title: "Permission Denied",
+              msg: "Please allow notifications to test them.",
+              cancelText: "",
+              confirmText: "OK",
+            });
+            return;
+          }
+        }
+
+        if (Notification.permission === "denied") {
+          console.error("Notifications denied by user");
+          showModal({
+            icon: "⚠️",
+            title: "Permission Denied",
+            msg: "Notifications are blocked. Please enable them in your browser settings.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+          return;
+        }
+
+        const days = state.notificationDaysBefore || 2;
+        const title = "Period Coming Soon";
+        const options = {
+          body: `Your period is expected in ${days} day${days > 1 ? "s" : ""}.`,
+          icon: "/luna-cycle/icons/icon-192.png",
+          badge: "/luna-cycle/icons/icon-192.png",
+          tag: "luna-test-notification",
+          requireInteraction: false,
+        };
+
+        console.log("Showing notification with options:", options);
+
+        // Try Service Worker first (only on http/https), but with timeout
+        if (
+          "serviceWorker" in navigator &&
+          (location.protocol === "http:" || location.protocol === "https:")
+        ) {
+          try {
+            console.log(
+              "Service Worker available, waiting for ready (with 2s timeout)..."
+            );
+            const timeoutPromise = new Promise((_, reject) =>
+              setTimeout(
+                () => reject(new Error("Service Worker timeout")),
+                2000
+              )
+            );
+            const registration = await Promise.race([
+              navigator.serviceWorker.ready,
+              timeoutPromise,
+            ]);
+            console.log("Service Worker ready:", registration);
+            if (registration) {
+              console.log("Showing notification via Service Worker...");
+              await registration.showNotification(title, options);
+              console.log("Notification shown successfully via Service Worker");
+              return;
+            }
+          } catch (err) {
+            console.warn(
+              "Service Worker notification failed, falling back:",
+              err.message
+            );
+          }
+        } else {
+          console.log(
+            "Service Worker not available (file:// protocol or not supported), using direct Notification API"
+          );
+        }
+
+        // Fallback: use direct notification API
+        console.log("Using direct Notification API...");
+        try {
+          const notification = new Notification(title, options);
+          console.log("Direct notification created successfully");
+        } catch (err) {
+          console.error("Direct notification failed:", err);
+          showModal({
+            icon: "❌",
+            title: "Notification Failed",
+            msg: "Could not display notification: " + err.message,
+            cancelText: "",
+            confirmText: "OK",
+          });
+        }
+      }
+
+      async function scheduleNotification() {
+        if (!state.lastPeriodStart || state.notificationDaysBefore === 0)
+          return;
+
+        if (
+          !state.cycleLength ||
+          state.cycleLength < 20 ||
+          state.cycleLength > 45
+        ) {
+          return;
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const lastStart = new Date(state.lastPeriodStart);
+        if (isNaN(lastStart.getTime())) {
+          return;
+        }
+
+        let nextStart = new Date(lastStart);
+
+        while (nextStart <= today) {
+          nextStart.setDate(nextStart.getDate() + state.cycleLength);
+        }
+
+        const notifyDate = new Date(nextStart);
+        notifyDate.setDate(notifyDate.getDate() - state.notificationDaysBefore);
+        notifyDate.setHours(9, 0, 0, 0);
+
+        if (isNaN(notifyDate.getTime())) {
+          return;
+        }
+
+        const notifyDateStr = notifyDate.toISOString();
+        localStorage.setItem("luna_notify_date", notifyDateStr);
+
+        // Schedule with Service Worker
+        if ("serviceWorker" in navigator) {
+          const registration = await navigator.serviceWorker.ready;
+
+          // Store notification data for Service Worker
+          localStorage.setItem(
+            "luna_notify_data",
+            JSON.stringify({
+              date: notifyDateStr,
+              daysBefore: state.notificationDaysBefore,
+            })
+          );
+
+          // Use showNotification at scheduled time (Service Worker will handle it)
+          const delay = notifyDate - Date.now();
+          if (delay > 0) {
+            setTimeout(async () => {
+              const stored = localStorage.getItem("luna_notify_data");
+              if (stored) {
+                const data = JSON.parse(stored);
+                await registration.showNotification("Period Coming Soon", {
+                  body: `Your period is expected in ${data.daysBefore} day${
+                    data.daysBefore > 1 ? "s" : ""
+                  }.`,
+                  icon: "/icons/icon-192.png",
+                  badge: "/icons/icon-192.png",
+                  tag: "luna-period-notification",
+                  requireInteraction: true,
+                });
+                // Schedule next notification
+                scheduleNotification();
+              }
+            }, delay);
+          }
+        }
+      }
+
+      function checkForUpcomingPeriod() {
+        // Only check if settings changed - recalculate notification date
+        const storedDate = localStorage.getItem("luna_notify_date");
+        if (!storedDate) {
+          scheduleNotification();
+          return;
+        }
+
+        // Recalculate expected date based on current settings
+        if (!state.lastPeriodStart || state.notificationDaysBefore === 0)
+          return;
+
+        if (
+          !state.cycleLength ||
+          state.cycleLength < 20 ||
+          state.cycleLength > 45
+        ) {
+          return;
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const lastStart = new Date(state.lastPeriodStart);
+        if (isNaN(lastStart.getTime())) {
+          return;
+        }
+
+        let nextStart = new Date(lastStart);
+
+        while (nextStart <= today) {
+          nextStart.setDate(nextStart.getDate() + state.cycleLength);
+        }
+
+        const notifyDate = new Date(nextStart);
+        notifyDate.setDate(notifyDate.getDate() - state.notificationDaysBefore);
+        notifyDate.setHours(9, 0, 0, 0);
+
+        if (isNaN(notifyDate.getTime())) {
+          return;
+        }
+
+        const newDateStr = notifyDate.toISOString();
+
+        // If date changed, reschedule
+        if (storedDate !== newDateStr) {
+          scheduleNotification();
+        }
+      }
+
+      async function exportData() {
+        if (!sessionPin) return;
+        showModal({
+          icon: "📦",
+          title: "Export Backup",
+          msg: "Your backup will be exported as an encrypted file. It can only be decrypted with your PIN. Keep it private.",
+          confirmText: "Export",
+          cancelText: "Cancel",
+          onConfirm: async () => {
+            const salt = getOrCreateSalt();
+            const enc = await encryptData(state, sessionPin, salt);
+            const saltB64 = btoa(String.fromCharCode(...salt));
+            const bundle = JSON.stringify({ enc, salt: saltB64, v: 1 });
+            const blob = new Blob([bundle], {
+              type: "application/octet-stream",
+            });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `luna_backup_${today()}.bin`;
+            a.click();
+            URL.revokeObjectURL(a.href);
+          },
+        });
+      }
+
+      async function importData() {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".bin";
+        input.addEventListener("change", async (e) => {
+          const file = e.target.files?.[0];
+          if (!file) return;
+          try {
+            const text = await file.text();
+            const bundle = JSON.parse(text);
+            const salt = Uint8Array.from(atob(bundle.salt), (c) =>
+              c.charCodeAt(0)
+            );
+
+            // Validate backup version
+            if (bundle.v !== 1) {
+              showModal({
+                icon: "❌",
+                title: "Invalid Backup",
+                msg: "This backup format is not supported.",
+                cancelText: "",
+                confirmText: "OK",
+              });
+              return;
+            }
+
+            showModal({
+              icon: "🔑",
+              title: "Restore Backup",
+              msg: "Enter your PIN to decrypt and restore the backup.",
+              confirmText: "Restore",
+              cancelText: "Cancel",
+              onConfirm: async () => {
+                try {
+                  const testDecrypted = await decryptData(
+                    bundle.enc,
+                    sessionPin,
+                    salt
+                  );
+                  if (testDecrypted) {
+                    state = testDecrypted;
+                    localStorage.setItem(STORE_KEY, bundle.enc);
+                    localStorage.setItem(SALT_KEY, bundle.salt);
+                    await save();
+                    renderCalendar();
+                    updateStatusCard();
+                    updateInsights();
+                    showModal({
+                      icon: "✅",
+                      title: "Restored",
+                      msg: "Your backup has been restored successfully.",
+                      cancelText: "",
+                      confirmText: "OK",
+                    });
+                  } else {
+                    showModal({
+                      icon: "❌",
+                      title: "Decryption Failed",
+                      msg: "The PIN is incorrect or the backup is corrupted.",
+                      cancelText: "",
+                      confirmText: "OK",
+                    });
+                  }
+                } catch (err) {
+                  showModal({
+                    icon: "❌",
+                    title: "Restore Error",
+                    msg: "Could not restore backup: " + err.message,
+                    cancelText: "",
+                    confirmText: "OK",
+                  });
+                }
+              },
+            });
+          } catch (err) {
+            showModal({
+              icon: "❌",
+              title: "Import Failed",
+              msg: "Could not read backup file. Ensure it's valid.",
+              cancelText: "",
+              confirmText: "OK",
+            });
+          }
+        });
+        input.click();
+      }
+
+      function confirmClear() {
+        showModal({
+          icon: "🗑️",
+          title: "Erase All Data",
+          msg: "This will permanently delete all your cycle data and cannot be undone. Are you absolutely sure?",
+          confirmText: "Yes, erase everything",
+          cancelText: "Cancel",
+          onConfirm: () => {
+            localStorage.clear();
+            location.reload();
+          },
+        });
+      }
+
+      let changePinStage = "new"; // 'new' | 'confirm'
+      let changePinFirst = "";
+      let changePinBuffer = "";
+
+      function showChangePinModal() {
+        changePinStage = "new";
+        changePinFirst = "";
+        changePinBuffer = "";
+        _renderChangePinModal();
+      }
+
+      function _renderChangePinModal() {
+        const isConfirm = changePinStage === "confirm";
+        const overlay = document.getElementById("modal-overlay");
+        const box = overlay.querySelector(".modal-box");
+
+        // Safe DOM construction — no user data in innerHTML, only static UI
+        const iconEl = document.createElement("div");
+        iconEl.className = "modal-icon";
+        iconEl.textContent = "🔑";
+        const titleEl = document.createElement("div");
+        titleEl.className = "modal-title";
+        titleEl.textContent = isConfirm ? "Confirm New PIN" : "Enter New PIN";
+        const msgEl = document.createElement("div");
+        msgEl.className = "modal-msg";
+        msgEl.id = "cpin-msg";
+        msgEl.textContent = isConfirm
+          ? "Re-enter your new PIN to confirm."
+          : "Choose a 4-digit PIN.";
+
+        const dotsWrap = document.createElement("div");
+        dotsWrap.id = "cpin-dots";
+        dotsWrap.style.cssText =
+          "display:flex;gap:0.75rem;justify-content:center;margin:1rem 0";
+        for (let i = 0; i < 4; i++) {
+          const dot = document.createElement("div");
+          dot.className = "pin-dot";
+          dot.id = "cpd" + i;
+          dotsWrap.appendChild(dot);
+        }
+
+        const padWrap = document.createElement("div");
+        padWrap.style.cssText =
+          "display:grid;grid-template-columns:repeat(3,4.25rem);gap:0.625rem;justify-content:center;margin-bottom:0.875rem";
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "⌫"].forEach(
+          (k) => {
+            if (k === "") {
+              padWrap.appendChild(document.createElement("div"));
+              return;
+            }
+            const btn = document.createElement("div");
+            btn.className = "num-btn";
+            btn.style.cssText = "width:4.25rem;height:4.25rem";
+            btn.textContent = k;
+            btn.addEventListener("click", () => changePinInput(k));
+            padWrap.appendChild(btn);
+          }
+        );
+
+        const btnsDiv = document.createElement("div");
+        btnsDiv.className = "modal-btns";
+        const cancelBtn = document.createElement("button");
+        cancelBtn.className = "modal-btn secondary";
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.addEventListener("click", () =>
+          document.getElementById("modal-overlay").classList.remove("visible")
+        );
+        btnsDiv.appendChild(cancelBtn);
+
+        box.replaceChildren(iconEl, titleEl, msgEl, dotsWrap, padWrap, btnsDiv);
+        overlay.classList.add("visible");
+      }
+
+      function changePinInput(key) {
+        if (key === "⌫") {
+          changePinBuffer = changePinBuffer.slice(0, -1);
+          for (let i = 0; i < 4; i++) {
+            const el = document.getElementById("cpd" + i);
+            if (el) el.classList.toggle("filled", i < changePinBuffer.length);
+          }
+          return;
+        }
+        if (changePinBuffer.length >= 4) return;
+        changePinBuffer += key;
+        for (let i = 0; i < 4; i++) {
+          const el = document.getElementById("cpd" + i);
+          if (el) el.classList.toggle("filled", i < changePinBuffer.length);
+        }
+        if (changePinBuffer.length === 4) {
+          setTimeout(() => _submitChangePinStep(), 150);
+        }
+      }
+
+      async function _submitChangePinStep() {
+        if (changePinStage === "new") {
+          changePinFirst = changePinBuffer;
+          changePinBuffer = "";
+          changePinStage = "confirm";
+          _renderChangePinModal();
+        } else {
+          if (changePinBuffer !== changePinFirst) {
+            const msgEl = document.getElementById("cpin-msg");
+            if (msgEl) {
+              msgEl.textContent = "PINs don't match. Try again.";
+              msgEl.style.color = "var(--danger)";
+            }
+            changePinBuffer = "";
+            changePinFirst = "";
+            changePinStage = "new";
+            setTimeout(() => _renderChangePinModal(), 900);
+            return;
+          }
+          // PINs match — re-derive key, re-encrypt, update HMAC
+          const newPin = changePinBuffer;
+          const salt = getOrCreateSalt();
+          const newHash = await hashPin(newPin, salt);
+          localStorage.setItem(PINHASH_KEY, newHash);
+          sessionPin = newPin;
+          await save(); // re-encrypts all data with new PIN
+          document.getElementById("modal-overlay").classList.remove("visible");
+          showModal({
+            icon: "✅",
+            title: "PIN Changed",
+            msg: "Your PIN has been updated and all data re-encrypted.",
+            cancelText: "",
+            confirmText: "OK",
+          });
+        }
+      }
+
+      function switchTab(tab) {
+        const allowed = ["calendar", "insights", "settings"];
+        if (!allowed.includes(tab)) return;
+        currentTab = tab;
+        // Remove active from bottom nav items
+        ["bnav-calendar", "bnav-insights", "bnav-settings"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.classList.remove("active");
+        });
+
+        // Show/hide view panels
+        const calView = document.getElementById("view-calendar");
+        const insView = document.getElementById("view-insights");
+        const setView = document.getElementById("view-settings");
+        if (calView)
+          calView.style.display = tab === "calendar" ? "block" : "none";
+        if (insView)
+          insView.style.display = tab === "insights" ? "block" : "none";
+        if (setView)
+          setView.style.display = tab === "settings" ? "block" : "none";
+        if (insView)
+          insView.className =
+            "insights-wrap" + (tab === "insights" ? " visible" : "");
+        if (setView)
+          setView.className =
+            "settings-wrap" + (tab === "settings" ? " visible" : "");
+
+        // Add active to current tab button
+        if (tab === "calendar") {
+          const bnav = document.getElementById("bnav-calendar");
+          if (bnav) bnav.classList.add("active");
+        }
+        if (tab === "insights") {
+          const bnav = document.getElementById("bnav-insights");
+          if (bnav) bnav.classList.add("active");
+          updateInsights();
+        }
+        if (tab === "settings") {
+          const bnav = document.getElementById("bnav-settings");
+          if (bnav) bnav.classList.add("active");
+          loadSettingsFields();
+        }
+        // Hide log panel when switching tabs
+        const logPanel = document.getElementById("log-panel");
+        if (logPanel) logPanel.classList.remove("visible");
+      }
+
+      function init() {
+        const hasData = !!localStorage.getItem(STORE_KEY);
+        const hasSalt = !!localStorage.getItem(SALT_KEY);
+        const hasPinHash = !!localStorage.getItem(PINHASH_KEY);
+
+        // Register Service Worker (only on http/https, not file://)
+        if (
+          "serviceWorker" in navigator &&
+          (location.protocol === "http:" || location.protocol === "https:")
+        ) {
+          navigator.serviceWorker
+            .register("/luna-cycle/service-worker.js")
+            .then((reg) => {
+              console.log("Service Worker registered:", reg);
+            })
+            .catch((err) => {
+              console.warn("Service Worker registration failed:", err);
+            });
+        } else if (!("serviceWorker" in navigator)) {
+          console.log("Service Worker not supported in this browser");
+        } else {
+          console.log(
+            "Service Worker skipped (running on file:// protocol - use http:// or https:// for production)"
+          );
+        }
+
+        // Set sensible default date in onboarding
+        document.getElementById("ob-last-period").value = toISO(
+          addDays(new Date(), -14)
+        );
+
+        if (hasData && hasSalt && hasPinHash) {
+          // Returning user: show lock screen
+          document.getElementById("lock-screen").classList.remove("hidden");
+          document.getElementById("lock-sub").textContent =
+            "Enter your PIN to unlock your private health data";
+        } else {
+          // First time: show onboarding
+          document.getElementById("lock-screen").classList.add("hidden");
+          document.getElementById("onboarding").classList.remove("hidden");
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>

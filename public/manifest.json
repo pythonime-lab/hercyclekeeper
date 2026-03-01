@@ -1,0 +1,25 @@
+{
+  "name": "Luna — Period & Cycle Calendar",
+  "short_name": "Luna",
+  "description": "Private, AES-encrypted period and cycle tracker. Zero data collection. Forever free.",
+  "start_url": "/luna-cycle/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F0A14",
+  "theme_color": "#FF3D6B",
+  "categories": ["health", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

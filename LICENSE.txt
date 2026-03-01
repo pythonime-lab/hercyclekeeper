@@ -1,0 +1,36 @@
+MIT License
+
+Copyright (c) 2026 Luna App
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+────────────────────────────────────────────────────────────────────────────────
+IMPORTANT DISCLAIMER
+────────────────────────────────────────────────────────────────────────────────
+
+This software provides cycle estimations based on average biological patterns
+as described in publicly available educational medical resources. It is NOT
+medical advice and must NOT be used as a substitute for professional medical
+consultation, as a contraceptive method, or as a fertility guarantee.
+
+The Calendar Rhythm Method and Standard Days Method are estimation tools only.
+Cycle timing can be significantly affected by stress, illness, medications,
+hormonal changes, and other individual factors.
+
+Always consult a qualified healthcare professional for medical decisions.
