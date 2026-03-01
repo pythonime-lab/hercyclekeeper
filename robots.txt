@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hercyclekeeper.web.app/sitemap.xml
+Sitemap: https://yourcyclekeeper.web.app/sitemap.xml

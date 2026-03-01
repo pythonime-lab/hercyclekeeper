@@ -1,8 +1,8 @@
 /*
- * Her Cycle Keeper — Service Worker
+ * Your Cycle Keeper — Service Worker
  * ─────────────────────────────────────────────────────────────
  * Strategy: Cache-first for app shell, network-only for nothing
- * (Her Cycle Keeper has no network calls at all — everything is local).
+ * (Your Cycle Keeper has no network calls at all — everything is local).
  *
  * Versioned cache: bump CACHE_VERSION when deploying updates
  * so stale caches are automatically purged on activation.
@@ -15,16 +15,14 @@
 
 "use strict";
 
-const CACHE_VERSION = "v2.0.0";
-const CACHE_NAME = `hercyclekeeper-${CACHE_VERSION}`;
-
-// App shell — all files that must be available offline
-const APP_SHELL = ["/", "/index.html", "/style.css", "/manifest.json"];
+const CACHE_VERSION = "v3.0.0";
+const CACHE_NAME = `yourcyclekeeper-${CACHE_VERSION}`;
 
 self.addEventListener("install", (event) => {
   self.skipWaiting(); // activate new SW immediately
+  // Delete all old caches on install
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
   );
 });
 
@@ -102,7 +100,7 @@ self.addEventListener("notificationclick", (event) => {
     clients.matchAll({ type: "window" }).then((clientList) => {
       // Focus existing window if open
       for (let client of clientList) {
-        if (client.url === "/" || client.url.includes("hercyclekeeper"))
+        if (client.url === "/" || client.url.includes("yourcyclekeeper"))
           return client.focus();
       }
       // Open new window if not already open

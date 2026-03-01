@@ -28,63 +28,63 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta name="apple-mobile-web-app-title" content="Her Cycle Keeper" />
+    <meta name="apple-mobile-web-app-title" content="Your Cycle Keeper" />
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
     <meta
       name="description"
-      content="Her Cycle Keeper is a privacy-first period and cycle tracker. Track your cycle, flow, and mood on your device — no servers, no tracking, no accounts."
+      content="Your Cycle Keeper is a privacy-first period and cycle tracker. Track your cycle, flow, and mood on your device — no servers, no tracking, no accounts."
     />
 
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Her Cycle Keeper — Private Period & Cycle Tracker"
+      content="Your Cycle Keeper — Private Period & Cycle Tracker"
     />
     <meta
       property="og:description"
-      content="Track your period and cycle privately with Her Cycle Keeper. Free, ad-free, and fully accessible."
+      content="Track your period and cycle privately with Your Cycle Keeper. Free, ad-free, and fully accessible."
     />
-    <meta property="og:url" content="https://hercyclekeeper.web.app" />
+    <meta property="og:url" content="https://yourcyclekeeper.web.app" />
     <meta
       property="og:image"
-      content="https://hercyclekeeper.web.app/icons/icon-192.png"
+      content="https://yourcyclekeeper.web.app/icons/icon-192.png"
     />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Her Cycle Keeper — Private Period & Cycle Tracker"
+      content="Your Cycle Keeper — Private Period & Cycle Tracker"
     />
     <meta
       name="twitter:description"
-      content="Track your period and cycle privately with Her Cycle Keeper. Free, ad-free, and fully accessible."
+      content="Track your period and cycle privately with Your Cycle Keeper. Free, ad-free, and fully accessible."
     />
     <meta
       name="twitter:image"
-      content="https://hercyclekeeper.web.app/icons/icon-192.png"
+      content="https://yourcyclekeeper.web.app/icons/icon-192.png"
     />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://hercyclekeeper.web.app" />
+    <link rel="canonical" href="https://yourcyclekeeper.web.app" />
 
-    <link rel="stylesheet" href="style.css?v=2.0.0" />
+    <link rel="stylesheet" href="style.css?v=3.0.0" />
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />
-    <title>Her Cycle Keeper — Private Period & Cycle Tracker</title>
+    <title>Your Cycle Keeper — Private Period & Cycle Tracker</title>
 
     <!-- JSON-LD Schema for Search Engines -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "Her Cycle Keeper",
+        "name": "Your Cycle Keeper",
         "description": "Private, AES-encrypted period and cycle tracker. Zero data collection, forever free.",
-        "url": "https://hercyclekeeper.web.app",
+        "url": "https://yourcyclekeeper.web.app",
         "applicationCategory": "HealthApplication",
         "operatingSystem": "Web",
         "offers": {
@@ -97,17 +97,16 @@
           "ratingValue": "5",
           "ratingCount": "1"
         },
-        "image": "https://hercyclekeeper.web.app/icons/icon-192.png"
+        "image": "https://yourcyclekeeper.web.app/icons/icon-192.png"
       }
     </script>
 
-    <!-- PWA Install Prompt Listener - Must be early to catch the event -->
     <script>
       let deferredPrompt = null;
 
       // Check if app is already installed and hide button
       if (
-        localStorage.getItem("hercyclekeeper_app_installed") === "true" ||
+        localStorage.getItem("yourcyclekeeper_app_installed") === "true" ||
         window.matchMedia("(display-mode: standalone)").matches ||
         window.navigator.standalone === true
       ) {
@@ -155,7 +154,7 @@
 
     <div id="lock-screen">
       <div class="lock-icon" id="lock-icon">🔐</div>
-      <div class="lock-logo">Her Cycle Keeper</div>
+      <div class="lock-logo">Your Cycle Keeper</div>
       <div class="lock-sub" id="lock-sub">
         Enter your PIN to unlock<br />your private health data
       </div>
@@ -202,7 +201,7 @@
     <!-- ONBOARDING -->
     <div id="onboarding" class="hidden">
       <div class="onboard-moon">🌙</div>
-      <h1 class="onboard-logo">Her Cycle Keeper</h1>
+      <h1 class="onboard-logo">Your Cycle Keeper</h1>
       <p class="onboard-sub">Track Your Period and Cycle Privately</p>
       <p
         class="onboard-tagline"
@@ -244,7 +243,7 @@
         <div class="pin-setup-title">🔒 Set a 4-digit PIN</div>
         <div class="pin-setup-sub">
           Your PIN encrypts all data locally.
-          <strong>Her Cycle Keeper never sends data anywhere.</strong> If you
+          <strong>Your Cycle Keeper never sends data anywhere.</strong> If you
           forget your PIN, data will be erased.
         </div>
         <div class="setup-pin-wrap" id="setup-pin-dots">
@@ -285,7 +284,7 @@
     <!-- MAIN APP -->
     <div id="app" style="display: none">
       <div class="header">
-        <div class="logo">Her Cycle Keeper</div>
+        <div class="logo">Your Cycle Keeper</div>
         <button
           id="install-btn"
           onclick="installApp()"
@@ -574,9 +573,9 @@
           </div>
         </div>
         <div class="insight-card">
-          <h3>How Her Cycle Keeper Works</h3>
+          <h3>How Your Cycle Keeper Works</h3>
           <div class="info-box">
-            Her Cycle Keeper estimates your fertile window by tracking cycle
+            Your Cycle Keeper estimates your fertile window by tracking cycle
             patterns.
             <strong>Ovulation</strong> is estimated ~14 days before your next
             period. <strong>Fertile days</strong> are calculated as day 8
@@ -704,7 +703,7 @@
             >
             It is <em>not</em> medical advice and must not be used as a
             substitute for professional medical consultation.<br /><br />
-            Her Cycle Keeper predicts your cycle by tracking patterns and
+            Your Cycle Keeper predicts your cycle by tracking patterns and
             estimating ovulation timing. Actual cycle timing can vary due to
             stress, illness, medications, and many other factors.<br /><br />
             Do <strong>not</strong> use this app as a contraceptive or fertility
@@ -720,7 +719,7 @@
             "
           >
             <strong>Privacy Guarantee</strong><br /><br />
-            Her Cycle Keeper collects <strong>zero data</strong>. This app:<br />
+            Your Cycle Keeper collects <strong>zero data</strong>. This app:<br />
             &nbsp;• Stores all data locally on your device only<br />
             &nbsp;• Has no servers, no accounts, no cloud storage<br />
             &nbsp;• Has no analytics, no tracking, no telemetry<br />
@@ -731,10 +730,10 @@
           </div>
         </div>
         <div class="settings-section">
-          <h3>About Her Cycle Keeper</h3>
+          <h3>About Your Cycle Keeper</h3>
           <div class="info-box">
-            Her Cycle Keeper is free software built with care for privacy. Based
-            on the
+            Your Cycle Keeper is free software built with care for privacy.
+            Based on the
             <strong>Calendar Rhythm Method</strong> and
             <strong>Standard Days Method</strong> for cycle estimation. For
             informational purposes only.
@@ -803,9 +802,9 @@
     <script>
       "use strict";
 
-      const STORE_KEY = "hercyclekeeper_enc_v1"; // encrypted blob
-      const SALT_KEY = "hercyclekeeper_salt_v1"; // random salt (not secret)
-      const PINHASH_KEY = "hercyclekeeper_ph_v1"; // HMAC of PIN for fast wrong-PIN detection
+      const STORE_KEY = "yourcyclekeeper_enc_v1"; // encrypted blob
+      const SALT_KEY = "yourcyclekeeper_salt_v1"; // random salt (not secret)
+      const PINHASH_KEY = "yourcyclekeeper_ph_v1"; // HMAC of PIN for fast wrong-PIN detection
       const SCHEMA_VERSION = 1; // bump when state shape changes
 
       async function deriveKey(pin, salt) {
@@ -1114,7 +1113,7 @@
         showModal({
           icon: "⚠️",
           title: "Forgot PIN?",
-          msg: "This will permanently erase all your cycle data and reset Her Cycle Keeper. This cannot be undone. Are you sure?",
+          msg: "This will permanently erase all your cycle data and reset Your Cycle Keeper. This cannot be undone. Are you sure?",
           confirmText: "Yes, erase and reset",
           cancelText: "Cancel",
           onConfirm: () => {
@@ -1138,7 +1137,7 @@
             showModal({
               icon: "✅",
               title: "Reset Complete",
-              msg: "Her Cycle Keeper has been reset. Please set a new PIN to get started.",
+              msg: "Your Cycle Keeper has been reset. Please set a new PIN to get started.",
               cancelText: "",
               confirmText: "OK",
             });
@@ -2408,7 +2407,7 @@
             console.log("Install choice:", choiceResult.outcome);
             if (choiceResult.outcome === "accepted") {
               console.log("User accepted the install prompt");
-              localStorage.setItem("hercyclekeeper_app_installed", "true");
+              localStorage.setItem("yourcyclekeeper_app_installed", "true");
               const btn = document.getElementById("install-btn");
               if (btn) btn.style.display = "none";
             } else {
@@ -2427,7 +2426,7 @@
             showModal({
               icon: "✅",
               title: "Already Installed",
-              msg: "Her Cycle Keeper is already installed on your device! You can see it in your app drawer.",
+              msg: "Your Cycle Keeper is already installed on your device! You can see it in your app drawer.",
               cancelText: "",
               confirmText: "OK",
             });
@@ -2435,7 +2434,7 @@
             // Show manual install instructions
             showModal({
               icon: "📱",
-              title: "Install Her Cycle Keeper as App",
+              title: "Install Your Cycle Keeper as App",
               msg: "To install:\n\n1. Tap the menu (⋮) in your browser\n2. Look for 'Install app' or 'Add to Home screen'\n3. Confirm installation",
               cancelText: "",
               confirmText: "OK",
@@ -2462,7 +2461,7 @@
             });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
-            a.download = `hercyclekeeper_backup_${today()}.bin`;
+            a.download = `yourcyclekeeper_backup_${today()}.bin`;
             a.click();
             URL.revokeObjectURL(a.href);
           },

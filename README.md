@@ -1,8 +1,8 @@
-# Her Cycle Keeper — Private Period & Cycle Tracker
+# Your Cycle Keeper — Private Period & Cycle Tracker
 
 > **AES-256-GCM encrypted. Zero data collection. Forever free.**
 
-Her Cycle Keeper is a privacy-first period and cycle tracking PWA (Progressive Web App). All data is encrypted locally on your device using AES-256-GCM. **Nothing is sent to any server. No accounts. No analytics. No tracking.**
+Your Cycle Keeper is a privacy-first period and cycle tracking PWA (Progressive Web App). All data is encrypted locally on your device using AES-256-GCM. **Nothing is sent to any server. No accounts. No analytics. No tracking.**
 
 ## Features
 
@@ -37,7 +37,7 @@ Cycle Keeper uses the **Calendar Rhythm Method** and **Standard Days Method** to
 
 ### Web App (Recommended)
 
-Visit: https://hercyclekeeper.web.app
+Visit: https://yourcyclekeeper.web.app
 
 Then:
 
@@ -49,8 +49,8 @@ Then:
 
 ```bash
 # Clone the repository
-git clone https://github.com/pythonime-lab/hercyclekeeper.git
-cd hercyclekeeper
+git clone https://github.com/pythonime-lab/yourcyclekeeper.git
+cd yourcyclekeeper
 
 # Open in browser (requires HTTP/HTTPS for Service Worker)
 # Use a local dev server:
