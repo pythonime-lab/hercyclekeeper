@@ -2885,8 +2885,14 @@
                   if ("serviceWorker" in navigator) {
                     try {
                       const registration = await navigator.serviceWorker.ready;
-                      await registration.showNotification("Period Coming Soon", notifOptions);
-                      localStorage.setItem("luna_notify_shown_date", today.toDateString());
+                      await registration.showNotification(
+                        "Period Coming Soon",
+                        notifOptions
+                      );
+                      localStorage.setItem(
+                        "luna_notify_shown_date",
+                        today.toDateString()
+                      );
                       return;
                     } catch (err) {
                       console.warn("Service Worker notification failed:", err);
@@ -2895,7 +2901,10 @@
 
                   // Fallback to direct API (works on web)
                   new Notification("Period Coming Soon", notifOptions);
-                  localStorage.setItem("luna_notify_shown_date", today.toDateString());
+                  localStorage.setItem(
+                    "luna_notify_shown_date",
+                    today.toDateString()
+                  );
                 } catch (err) {
                   console.warn("Failed to show notification:", err);
                 }
