@@ -35,7 +35,7 @@
     />
     <meta
       name="description"
-      content="Her Cycle Keeper — Private, AES-encrypted period and cycle tracker. Zero data collection. Forever free."
+      content="Her Cycle Keeper is a privacy-first period and cycle tracker. Track your cycle, flow, and mood on your device — no servers, no tracking, no accounts."
     />
 
     <!-- Open Graph / Social Sharing -->
@@ -46,7 +46,7 @@
     />
     <meta
       property="og:description"
-      content="AES-encrypted period tracker. Track your cycle with complete privacy. No accounts, no tracking, forever free."
+      content="Track your period and cycle privately with Her Cycle Keeper. Free, ad-free, and fully accessible."
     />
     <meta property="og:url" content="https://hercyclekeeper.web.app" />
     <meta
@@ -62,7 +62,7 @@
     />
     <meta
       name="twitter:description"
-      content="AES-encrypted period tracker with zero data collection. Track your cycle privately, forever free."
+      content="Track your period and cycle privately with Her Cycle Keeper. Free, ad-free, and fully accessible."
     />
     <meta
       name="twitter:image"
@@ -1253,9 +1253,22 @@
     <!-- ONBOARDING -->
     <div id="onboarding" class="hidden">
       <div class="onboard-moon">🌙</div>
-      <div class="onboard-logo">Cycle Keeper</div>
-      <p class="onboard-sub">
-        Your private cycle companion. 100% free. Encrypted on your device.
+      <h1 class="onboard-logo">Her Cycle Keeper</h1>
+      <p class="onboard-sub">Track Your Period and Cycle Privately</p>
+      <p
+        class="onboard-tagline"
+        style="
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin: -0.5rem 0 1.5rem;
+          text-align: center;
+          max-width: 28rem;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      >
+        Track your flow, mood, and symptoms — all on your device. Free, ad-free,
+        fully accessible, and privacy-first.
       </p>
       <div class="onboard-form">
         <label for="ob-last-period">First day of your last period</label>
@@ -1429,6 +1442,16 @@
         </div>
         <div class="log-panel" id="log-panel">
           <div class="log-date-title" id="log-panel-date">Log for Today</div>
+          <p
+            style="
+              color: var(--text-muted);
+              font-size: 0.875rem;
+              text-align: center;
+              margin: -0.5rem 0 1rem;
+            "
+          >
+            What's your flow today? 🌊
+          </p>
           <div class="log-options">
             <div class="log-btn" id="log-flow" onclick="showFlowModal()">
               <span class="icon" id="log-flow-icon">🩸</span>Flow
