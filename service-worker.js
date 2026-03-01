@@ -70,7 +70,10 @@ self.addEventListener("message", (event) => {
   if (event.data.type === "SCHEDULE_NOTIFICATION") {
     console.log("Service Worker received notification schedule request");
     // Store for periodic background sync
-    localStorage.setItem("luna_notify_pending", JSON.stringify(event.data.data));
+    localStorage.setItem(
+      "luna_notify_pending",
+      JSON.stringify(event.data.data)
+    );
   }
 });
 

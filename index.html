@@ -2760,7 +2760,9 @@
             if (registration) {
               console.log("Showing test notification via Service Worker...");
               await registration.showNotification(title, options);
-              console.log("Test notification shown successfully via Service Worker");
+              console.log(
+                "Test notification shown successfully via Service Worker"
+              );
               return;
             }
           } catch (err) {
@@ -2841,7 +2843,10 @@
 
         // If permission granted, show notifications are enabled
         if (Notification.permission === "granted") {
-          console.log("Notifications enabled. Next notification scheduled for:", notifyDateStr);
+          console.log(
+            "Notifications enabled. Next notification scheduled for:",
+            notifyDateStr
+          );
         }
       }
 
@@ -2913,13 +2918,18 @@
                   try {
                     const registration = await navigator.serviceWorker.ready;
                     await registration.showNotification("Period Coming Soon", {
-                      body: `Your period is expected in ${days} day${days > 1 ? "s" : ""}.`,
+                      body: `Your period is expected in ${days} day${
+                        days > 1 ? "s" : ""
+                      }.`,
                       icon: "/luna-cycle/icons/icon-192.png",
                       badge: "/luna-cycle/icons/icon-192.png",
                       tag: "luna-period-notification",
                       requireInteraction: true,
                     });
-                    localStorage.setItem("luna_notify_shown_date", today.toDateString());
+                    localStorage.setItem(
+                      "luna_notify_shown_date",
+                      today.toDateString()
+                    );
                   } catch (err) {
                     console.warn("Failed to show notification:", err);
                   }
