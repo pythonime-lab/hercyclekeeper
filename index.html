@@ -541,10 +541,13 @@
               "
             ></select>
           </div>
-          <div id="pain-chart-container">
+          <div
+            id="pain-chart-container"
+            style="margin: 0 -1.125rem; padding: 0"
+          >
             <canvas
               id="pain-chart"
-              style="width: 100%; max-height: 300px"
+              style="width: 100%; max-height: 300px; display: block"
             ></canvas>
           </div>
           <div
@@ -1953,7 +1956,7 @@
         canvas.style.height = height + "px";
         ctx.scale(dpr, dpr);
 
-        const padding = { top: 20, right: 20, bottom: 40, left: 40 };
+        const padding = { top: 20, right: 20, bottom: 40, left: 20 };
         const chartWidth = width - padding.left - padding.right;
         const chartHeight = height - padding.top - padding.bottom;
 
