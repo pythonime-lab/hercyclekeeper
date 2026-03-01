@@ -1447,7 +1447,7 @@
       <!-- INSIGHTS VIEW -->
       <div class="insights-wrap" id="view-insights">
         <div class="insight-card">
-          <h3>📈 Cycle Stats</h3>
+          <h3>Cycle Stats</h3>
           <div class="stat-grid">
             <div class="stat-box">
               <div class="big" id="avg-cycle" style="color: var(--rose)">—</div>
@@ -1478,7 +1478,7 @@
           </div>
         </div>
         <div class="insight-card">
-          <h3>🤕 Pain Tracking</h3>
+          <h3>Symptom Tracking</h3>
           <div
             style="
               margin-bottom: 1rem;
@@ -1487,32 +1487,48 @@
               align-items: center;
             "
           >
-            <button
+            <select
               id="pain-view-month"
               class="apply-btn"
-              onclick="switchPainView('month')"
-              style="
-                flex: 1;
-                padding: 0.5rem;
-                font-size: 0.875rem;
-                background: linear-gradient(135deg, var(--rose), var(--coral));
-              "
-            >
-              This Month
-            </button>
-            <button
-              id="pain-view-year"
-              class="apply-btn"
-              onclick="switchPainView('year')"
+              onchange="updatePainChart()"
               style="
                 flex: 1;
                 padding: 0.5rem;
                 font-size: 0.875rem;
                 background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                cursor: pointer;
               "
             >
-              This Year
-            </button>
+              <option value="">All Months</option>
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+            <select
+              id="pain-view-year"
+              class="apply-btn"
+              onchange="updatePainChart()"
+              style="
+                flex: 1;
+                padding: 0.5rem;
+                font-size: 0.875rem;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                cursor: pointer;
+              "
+            ></select>
           </div>
           <div id="pain-chart-container">
             <canvas
@@ -1527,12 +1543,19 @@
               color: var(--text-muted);
             "
           >
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+              "
+            >
               <span style="color: #ff3d6b">▮ Period</span>
               <span style="color: #ffd700">▮ Ovulation</span>
               <span style="color: #ff3d6b">▮ Flow</span>
               <span style="color: #ff6b4a">▮ Pain</span>
-              <span style="color: #8b7fe8">▮ Mood (Low → Happy)</span>
+              <span style="color: #8b7fe8">▮ Mood</span>
             </div>
           </div>
         </div>
@@ -2483,8 +2506,8 @@
       function painColorFromValue(value) {
         const v = normalizePainValue(value, 5);
         const t = (v - 1) / 9;
-        const low = { r: 255, g: 179, b: 71 }; // #FFB347
-        const high = { r: 255, g: 61, b: 107 }; // #FF3D6B
+        const low = { r: 255, g: 179, b: 71 }; // #FFB347 (light orange)
+        const high = { r: 255, g: 140, b: 0 }; // #FF8C00 (dark orange)
         const r = Math.round(low.r + (high.r - low.r) * t);
         const g = Math.round(low.g + (high.g - low.g) * t);
         const b = Math.round(low.b + (high.b - low.b) * t);
@@ -2859,26 +2882,45 @@
             hist.appendChild(row);
           });
 
+        // Ensure chart controls are initialized
+        const yearSelect = document.getElementById("pain-view-year");
+        if (yearSelect && yearSelect.options.length === 0) {
+          initializePainChartControls();
+        }
         renderPainChart();
       }
 
       let painViewMode = "month";
 
       function switchPainView(mode) {
-        painViewMode = mode;
-        const monthBtn = document.getElementById("pain-view-month");
-        const yearBtn = document.getElementById("pain-view-year");
+        // Deprecated - keeping for backward compatibility
+        updatePainChart();
+      }
 
-        if (mode === "month") {
-          monthBtn.style.background =
-            "linear-gradient(135deg, var(--rose), var(--coral))";
-          yearBtn.style.background = "rgba(255, 255, 255, 0.1)";
-        } else {
-          monthBtn.style.background = "rgba(255, 255, 255, 0.1)";
-          yearBtn.style.background =
-            "linear-gradient(135deg, var(--rose), var(--coral))";
+      function initializePainChartControls() {
+        const monthSelect = document.getElementById("pain-view-month");
+        const yearSelect = document.getElementById("pain-view-year");
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth();
+
+        // Set to 'All Months' by default to show full year
+        if (monthSelect) monthSelect.value = "";
+
+        // Populate year dropdown with last 5 years
+        if (yearSelect) {
+          for (let i = 0; i < 5; i++) {
+            const year = currentYear - i;
+            const option = document.createElement("option");
+            option.value = String(year);
+            option.textContent = String(year);
+            yearSelect.appendChild(option);
+          }
+          yearSelect.value = String(currentYear);
         }
+      }
 
+      function updatePainChart() {
         renderPainChart();
       }
 
@@ -2913,9 +2955,19 @@
         // Clear canvas
         ctx.clearRect(0, 0, width, height);
 
-        // Get data based on view mode
-        const data =
-          painViewMode === "month" ? getPainDataMonth() : getPainDataYear();
+        // Get selected month and year
+        const monthSelect = document.getElementById("pain-view-month");
+        const yearSelect = document.getElementById("pain-view-year");
+        const selectedMonthValue = monthSelect ? monthSelect.value : "";
+        const selectedYear = yearSelect
+          ? parseInt(yearSelect.value)
+          : new Date().getFullYear();
+
+        // Get data for selected period
+        const isYearView = selectedMonthValue === "";
+        const data = isYearView
+          ? getPainDataYear(selectedYear)
+          : getPainDataMonth(selectedYear, parseInt(selectedMonthValue));
 
         if (data.length === 0) {
           ctx.fillStyle = "#666";
@@ -3014,7 +3066,7 @@
         ctx.font = "11px sans-serif";
         ctx.textAlign = "center";
 
-        const labelStep = painViewMode === "month" ? 5 : 1;
+        const labelStep = isYearView ? 1 : 5;
         data.forEach((point, i) => {
           if (i % labelStep === 0 || i === data.length - 1) {
             const x = padding.left + i * barWidth + barWidth / 2;
@@ -3023,11 +3075,13 @@
         });
       }
 
-      function getPainDataMonth() {
+      function getPainDataMonth(year, month) {
         const data = [];
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
+        if (year === undefined || month === undefined) {
+          const now = new Date();
+          year = now.getFullYear();
+          month = now.getMonth();
+        }
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
         const info = getCycleInfo();
@@ -3063,10 +3117,12 @@
         return data;
       }
 
-      function getPainDataYear() {
+      function getPainDataYear(year) {
         const data = [];
-        const now = new Date();
-        const year = now.getFullYear();
+        if (year === undefined) {
+          const now = new Date();
+          year = now.getFullYear();
+        }
 
         for (let m = 0; m < 12; m++) {
           const monthStart = new Date(year, m, 1);
@@ -3751,6 +3807,7 @@
         updateFlowButtonVisual(1, false);
         updatePainButtonVisual(5, false);
         updateMoodButtonVisual(50, false);
+        initializePainChartControls();
       }
 
       init();
