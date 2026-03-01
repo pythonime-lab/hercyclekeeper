@@ -64,3 +64,44 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
+// Handle messages from the app (for notification scheduling)
+self.addEventListener("message", (event) => {
+  if (event.data.type === "SCHEDULE_NOTIFICATION") {
+    const { date, daysBefore } = event.data.data;
+    const notifyDate = new Date(date);
+    const delay = notifyDate - Date.now();
+
+    if (delay > 0) {
+      setTimeout(async () => {
+        await self.registration.showNotification("Period Coming Soon", {
+          body: `Your period is expected in ${daysBefore} day${
+            daysBefore > 1 ? "s" : ""
+          }.`,
+          icon: "/luna-cycle/icons/icon-192.png",
+          badge: "/luna-cycle/icons/icon-192.png",
+          tag: "luna-period-notification",
+          requireInteraction: true,
+        });
+      }, delay);
+    }
+  }
+});
+
+// Handle notification clicks
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll({ type: "window" }).then((clientList) => {
+      // Focus existing window if open
+      for (let client of clientList) {
+        if (client.url === "/" || client.url.includes("luna-cycle"))
+          return client.focus();
+      }
+      // Open new window if not already open
+      if (clients.openWindow) {
+        return clients.openWindow("/luna-cycle/");
+      }
+    })
+  );
+});
