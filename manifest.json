@@ -1,8 +1,8 @@
 {
-  "name": "Luna — Period & Cycle Calendar",
-  "short_name": "Luna",
+  "name": "Her Cycle Keeper — Private Period & Cycle Tracker",
+  "short_name": "Cycle Keeper",
   "description": "Private, AES-encrypted period and cycle tracker. Zero data collection. Forever free.",
-  "start_url": "/luna-cycle/",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0F0A14",

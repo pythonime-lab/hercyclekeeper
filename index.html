@@ -28,23 +28,26 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta name="apple-mobile-web-app-title" content="Luna" />
+    <meta name="apple-mobile-web-app-title" content="Cycle Keeper" />
     <meta
       name="description"
-      content="Luna — Private, AES-encrypted period and cycle tracker. Zero data collection. Forever free."
+      content="Her Cycle Keeper — Private, AES-encrypted period and cycle tracker. Zero data collection. Forever free."
     />
 
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Luna — Private Period & Cycle Tracker" />
+    <meta
+      property="og:title"
+      content="Her Cycle Keeper — Private Period & Cycle Tracker"
+    />
     <meta
       property="og:description"
       content="AES-encrypted period tracker. Track your cycle with complete privacy. No accounts, no tracking, forever free."
     />
-    <meta property="og:url" content="https://luna-cycle.app" />
+    <meta property="og:url" content="https://hercyclekeeper.web.app" />
     <meta
       property="og:image"
-      content="https://luna-cycle.app/icons/icon-192.png"
+      content="https://hercyclekeeper.web.app/icons/icon-192.png"
     />
 
     <!-- Twitter Card -->
@@ -67,7 +70,7 @@
 
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />
-    <title>Luna — Period & Cycle Calendar</title>
+    <title>Her Cycle Keeper — Private Period & Cycle Tracker</title>
 
     <!-- JSON-LD Schema for Search Engines -->
     <script type="application/ld+json">
@@ -89,7 +92,7 @@
           "ratingValue": "5",
           "ratingCount": "1"
         },
-        "image": "https://luna-cycle.app/icons/icon-192.png"
+        "image": "https://hercyclekeeper.web.app/icons/icon-192.png"
       }
     </script>
 
@@ -1199,7 +1202,7 @@
 
     <div id="lock-screen">
       <div class="lock-icon" id="lock-icon">🔐</div>
-      <div class="lock-logo">Luna</div>
+      <div class="lock-logo">Cycle Keeper</div>
       <div class="lock-sub" id="lock-sub">
         Enter your PIN to unlock<br />your private health data
       </div>
@@ -1246,7 +1249,7 @@
     <!-- ONBOARDING -->
     <div id="onboarding" class="hidden">
       <div class="onboard-moon">🌙</div>
-      <div class="onboard-logo">Luna</div>
+      <div class="onboard-logo">Cycle Keeper</div>
       <p class="onboard-sub">
         Your private cycle companion. 100% free. Encrypted on your device.
       </p>
@@ -1275,8 +1278,8 @@
         <div class="pin-setup-title">🔒 Set a 4-digit PIN</div>
         <div class="pin-setup-sub">
           Your PIN encrypts all data locally.
-          <strong>Luna never sends data anywhere.</strong> If you forget your
-          PIN, data will be erased.
+          <strong>Cycle Keeper never sends data anywhere.</strong> If you forget
+          your PIN, data will be erased.
         </div>
         <div class="setup-pin-wrap" id="setup-pin-dots">
           <div class="setup-pin-dot" id="sp0"></div>
@@ -1316,7 +1319,7 @@
     <!-- MAIN APP -->
     <div id="app" style="display: none">
       <div class="header">
-        <div class="logo">Luna</div>
+        <div class="logo">Cycle Keeper</div>
         <button
           id="install-btn"
           onclick="installApp()"
@@ -1592,9 +1595,10 @@
           </div>
         </div>
         <div class="insight-card">
-          <h3>How Luna Works</h3>
+          <h3>How Cycle Keeper Works</h3>
           <div class="info-box">
-            Luna estimates your fertile window by tracking cycle patterns.
+            Cycle Keeper estimates your fertile window by tracking cycle
+            patterns.
             <strong>Ovulation</strong> is estimated ~14 days before your next
             period. <strong>Fertile days</strong> are calculated as day 8
             through (cycle length − 11).<br /><br />
@@ -1816,7 +1820,6 @@
         >Settings
       </div>
     </div>
-
     <script>
       "use strict";
 
@@ -3790,7 +3793,7 @@
           (location.protocol === "http:" || location.protocol === "https:")
         ) {
           navigator.serviceWorker
-            .register("/luna-cycle/service-worker.js")
+            .register("/service-worker.js")
             .then((reg) => {
               console.log("Service Worker registered:", reg);
             })
