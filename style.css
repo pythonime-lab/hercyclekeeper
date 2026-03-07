@@ -20,8 +20,8 @@
   --bg3: #2a1538;
   --card: #1c0f2b;
   --text: #f9f0ff;
-  --text-muted: #a08ec0;
-  --border: rgba(167, 139, 250, 0.15);
+  --text-muted: #c4b5fd;
+  --border: rgba(167, 139, 250, 0.28);
   --danger: #e6233b;
   --success: #34d399;
 }
@@ -1031,6 +1031,17 @@ body {
 .settings-wrap.visible {
   display: block;
 }
+
+/* Support tab mode: show only About + Support sections */
+#view-about.support-mode .settings-section {
+  display: none;
+}
+
+#view-about.support-mode #about-core-section,
+#view-about.support-mode #support-section {
+  display: block;
+}
+
 .settings-section {
   background: var(--card);
   border: 0.0625rem solid var(--border);
@@ -1132,6 +1143,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.1875rem;
   cursor: pointer;
   font-size: 0.625rem;
@@ -1146,10 +1158,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  stroke: currentColor;
   stroke-width: 1.5;
   fill: none;
   line-height: 1;
+}
+
+.bnav-item .icon svg {
+  display: block;
+  margin: auto;
 }
 .bnav-item.active {
   color: var(--rose-light);
@@ -1442,6 +1458,46 @@ body {
 .accessibility-link {
   color: var(--teal);
   text-decoration: underline;
+}
+
+/* Support Link */
+.support-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(50deg, #0070e0, #b9dcff);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.875rem;
+  border: none;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+
+.support-link:hover {
+  transform: translateY(-2px);
+}
+
+.support-link:active {
+  transform: translateY(0);
+}
+
+.support-link:focus-visible {
+  outline: 2px solid rgba(185, 220, 255, 0.65);
+  outline-offset: 2px;
+}
+
+.support-paypal-logo {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.support-paypal-logo svg {
+  width: 4.6rem;
+  height: auto;
+  display: block;
 }
 
 /* Button Variants */

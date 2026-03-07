@@ -2208,38 +2208,45 @@ async function _submitChangePinStep() {
 }
 
 function switchTab(tab) {
-  const allowed = ["calendar", "insights", "settings", "about"];
+  const allowed = ["calendar", "insights", "settings", "about", "support"];
   if (!allowed.includes(tab)) return;
   currentTab = tab;
 
   // Sync navigation state
-  setNavigationState(tab, viewMonth);
+  setNavigationState(tab === "support" ? "about" : tab, viewMonth);
 
   // Remove active from bottom nav items
-  ["bnav-calendar", "bnav-insights", "bnav-settings", "bnav-about"].forEach(
-    (id) => {
-      const el = document.getElementById(id);
-      if (el) el.classList.remove("active");
-    }
-  );
+  [
+    "bnav-calendar",
+    "bnav-insights",
+    "bnav-settings",
+    "bnav-about",
+    "bnav-support",
+  ].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove("active");
+  });
 
   // Show/hide view panels
   const calView = document.getElementById("view-calendar");
   const insView = document.getElementById("view-insights");
   const setView = document.getElementById("view-settings");
   const aboutView = document.getElementById("view-about");
+  const isAboutMode = tab === "about" || tab === "support";
   if (calView) calView.style.display = tab === "calendar" ? "block" : "none";
   if (insView) insView.style.display = tab === "insights" ? "block" : "none";
   if (setView) setView.style.display = tab === "settings" ? "block" : "none";
-  if (aboutView) aboutView.style.display = tab === "about" ? "block" : "none";
+  if (aboutView) aboutView.style.display = isAboutMode ? "block" : "none";
   if (insView)
     insView.className =
       "insights-wrap" + (tab === "insights" ? " visible" : "");
   if (setView)
     setView.className =
       "settings-wrap" + (tab === "settings" ? " visible" : "");
-  if (aboutView)
-    aboutView.className = "settings-wrap" + (tab === "about" ? " visible" : "");
+  if (aboutView) {
+    aboutView.className = "settings-wrap" + (isAboutMode ? " visible" : "");
+    aboutView.classList.toggle("support-mode", tab === "support");
+  }
 
   // Add active to current tab button
   if (tab === "calendar") {
@@ -2258,6 +2265,10 @@ function switchTab(tab) {
   }
   if (tab === "about") {
     const bnav = document.getElementById("bnav-about");
+    if (bnav) bnav.classList.add("active");
+  }
+  if (tab === "support") {
+    const bnav = document.getElementById("bnav-support");
     if (bnav) bnav.classList.add("active");
   }
   // Hide log panel when switching tabs
