@@ -1,12 +1,19 @@
 /* Desktop-only layout (this file is loaded only on desktop from index.html) */
+body {
+  overflow: hidden;
+  height: 100vh;
+}
+
 #app {
   max-width: 82rem;
   margin: 0 auto;
   padding: 0 1rem 1.5rem;
   display: grid !important;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1.25rem 1.5rem;
   align-items: start;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .header {
@@ -71,6 +78,46 @@
   margin-left: 0;
   margin-right: 0;
   width: auto;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  padding-bottom: 2rem;
+}
+
+/* Custom scrollbar for left column */
+#view-insights::-webkit-scrollbar,
+#view-settings::-webkit-scrollbar,
+#view-about::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#view-insights::-webkit-scrollbar-track,
+#view-settings::-webkit-scrollbar-track,
+#view-about::-webkit-scrollbar-track {
+  background: rgba(167, 139, 250, 0.05);
+  border-radius: 999px;
+}
+
+#view-insights::-webkit-scrollbar-thumb,
+#view-settings::-webkit-scrollbar-thumb,
+#view-about::-webkit-scrollbar-thumb {
+  background: rgba(167, 139, 250, 0.3);
+  border-radius: 999px;
+}
+
+#view-insights::-webkit-scrollbar-thumb:hover,
+#view-settings::-webkit-scrollbar-thumb:hover,
+#view-about::-webkit-scrollbar-thumb:hover {
+  background: rgba(167, 139, 250, 0.5);
+}
+
+/* Firefox scrollbar */
+#view-insights,
+#view-settings,
+#view-about {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(167, 139, 250, 0.3) rgba(167, 139, 250, 0.05);
 }
 
 /* Show insights by default on desktop (Calendar tab) */
@@ -138,4 +185,24 @@ body:has(.settings-wrap.visible) .insights-wrap {
 #calendar-wrap-main {
   margin: 0;
   width: 100%;
+}
+
+/* Responsive canvas for charts */
+.chart-container {
+  margin: 0;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.chart-canvas {
+  max-width: 100%;
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+#pain-chart {
+  max-width: 100%;
+  width: 100% !important;
+  height: auto !important;
 }
