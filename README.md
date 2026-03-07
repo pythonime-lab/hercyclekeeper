@@ -1,5 +1,7 @@
 # Your Cycle Keeper — Private Period & Cycle Tracker
 
+> **⚠️ Beta Version 1.0.0** — Currently in active development. Features may change and bugs may occur.
+
 > **AES-256-GCM encrypted. Zero data collection. Forever free.**
 
 Your Cycle Keeper is a privacy-first period and cycle tracking PWA (Progressive Web App). All data is encrypted locally on your device using AES-256-GCM. **Nothing is sent to any server. No accounts. No analytics. No tracking.**
@@ -8,10 +10,17 @@ Your Cycle Keeper is a privacy-first period and cycle tracking PWA (Progressive 
 
 - 🔒 **End-to-End Encrypted** — AES-256-GCM encryption with your personal PIN
 - 📱 **Progressive Web App** — Install like a native app on any device
-- 🔴 **Period Tracking** — Log flow, symptoms, mood, and notes
+- 🩸 **Flow Tracking** — Log flow intensity (light, medium, heavy)
+- 🤕 **Pain Tracking** — Rate pain levels from 1-10 in 0.5 increments
+- 😊 **Mood Tracking** — Track mood (low, neutral, happy)
+- 📅 **Period Markers** — Manually mark period start/end dates
+- 📝 **Daily Notes** — Add custom notes (up to 500 characters)
 - 📊 **Cycle Predictions** — Estimates fertile window, ovulation, and next period
-- ⏰ **Notifications** — Get reminders before your period starts
-- 📈 **Cycle Statistics** — View your cycle history and patterns
+- ⏰ **In-App Reminders** — Banner notification when your period is approaching
+- 📈 **Symptom Charts** — Visual charts with month/year views and data export (PNG)
+- 🎨 **Interactive Charts** — Filter by period, ovulation, flow, pain, or mood
+- 📊 **Cycle Statistics** — View your cycle history and patterns
+- ♿ **Fully Accessible** — WCAG 2.0 compliant with keyboard navigation
 - 🚫 **Completely Offline** — Works without internet connection
 - 💾 **Encrypted Backup** — Export and restore your data with your PIN
 
@@ -63,23 +72,33 @@ npx http-server
 
 ## Technical Details
 
-- **Framework:** Vanilla JavaScript (no dependencies)
-- **Encryption:** Web Crypto API (AES-GCM)
-- **Key Derivation:** PBKDF2 (250,000 iterations)
-- **Offline Support:** Service Worker + Cache-first strategy
-- **Browser Support:** All modern browsers (Chrome, Firefox, Safari, Edge)
+- **Version:** 1.0.0-beta (in active development)
+- **Framework:** Vanilla JavaScript ES6 modules (zero dependencies)
+- **Architecture:** Modular design with separated concerns (crypto, cycles, validation, storage)
+- **Storage:** IndexedDB (persistent, survives cache clearing)
+- **Encryption:** Web Crypto API (AES-256-GCM)
+- **Key Derivation:** PBKDF2 (250,000 iterations, SHA-256)
+- **Session Security:** 5-minute auto-lock with countdown warning
+- **Offline Support:** Service Worker v3.1.0 + Cache-first strategy
+- **Accessibility:** WCAG 2.0 compliant (keyboard navigation, screen reader support, focus management)
+- **Browser Support:** All modern browsers with Web Crypto API (Chrome, Firefox, Safari, Edge)
 
 ## Data Structure
 
-Cycle Keeper stores:
+Cycle Keeper stores in IndexedDB:
 
 - Last period start date
 - Cycle length and period duration
-- Daily logs (flow, symptoms, mood, notes)
-- Cycle history
-- Notification preferences
+- Daily logs with:
+  - Flow intensity (1-3: light, medium, heavy)
+  - Pain level (1-10 in 0.5 increments)
+  - Mood (0-100: low, neutral, happy)
+  - Custom notes (up to 500 characters)
+  - Period start/end markers
+- Cycle history (tracks pattern changes over time)
+- PIN-derived encryption keys (PBKDF2 with random salt)
 
-All encrypted locally. Never transmitted.
+All encrypted locally with your PIN. Never transmitted. No cloud storage.
 
 ## License
 
@@ -97,6 +116,24 @@ Cycle Keeper estimates your cycle using pattern tracking. Actual timing varies d
 - Hormonal changes
 - Individual biology
 
+**Do NOT use as a contraceptive or fertility guarantee.** Always consult a qualified healthcare professional.
+
+## Accessibility
+
+Your Cycle Keeper follows **WCAG 2.0 accessibility standards**:
+
+- **Keyboard Navigation:**
+  - Tab/Shift+Tab: Navigate forward/backward through interactive elements
+  - Arrow Keys: Navigate calendar dates (complex grid component)
+  - Enter/Space: Activate buttons and links
+  - Escape: Close modals and return focus
+  - Digits 0-9 + Backspace: PIN entry on all screens
+- **Screen Readers:** Semantic HTML with proper ARIA labels and roles
+- **Focus Management:** Visible focus indicators, logical tab order
+- **Form Controls:** Native keyboard support for inputs, selects, and textareas
+
+Standards based on [Salesforce Accessibility Guidelines](https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation).
+opment. Features may change and bugs may occur. Please report issues!
 **Do NOT use as a contraceptive or fertility guarantee.** Always consult a qualified healthcare professional.
 
 ## Contributing
