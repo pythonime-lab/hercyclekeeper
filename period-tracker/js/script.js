@@ -2325,7 +2325,7 @@ async function init() {
       (location.protocol === "http:" || location.protocol === "https:")
     ) {
       navigator.serviceWorker
-        .register("/service-worker.js")
+        .register("/period-tracker/service-worker.js")
         .then((reg) => {
           console.log("Service Worker registered:", reg);
         })

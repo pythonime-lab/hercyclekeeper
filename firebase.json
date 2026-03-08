@@ -40,7 +40,7 @@
         ]
       },
       {
-        "source": "index.html",
+        "source": "**/index.html",
         "headers": [
           {
             "key": "Cache-Control",
@@ -74,7 +74,7 @@
         ]
       },
       {
-        "source": "service-worker.js",
+        "source": "**/service-worker.js",
         "headers": [
           {
             "key": "Cache-Control",
@@ -83,11 +83,6 @@
         ]
       }
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "rewrites": []
   }
 }

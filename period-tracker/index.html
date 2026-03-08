@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+    default-src 'none';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    font-src 'self' data:;
+    img-src 'self' data:;
+    manifest-src 'self';
+    connect-src 'none';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'none';
+  "
+    />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#120818" />
+    <meta name="apple-mobile-web-app-title" content="Your Cycle Keeper" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta
+      name="description"
+      content="Your Cycle Keeper — a free, private period tracker with AES-256 encryption. Track your cycle, flow, mood, and symptoms entirely on your device. No accounts, no servers, no data collection. Forever free and ad-free."
+    />
+    <meta
+      name="keywords"
+      content="period tracker, cycle tracker, private period tracker, free period app, menstrual cycle tracker, ovulation tracker, fertility tracker, encrypted health app, offline period tracker, no account period tracker, privacy first, AES-256, PWA"
+    />
+    <meta name="author" content="Your Cycle Keeper" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Your Cycle Keeper" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="Your Cycle Keeper — Free Private Period & Cycle Tracker"
+    />
+    <meta
+      property="og:description"
+      content="Track your period, flow, mood and symptoms privately. AES-256 encrypted, no accounts, no servers, no data collection. Free forever."
+    />
+    <meta property="og:url" content="https://yourcyclekeeper.web.app/period-tracker/" />
+    <meta
+      property="og:image"
+      content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+    />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta
+      property="og:image:alt"
+      content="Your Cycle Keeper logo — a heart with a blood drop"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Your Cycle Keeper — Free Private Period Tracker"
+    />
+    <meta
+      name="twitter:description"
+      content="Track your period, flow, mood and symptoms privately. AES-256 encrypted, no accounts, no servers. Free forever."
+    />
+    <meta
+      name="twitter:image"
+      content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+    />
+    <meta name="twitter:image:alt" content="Your Cycle Keeper logo" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourcyclekeeper.web.app/period-tracker/" />
+
+    <link rel="stylesheet" href="style.css?v=20260308c" />
+    <link
+      rel="stylesheet"
+      href="style-desktop.css?v=20260308c"
+      media="screen and (min-width: 768px)"
+    />
+    <link rel="manifest" href="../manifest.json" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../icons/favicon-16x16.png"
+    />
+    <script src="js/indexeddb-storage.js" defer></script>
+    <script type="module" src="js/script.js"></script>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="../icons/favicon-48x48.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="../icons/favicon-64x64.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="../icons/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="128x128"
+      href="../icons/favicon-128x128.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../icons/favicon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="256x256"
+      href="../icons/favicon-256x256.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../icons/favicon-512x512.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../icons/favicon-180x180.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="../icons/favicon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="../icons/favicon-144x144.png"
+    />
+    <title>Your Cycle Keeper — Private Period & Cycle Tracker</title>
+
+    <!-- JSON-LD Schema for Search Engines -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Your Cycle Keeper",
+        "alternateName": "Cycle Keeper",
+        "description": "Free, private period and cycle tracker with AES-256 encryption. Track your flow, mood, and symptoms entirely on your device. No accounts, no servers, no data collection.",
+        "url": "https://yourcyclekeeper.web.app/period-tracker/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript, Web Crypto API",
+        "softwareVersion": "1.0.0-beta",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "featureList": [
+          "AES-256-GCM encryption",
+          "Offline-first PWA",
+          "Period tracking",
+          "Flow intensity tracking",
+          "Mood tracking",
+          "Pain tracking",
+          "Cycle predictions",
+          "Ovulation estimation",
+          "Encrypted backup & restore",
+          "Zero data collection"
+        ],
+        "screenshot": "https://yourcyclekeeper.web.app/icons/favicon-512x512.png",
+        "image": "https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+      }
+    </script>
+
+  </head>
+  <body>
+    <div id="timeout-banner">
+      ⏱️ Session expires in <span id="timeout-count">60</span>s of inactivity —
+      tap to reset
+    </div>
+
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-icon" id="modal-icon">⚠️</div>
+        <div class="modal-title" id="modal-title">Are you sure?</div>
+        <div class="modal-msg" id="modal-msg"></div>
+        <div class="modal-btns">
+          <button class="modal-btn secondary" id="modal-cancel">Cancel</button>
+          <button class="modal-btn primary" id="modal-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="lock-screen">
+      <div class="lock-icon" id="lock-icon">
+        <img
+          src="../icons/favicon-128x128.png"
+          alt="Your Cycle Keeper Logo"
+          class="logo-lock"
+        />
+      </div>
+      <div class="lock-logo">Your <span>Cycle</span> Keeper</div>
+      <div class="lock-sub" id="lock-sub">
+        Enter your PIN to unlock<br />your private health data
+      </div>
+      <div class="pin-label" id="pin-label">PIN</div>
+      <div class="pin-dots" id="pin-dots">
+        <div class="pin-dot" id="d0"></div>
+        <div class="pin-dot" id="d1"></div>
+        <div class="pin-dot" id="d2"></div>
+        <div class="pin-dot" id="d3"></div>
+      </div>
+      <div class="numpad" id="numpad">
+        <div class="num-btn" onclick="pinInput('1')">1</div>
+        <div class="num-btn" onclick="pinInput('2')">2</div>
+        <div class="num-btn" onclick="pinInput('3')">3</div>
+        <div class="num-btn" onclick="pinInput('4')">4</div>
+        <div class="num-btn" onclick="pinInput('5')">5</div>
+        <div class="num-btn" onclick="pinInput('6')">6</div>
+        <div class="num-btn" onclick="pinInput('7')">7</div>
+        <div class="num-btn" onclick="pinInput('8')">8</div>
+        <div class="num-btn" onclick="pinInput('9')">9</div>
+        <div class="num-btn empty"></div>
+        <div class="num-btn" onclick="pinInput('0')">0</div>
+        <div class="num-btn del" onclick="pinDelete()">⌫</div>
+      </div>
+      <div class="lock-error" id="lock-error"></div>
+      <div class="forgot-pin-wrapper">
+        <button onclick="forgotPinFlow()" class="forgot-pin-btn">
+          Forgot PIN?
+        </button>
+      </div>
+    </div>
+
+    <!-- ONBOARDING -->
+    <div id="onboarding" class="hidden">
+      <div class="onboard-moon">
+        <img
+          src="../icons/favicon-128x128.png"
+          alt="Your Cycle Keeper Logo"
+          class="logo-onboard"
+        />
+      </div>
+      <h1 class="onboard-logo">Your <span>Cycle</span> Keeper</h1>
+      <p class="onboard-sub">Track Your Period and Cycle Privately</p>
+      <p class="onboard-tagline">
+        Track your flow, mood, and symptoms — all on your device. Free, ad-free,
+        fully accessible, and privacy-first.
+      </p>
+      <div class="beta-warning">
+        ⚠️ <strong>Beta</strong> — This app is currently in active development.
+        Features may change and bugs may occur.
+      </div>
+      <div class="onboard-form">
+        <label for="ob-last-period">First day of your last period</label>
+        <input type="date" id="ob-last-period" autocomplete="off" />
+        <label for="ob-cycle-len">Average cycle length (days)</label>
+        <input
+          type="number"
+          id="ob-cycle-len"
+          value="28"
+          min="20"
+          max="45"
+          autocomplete="off"
+        />
+        <label for="ob-period-dur">Average period duration (days)</label>
+        <input
+          type="number"
+          id="ob-period-dur"
+          value="5"
+          min="1"
+          max="10"
+          autocomplete="off"
+        />
+
+        <div class="pin-setup-title">🔒 Set a 4-digit PIN</div>
+        <div class="pin-setup-sub">
+          Your PIN encrypts all data locally.
+          <strong>Your Cycle Keeper never sends data anywhere.</strong> If you
+          forget your PIN, data will be erased.
+        </div>
+        <div class="setup-pin-wrap" id="setup-pin-dots">
+          <div class="setup-pin-dot" id="sp0"></div>
+          <div class="setup-pin-dot" id="sp1"></div>
+          <div class="setup-pin-dot" id="sp2"></div>
+          <div class="setup-pin-dot" id="sp3"></div>
+        </div>
+        <div class="onboard-numpad">
+          <div class="num-btn" onclick="setupPinInput('1')">1</div>
+          <div class="num-btn" onclick="setupPinInput('2')">2</div>
+          <div class="num-btn" onclick="setupPinInput('3')">3</div>
+          <div class="num-btn" onclick="setupPinInput('4')">4</div>
+          <div class="num-btn" onclick="setupPinInput('5')">5</div>
+          <div class="num-btn" onclick="setupPinInput('6')">6</div>
+          <div class="num-btn" onclick="setupPinInput('7')">7</div>
+          <div class="num-btn" onclick="setupPinInput('8')">8</div>
+          <div class="num-btn" onclick="setupPinInput('9')">9</div>
+          <div class="num-btn empty"></div>
+          <div class="num-btn" onclick="setupPinInput('0')">0</div>
+          <div class="num-btn del" onclick="setupPinDelete()">⌫</div>
+        </div>
+        <button
+          class="onboard-start"
+          id="onboard-start-btn"
+          onclick="startApp()"
+          disabled
+        >
+          Start Tracking ✨
+        </button>
+      </div>
+      <p class="privacy-note">
+        🔒 <span>AES-256-GCM encrypted.</span> Data never leaves your device. No
+        accounts, no tracking, forever free.
+      </p>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="app" style="display: none">
+      <div class="header">
+        <div class="logo">Your <span>Cycle</span> Keeper</div>
+        <div class="bottom-nav" id="bottom-nav">
+          <div
+            class="bnav-item active"
+            id="bnav-calendar"
+            onclick="switchTab('calendar')"
+            tabindex="0"
+            role="button"
+            aria-label="Calendar tab"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('calendar');}"
+          >
+            <span class="icon"
+              ><svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="1.5"
+                fill="none"
+                stroke-linecap="round"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line></svg></span
+            >Calendar
+          </div>
+          <div
+            class="bnav-item"
+            id="bnav-insights"
+            onclick="switchTab('insights')"
+            tabindex="0"
+            role="button"
+            aria-label="Insights tab"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('insights');}"
+          >
+            <span class="icon"
+              ><svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 21H3.8a.8.8 0 0 1-.8-.8V3"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M5.47 13.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06ZM10 10l.53-.53a.75.75 0 0 0-1.06 0L10 10Zm4 4-.53.53a.75.75 0 0 0 1.06 0L14 14Zm7.53-6.47a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-15 7 4-4-1.06-1.06-4 4 1.06 1.06Zm2.94-4 4 4 1.06-1.06-4-4-1.06 1.06Zm5.06 4 7-7-1.06-1.06-7 7 1.06 1.06Z"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path></svg></span
+            >Insights
+          </div>
+          <div
+            class="bnav-item"
+            id="bnav-settings"
+            onclick="switchTab('settings')"
+            tabindex="0"
+            role="button"
+            aria-label="Settings tab"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('settings');}"
+          >
+            <span class="icon"
+              ><svg
+                viewBox="0 0 50 50"
+                width="24"
+                height="24"
+                fill="currentColor"
+              >
+                <path
+                  d="M 22.205078 2 A 1.0001 1.0001 0 0 0 21.21875 2.8378906 L 20.246094 8.7929688 C 19.076509 9.1331971 17.961243 9.5922728 16.910156 10.164062 L 11.996094 6.6542969 A 1.0001 1.0001 0 0 0 10.708984 6.7597656 L 6.8183594 10.646484 A 1.0001 1.0001 0 0 0 6.7070312 11.927734 L 10.164062 16.873047 C 9.583454 17.930271 9.1142098 19.051824 8.765625 20.232422 L 2.8359375 21.21875 A 1.0001 1.0001 0 0 0 2.0019531 22.205078 L 2.0019531 27.705078 A 1.0001 1.0001 0 0 0 2.8261719 28.691406 L 8.7597656 29.742188 C 9.1064607 30.920739 9.5727226 32.043065 10.154297 33.101562 L 6.6542969 37.998047 A 1.0001 1.0001 0 0 0 6.7597656 39.285156 L 10.648438 43.175781 A 1.0001 1.0001 0 0 0 11.927734 43.289062 L 16.882812 39.820312 C 17.936999 40.39548 19.054994 40.857928 20.228516 41.201172 L 21.21875 47.164062 A 1.0001 1.0001 0 0 0 22.205078 48 L 27.705078 48 A 1.0001 1.0001 0 0 0 28.691406 47.173828 L 29.751953 41.1875 C 30.920633 40.838997 32.033372 40.369697 33.082031 39.791016 L 38.070312 43.291016 A 1.0001 1.0001 0 0 0 39.351562 43.179688 L 43.240234 39.287109 A 1.0001 1.0001 0 0 0 43.34375 37.996094 L 39.787109 33.058594 C 40.355783 32.014958 40.813915 30.908875 41.154297 29.748047 L 47.171875 28.693359 A 1.0001 1.0001 0 0 0 47.998047 27.707031 L 47.998047 22.207031 A 1.0001 1.0001 0 0 0 47.160156 21.220703 L 41.152344 20.238281 C 40.80968 19.078827 40.350281 17.974723 39.78125 16.931641 L 43.289062 11.933594 A 1.0001 1.0001 0 0 0 43.177734 10.652344 L 39.287109 6.7636719 A 1.0001 1.0001 0 0 0 37.996094 6.6601562 L 33.072266 10.201172 C 32.023186 9.6248101 30.909713 9.1579916 29.738281 8.8125 L 28.691406 2.828125 A 1.0001 1.0001 0 0 0 27.705078 2 L 22.205078 2 z M 23.056641 4 L 26.865234 4 L 27.861328 9.6855469 A 1.0001 1.0001 0 0 0 28.603516 10.484375 C 30.066026 10.848832 31.439607 11.426549 32.693359 12.185547 A 1.0001 1.0001 0 0 0 33.794922 12.142578 L 38.474609 8.7792969 L 41.167969 11.472656 L 37.835938 16.220703 A 1.0001 1.0001 0 0 0 37.796875 17.310547 C 38.548366 18.561471 39.118333 19.926379 39.482422 21.380859 A 1.0001 1.0001 0 0 0 40.291016 22.125 L 45.998047 23.058594 L 45.998047 26.867188 L 40.279297 27.871094 A 1.0001 1.0001 0 0 0 39.482422 28.617188 C 39.122545 30.069817 38.552234 31.434687 37.800781 32.685547 A 1.0001 1.0001 0 0 0 37.845703 33.785156 L 41.224609 38.474609 L 38.53125 41.169922 L 33.791016 37.84375 A 1.0001 1.0001 0 0 0 32.697266 37.808594 C 31.44975 38.567585 30.074755 39.148028 28.617188 39.517578 A 1.0001 1.0001 0 0 0 27.876953 40.3125 L 26.867188 46 L 23.052734 46 L 22.111328 40.337891 A 1.0001 1.0001 0 0 0 21.365234 39.53125 C 19.90185 39.170557 18.522094 38.59371 17.259766 37.835938 A 1.0001 1.0001 0 0 0 16.171875 37.875 L 11.46875 41.169922 L 8.7734375 38.470703 L 12.097656 33.824219 A 1.0001 1.0001 0 0 0 12.138672 32.724609 C 11.372652 31.458855 10.793319 30.079213 10.427734 28.609375 A 1.0001 1.0001 0 0 0 9.6328125 27.867188 L 4.0019531 26.867188 L 4.0019531 23.052734 L 9.6289062 22.117188 A 1.0001 1.0001 0 0 0 10.435547 21.373047 C 10.804273 19.898143 11.383325 18.518729 12.146484 17.255859 A 1.0001 1.0001 0 0 0 12.111328 16.164062 L 8.8261719 11.46875 L 11.523438 8.7734375 L 16.185547 12.105469 A 1.0001 1.0001 0 0 0 17.28125 12.148438 C 18.536908 11.394293 19.919867 10.822081 21.384766 10.462891 A 1.0001 1.0001 0 0 0 22.132812 9.6523438 L 23.056641 4 z M 25 17 C 20.593567 17 17 20.593567 17 25 C 17 29.406433 20.593567 33 25 33 C 29.406433 33 33 29.406433 33 25 C 33 20.593567 29.406433 17 25 17 z M 25 19 C 28.325553 19 31 21.674447 31 25 C 31 28.325553 28.325553 31 25 31 C 21.674447 31 19 28.325553 19 25 C 19 21.674447 21.674447 19 25 19 z"
+                ></path></svg></span
+            >Settings
+          </div>
+          <div
+            class="bnav-item"
+            id="bnav-about"
+            onclick="switchTab('about')"
+            tabindex="0"
+            role="button"
+            aria-label="About tab"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('about');}"
+          >
+            <span class="icon">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path
+                  d="M12 16v-4m0-4h.01"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            About
+          </div>
+          <div
+            class="bnav-item bnav-support"
+            id="bnav-support"
+            onclick="switchTab('support')"
+            tabindex="0"
+            role="button"
+            aria-label="Support development"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('support');}"
+          >
+            <span class="icon">
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+            </span>
+            Support
+          </div>
+        </div>
+      </div>
+
+      <div id="desktop-right-column">
+        <!-- CALENDAR VIEW -->
+        <div id="view-calendar">
+          <!-- In-app Reminder Banner -->
+          <div id="reminder-banner" class="reminder-banner">
+            ⏰ <span id="reminder-text">Your period is expected soon</span>
+          </div>
+
+          <div class="status-card">
+            <div class="status-phase" id="status-phase"><span class="phase-dot"></span><span id="status-phase-text">Current Phase</span></div>
+            <div class="status-title" id="status-title">—</div>
+            <div class="status-subtitle" id="status-subtitle">Loading…</div>
+            <div class="status-row">
+              <div class="status-pill">
+                <div class="val" id="cycle-day">—</div>
+                <div class="lbl">Cycle Day</div>
+              </div>
+              <div class="status-pill">
+                <div class="val" id="days-until-next">—</div>
+                <div class="lbl">Until Next</div>
+              </div>
+              <div class="status-pill">
+                <div class="val" id="cycle-len-disp">—</div>
+                <div class="lbl">Avg Length</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cycle-bar-wrap">
+            <div class="cycle-bar-labels">
+              <span>Day 1</span><span id="bar-cycle-end">Day 28</span>
+            </div>
+            <div class="cycle-bar" id="cycle-bar"></div>
+            <div class="bar-legend">
+              <div class="legend-item">
+                <div class="legend-dot legend-dot--rose"></div>
+                Period
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot legend-dot--fertile"></div>
+                Fertile
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot legend-dot--ovulation"></div>
+                Ovulation
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot legend-dot--lavender"></div>
+                Luteal
+              </div>
+            </div>
+          </div>
+
+          <div class="calendar-wrap" id="calendar-wrap-main">
+            <div class="cal-header">
+              <button
+                class="cal-nav-btn"
+                onclick="changeMonth(-1)"
+                aria-label="Previous month"
+              >
+                ‹
+              </button>
+              <div class="cal-month" id="cal-month-label">—</div>
+              <button
+                class="cal-nav-btn"
+                onclick="changeMonth(1)"
+                aria-label="Next month"
+              >
+                ›
+              </button>
+            </div>
+            <div class="cal-weekdays">
+              <div>Su</div>
+              <div>Mo</div>
+              <div>Tu</div>
+              <div>We</div>
+              <div>Th</div>
+              <div>Fr</div>
+              <div>Sa</div>
+            </div>
+            <div class="cal-grid" id="cal-grid"></div>
+          </div>
+
+          <!-- LOG MODAL -->
+          <div
+            class="log-modal-overlay"
+            id="log-modal-overlay"
+            onclick="if(event.target === this) closeLogPanel()"
+          >
+            <div class="log-panel" id="log-panel">
+              <div class="log-header">
+                <div class="log-date-title" id="log-panel-date">
+                  Log for Today
+                </div>
+                <button class="close-btn" onclick="closeLogPanel()">×</button>
+              </div>
+              <p class="calendar-empty-text">What's your flow today? 🌊</p>
+              <div class="log-options">
+                <div
+                  class="log-btn"
+                  id="log-flow"
+                  onclick="showFlowModal()"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Set flow intensity"
+                  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFlowModal();}"
+                >
+                  <span class="icon" id="log-flow-icon">🩸</span>Flow
+                </div>
+                <div
+                  class="log-btn"
+                  id="log-headache"
+                  onclick="showPainModal()"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Set pain level"
+                  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPainModal();}"
+                >
+                  <span class="icon" id="log-pain-icon">🤕</span>Pain
+                </div>
+                <div
+                  class="log-btn mood-btn"
+                  id="log-mood"
+                  onclick="showMoodModal()"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Set mood"
+                  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showMoodModal();}"
+                >
+                  <span class="icon" id="log-mood-icon">😐</span>Mood
+                </div>
+              </div>
+              <div class="period-markers">
+                <div
+                  class="period-marker-btn"
+                  id="log-period-start"
+                  onclick="togglePeriodStart()"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Mark period start"
+                  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePeriodStart();}"
+                >
+                  <span class="icon">📅</span>Period Start
+                </div>
+                <div
+                  class="period-marker-btn"
+                  id="log-period-end"
+                  onclick="togglePeriodEnd()"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Mark period end"
+                  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePeriodEnd();}"
+                >
+                  <span class="icon">🏁</span>Period End
+                </div>
+              </div>
+              <textarea
+                class="log-note"
+                id="log-note"
+                rows="2"
+                placeholder="Add a note…"
+                maxlength="500"
+                oninput="updateNoteCount()"
+              ></textarea>
+              <div class="note-limit" id="note-limit">0 / 500</div>
+              <div class="log-actions">
+                <button class="log-save-btn" onclick="saveLog()">
+                  Save Entry
+                </button>
+                <button class="log-delete-btn" onclick="deleteLog()">
+                  Delete Entry
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSIGHTS VIEW -->
+      <div class="insights-wrap" id="view-insights">
+        <div class="insight-card">
+          <h3>Cycle Stats</h3>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div class="big stat-color--rose" id="avg-cycle">—</div>
+              <div class="sm">Avg Length</div>
+            </div>
+            <div class="stat-box">
+              <div class="big stat-color--lavender" id="avg-period">—</div>
+              <div class="sm">Avg Period</div>
+            </div>
+            <div class="stat-box">
+              <div class="big stat-color--teal" id="tracked-cycles">—</div>
+              <div class="sm">Cycles Logged</div>
+            </div>
+            <div class="stat-box">
+              <div class="big stat-color--fertile" id="fertile-window">—</div>
+              <div class="sm">Fertile Days</div>
+            </div>
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="chart-header-row">
+            <h3>Symptom Tracking</h3>
+            <button
+              onclick="downloadChart()"
+              aria-label="Download chart"
+              class="chart-download-btn"
+              title="Download chart"
+            >
+              <svg
+                class="w-6 h-6"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="chart-controls-row">
+            <select
+              id="pain-view-month"
+              onchange="updatePainChart()"
+              aria-label="Select month to view"
+              class="chart-select"
+            >
+              <option value="" class="chart-select option">All Months</option>
+              <option value="0" class="chart-select option">January</option>
+              <option value="1" class="chart-select option">February</option>
+              <option value="2" class="chart-select option">March</option>
+              <option value="3" class="chart-select option">April</option>
+              <option value="4" class="chart-select option">May</option>
+              <option value="5" class="chart-select option">June</option>
+              <option value="6" class="chart-select option">July</option>
+              <option value="7" class="chart-select option">August</option>
+              <option value="8" class="chart-select option">September</option>
+              <option value="9" class="chart-select option">October</option>
+              <option value="10" class="chart-select option">November</option>
+              <option value="11" class="chart-select option">December</option>
+            </select>
+            <select
+              id="pain-view-year"
+              onchange="updatePainChart()"
+              aria-label="Select year to view"
+              class="chart-select"
+            ></select>
+          </div>
+          <div id="pain-chart-container" class="chart-container">
+            <canvas id="pain-chart" class="chart-canvas"></canvas>
+          </div>
+          <div id="chart-legend" class="chart-legend">
+            <div class="legend-items">
+              <span
+                id="legend-period"
+                onclick="setChartFilter('period')"
+                tabindex="0"
+                role="button"
+                aria-label="Toggle period data visibility"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('period');}"
+                class="legend-item--period"
+                >▮ Period</span
+              >
+              <span
+                id="legend-ovulation"
+                onclick="setChartFilter('ovulation')"
+                tabindex="0"
+                role="button"
+                aria-label="Toggle ovulation data visibility"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('ovulation');}"
+                class="legend-item--ovulation"
+                >▮ Ovulation</span
+              >
+              <span
+                id="legend-flow"
+                onclick="setChartFilter('flow')"
+                tabindex="0"
+                role="button"
+                aria-label="Toggle flow data visibility"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('flow');}"
+                class="legend-item--flow"
+                >▮ Flow</span
+              >
+              <span
+                id="legend-pain"
+                onclick="setChartFilter('pain')"
+                tabindex="0"
+                role="button"
+                aria-label="Toggle pain data visibility"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('pain');}"
+                class="legend-item--pain"
+                >▮ Pain</span
+              >
+              <span
+                id="legend-mood"
+                onclick="setChartFilter('mood')"
+                tabindex="0"
+                role="button"
+                aria-label="Toggle mood data visibility"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('mood');}"
+                class="legend-item--mood"
+                >▮ Mood</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="insight-card">
+          <h3>How Your Cycle Keeper Works</h3>
+          <div class="info-box">
+            Your Cycle Keeper estimates your fertile window by tracking cycle
+            patterns.
+            <strong>Ovulation</strong> is estimated ~14 days before your next
+            period. <strong>Fertile days</strong> are calculated as day 8
+            through (cycle length − 11).<br /><br />
+            For regular 28-day cycles, this means days 8–17 are typically
+            fertile, with ovulation around day 14.<br /><br />
+            ⚠️ <strong>This is an estimation tool only.</strong> Not for
+            contraception. Stress, illness &amp; medications can shift timing.
+          </div>
+        </div>
+        <div class="insight-card">
+          <h3>Cycle History</h3>
+          <div id="cycle-history">
+            <p class="empty-history">No history yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT VIEW -->
+      <div class="settings-wrap" id="view-about">
+        <div class="settings-section">
+          <h3>Privacy Guarantee</h3>
+          <div class="info-box info-box--success">
+            Your Cycle Keeper collects <strong>zero data</strong>. This app:<br />
+            &nbsp;• Stores all data locally on your device only<br />
+            &nbsp;• Has no servers, no accounts, no cloud storage<br />
+            &nbsp;• Has no analytics, no tracking, no telemetry<br />
+            &nbsp;• Has no ads, no third-party code<br />
+            &nbsp;• Never transmits any data anywhere<br />
+            &nbsp;• Is encrypted with your PIN via AES-256-GCM<br /><br />
+            Your health data is yours alone.
+          </div>
+        </div>
+        <div class="settings-section" id="about-core-section">
+          <h3>About Your Cycle Keeper</h3>
+          <div class="info-box">
+            Your Cycle Keeper is free software built with care for privacy.
+            Based on the
+            <strong>Calendar Rhythm Method</strong> and
+            <strong>Standard Days Method</strong> for cycle estimation. For
+            informational purposes only.<br /><br />
+            <strong>Version:</strong> 1.0.0-beta<br />
+            <strong>License:</strong> MIT License<br />
+            <strong>Developer:</strong>
+            <a
+              href="https://github.com/pythonime-lab"
+              target="_blank"
+              rel="noopener"
+              class="accessibility-link"
+              >pythonime-lab</a
+            ><br /><br />
+            Found a bug or have a suggestion? Visit our
+            <a
+              href="https://github.com/pythonime-lab/yourcyclekeeper"
+              target="_blank"
+              rel="noopener"
+              class="accessibility-link"
+              >GitHub repository</a
+            >.
+          </div>
+        </div>
+        <div class="settings-section" id="support-section">
+          <h3>Support Development</h3>
+          <div class="info-box info-box--success">
+            Your Cycle Keeper is <strong>free forever</strong> with no ads, no
+            tracking, and no data collection. If you find it helpful and would
+            like to support continued development, you can buy me a coffee!<br /><br />
+            <a
+              href="https://paypal.me/pythonime"
+              target="_blank"
+              rel="noopener"
+              class="support-link"
+            >
+              <span>Support via</span>
+              <span class="support-paypal-logo" aria-hidden="true"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 170 48"
+                >
+                  <path
+                    fill="#003087"
+                    d="M62.56 28.672a10.111 10.111 0 009.983-8.56c.78-4.967-3.101-9.303-8.6-9.303H55.08a.689.689 0 00-.69.585l-3.95 25.072a.643.643 0 00.634.742h4.69a.689.689 0 00.688-.585l1.162-7.365a.689.689 0 01.689-.586h4.257zm3.925-8.786c-.29 1.836-1.709 3.189-4.425 3.189h-3.474l1.053-6.68h3.411c2.81.006 3.723 1.663 3.435 3.496v-.005zm26.378-1.18H88.41a.69.69 0 00-.69.585l-.144.924s-3.457-3.775-9.575-1.225c-3.51 1.461-5.194 4.48-5.91 6.69 0 0-2.277 6.718 2.87 10.417 0 0 4.771 3.556 10.145-.22l-.093.589a.642.642 0 00.634.742h4.451a.689.689 0 00.69-.585l2.708-17.175a.643.643 0 00-.634-.742zm-6.547 9.492a4.996 4.996 0 01-4.996 4.276 4.513 4.513 0 01-1.397-.205c-1.92-.616-3.015-2.462-2.7-4.462a4.996 4.996 0 015.014-4.277c.474-.005.946.065 1.398.206 1.913.614 3.001 2.46 2.686 4.462h-.005z"
+                  />
+                  <path
+                    fill="#0070E0"
+                    d="M126.672 28.672a10.115 10.115 0 009.992-8.56c.779-4.967-3.101-9.303-8.602-9.303h-8.86a.69.69 0 00-.689.585l-3.962 25.079a.637.637 0 00.365.683.64.64 0 00.269.06h4.691a.69.69 0 00.689-.586l1.163-7.365a.688.688 0 01.689-.586l4.255-.007zm3.925-8.786c-.29 1.836-1.709 3.189-4.426 3.189h-3.473l1.054-6.68h3.411c2.808.006 3.723 1.663 3.434 3.496v-.005zm26.377-1.18h-4.448a.69.69 0 00-.689.585l-.146.924s-3.456-3.775-9.574-1.225c-3.509 1.461-5.194 4.48-5.911 6.69 0 0-2.276 6.718 2.87 10.417 0 0 4.772 3.556 10.146-.22l-.093.589a.637.637 0 00.365.683c.084.04.176.06.269.06h4.451a.686.686 0 00.689-.586l2.709-17.175a.657.657 0 00-.148-.518.632.632 0 00-.49-.224zm-6.546 9.492a4.986 4.986 0 01-4.996 4.276 4.513 4.513 0 01-1.399-.205c-1.921-.616-3.017-2.462-2.702-4.462a4.996 4.996 0 014.996-4.277c.475-.005.947.064 1.399.206 1.933.614 3.024 2.46 2.707 4.462h-.005z"
+                  />
+                  <path
+                    fill="#003087"
+                    d="M109.205 19.131l-5.367 9.059-2.723-8.992a.69.69 0 00-.664-.492h-4.842a.516.516 0 00-.496.689l4.88 15.146-4.413 7.138a.517.517 0 00.442.794h5.217a.858.858 0 00.741-.418l13.632-22.552a.516.516 0 00-.446-.789h-5.215a.858.858 0 00-.746.417z"
+                  />
+                  <path
+                    fill="#0070E0"
+                    d="M161.982 11.387l-3.962 25.079a.637.637 0 00.365.683c.084.04.176.06.269.06h4.689a.688.688 0 00.689-.586l3.963-25.079a.637.637 0 00-.146-.517.645.645 0 00-.488-.225h-4.69a.69.69 0 00-.689.585z"
+                  />
+                  <path
+                    fill="#001C64"
+                    d="M37.146 22.26c-1.006 5.735-5.685 10.07-11.825 10.07h-3.898c-.795 0-1.596.736-1.723 1.55l-1.707 10.835c-.099.617-.388.822-1.013.822h-6.27c-.634 0-.784-.212-.689-.837l.72-7.493-7.526-.389c-.633 0-.862-.345-.772-.977l5.135-32.56c.099-.617.483-.882 1.106-.882h13.023c6.269 0 10.235 4.22 10.72 9.692 3.73 2.52 5.474 5.873 4.72 10.168z"
+                  />
+                  <path
+                    fill="#0070E0"
+                    d="M12.649 25.075l-1.907 12.133-1.206 7.612a1.034 1.034 0 001.016 1.19h6.622a1.27 1.27 0 001.253-1.072l1.743-11.06a1.27 1.27 0 011.253-1.071h3.898A12.46 12.46 0 0037.617 22.26c.675-4.307-1.492-8.228-5.201-10.165a9.96 9.96 0 01-.12 1.37 12.461 12.461 0 01-12.295 10.54h-6.1a1.268 1.268 0 00-1.252 1.07z"
+                  />
+                  <path
+                    fill="#003087"
+                    d="M10.741 37.208H3.03a1.035 1.035 0 01-1.018-1.192L7.208 3.072A1.268 1.268 0 018.46 2H21.7c6.269 0 10.827 4.562 10.72 10.089a11.567 11.567 0 00-5.399-1.287H15.983a1.27 1.27 0 00-1.254 1.071l-2.08 13.202-1.908 12.133z"
+                  /></svg
+              ></span>
+            </a>
+            <br /><br />
+            <small style="color: var(--text-muted)"
+              >Your support helps keep this project maintained and ad-free for
+              everyone. Thank you! 💜</small
+            >
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3>Medical Disclaimer</h3>
+          <div class="info-box info-box--warning">
+            ⚠️
+            <strong
+              >This app provides cycle estimations based on average biological
+              patterns.</strong
+            >
+            It is <em>not</em> medical advice and must not be used as a
+            substitute for professional medical consultation.<br /><br />
+            Your Cycle Keeper predicts your cycle by tracking patterns and
+            estimating ovulation timing. Actual cycle timing can vary due to
+            stress, illness, medications, and many other factors.<br /><br />
+            Do <strong>not</strong> use this app as a contraceptive or fertility
+            guarantee. Always consult a qualified healthcare professional for
+            medical decisions.
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3>Accessibility</h3>
+          <div class="info-box">
+            Your Cycle Keeper follows
+            <strong>WCAG 2.0 accessibility standards</strong>:<br /><br />
+            &nbsp;• <strong>Tab/Shift+Tab:</strong> Navigate forward/backward
+            through all interactive elements<br />
+            &nbsp;• <strong>Arrow Keys:</strong> Navigate calendar dates
+            (complex grid component)<br />
+            &nbsp;• <strong>Enter/Space:</strong> Activate buttons and links<br />
+            &nbsp;• <strong>Escape:</strong> Close modals and return focus to
+            trigger element<br />
+            &nbsp;• <strong>PIN Entry:</strong> Type digits 0-9 and Backspace on
+            all PIN screens<br />
+            &nbsp;• <strong>Form Controls:</strong> Native keyboard support for
+            inputs, selects, and textareas<br />
+            &nbsp;• <strong>Screen Readers:</strong> Semantic HTML with proper
+            ARIA labels and roles<br />
+            &nbsp;• <strong>Focus Management:</strong> Visible focus indicators,
+            logical tab order<br /><br />
+            Standards based on
+            <a
+              href="https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation"
+              target="_blank"
+              rel="noopener"
+              class="accessibility-link"
+              >Salesforce Accessibility Guidelines</a
+            >.
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS VIEW -->
+      <div class="settings-wrap" id="view-settings">
+        <div class="settings-section">
+          <h3>Cycle Settings</h3>
+          <div class="field-label">Last period start date</div>
+          <input
+            class="field-input"
+            type="date"
+            id="s-last-period"
+            autocomplete="off"
+          />
+          <div class="field-label">Average cycle length (days)</div>
+          <input
+            class="field-input"
+            type="number"
+            id="s-cycle-len"
+            min="20"
+            max="45"
+            autocomplete="off"
+          />
+          <div class="field-label">Period duration (days)</div>
+          <input
+            class="field-input"
+            type="number"
+            id="s-period-dur"
+            min="1"
+            max="10"
+            autocomplete="off"
+          />
+          <button class="apply-btn" onclick="applySettings()">
+            Update Predictions
+          </button>
+        </div>
+        <div class="settings-section">
+          <h3>Security &amp; Privacy</h3>
+          <div class="sec-badge">AES-256-GCM Encrypted</div>
+          <div class="info-box info-box--margin">
+            All data is encrypted with your PIN before being stored. Cycle
+            Keeper uses the <strong>Web Crypto API</strong> — the same standard
+            used by browsers for HTTPS.<br /><br />
+            Zero data is sent to any server. No accounts. No analytics.
+          </div>
+          <button
+            class="apply-btn btn--change-pin"
+            onclick="showChangePinModal()"
+          >
+            Change PIN
+          </button>
+          <button class="apply-btn btn--export" onclick="exportData()">
+            Export Encrypted Backup
+          </button>
+          <button class="apply-btn btn--import" onclick="importData()">
+            Import Encrypted Backup
+          </button>
+          <div class="info-box info-box--security">
+            <strong>Storage used:</strong>
+            <span id="storage-usage">Calculating...</span>
+          </div>
+          <div class="info-box info-box--data-warning">
+            ⚠️ <strong>Data Persistence:</strong> Your data is stored in
+            IndexedDB. Clearing browser cache is safe, but clearing "site data"
+            or "cookies and site data" in your browser settings WILL erase all
+            your cycle data. Always export a backup first!
+          </div>
+          <button class="danger-btn" onclick="confirmClear()">
+            Erase All Data
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
