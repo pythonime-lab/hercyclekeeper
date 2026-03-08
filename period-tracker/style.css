@@ -413,6 +413,7 @@ body {
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 1.375rem;
+  white-space: pre-wrap;
 }
 .modal-btns {
   display: flex;
@@ -1453,6 +1454,21 @@ body {
 
 .info-box--margin {
   margin-bottom: 0.75rem;
+}
+
+.backup-status {
+  font-size: 0.85rem;
+  padding: 0.5rem 0 0.25rem;
+  color: #c4b5fd;
+}
+
+.backup-status--warn {
+  color: #fcd68a;
+  font-weight: 600;
+}
+
+.backup-status--ok {
+  color: #c4b5fd;
 }
 
 /* Accessibility Link */

@@ -87,13 +87,13 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yourcyclekeeper.web.app/period-tracker/" />
 
-    <link rel="stylesheet" href="style.css?v=20260308c" />
+    <link rel="stylesheet" href="style.css?v=20260308d" />
     <link
       rel="stylesheet"
-      href="style-desktop.css?v=20260308c"
+      href="style-desktop.css?v=20260308d"
       media="screen and (min-width: 768px)"
     />
-    <link rel="manifest" href="../manifest.json" />
+    <link rel="manifest" href="manifest.json" />
     <link
       rel="icon"
       type="image/png"
@@ -457,30 +457,6 @@
               </svg>
             </span>
             About
-          </div>
-          <div
-            class="bnav-item bnav-support"
-            id="bnav-support"
-            onclick="switchTab('support')"
-            tabindex="0"
-            role="button"
-            aria-label="Support development"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('support');}"
-          >
-            <span class="icon">
-              <svg
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                />
-              </svg>
-            </span>
-            Support
           </div>
         </div>
       </div>
@@ -1020,6 +996,7 @@
           >
             Change PIN
           </button>
+          <div id="backup-status" class="backup-status"></div>
           <button class="apply-btn btn--export" onclick="exportData()">
             Export Encrypted Backup
           </button>

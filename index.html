@@ -1,650 +1,1323 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Cycle Keeper — Free Private Period & Cycle Tracker</title>
-  <meta name="description" content="Track your period and cycle privately. No account, no ads, no data collection. AES-256 encrypted, stored only on your device. Free forever." />
-  <meta name="keywords" content="private period tracker, cycle tracker no account, offline period app, secure menstrual tracker, free period tracker, no data collection period app" />
-  <meta property="og:title" content="Your Cycle Keeper — Free & Private Period Tracker" />
-  <meta property="og:description" content="No accounts. No ads. No data collection. Your cycle data stays on your device, always." />
-  <meta property="og:url" content="https://yourcyclekeeper.web.app/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="/period-tracker/" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cycle Keeper — Free Private Period & Cycle Tracker</title>
+    <meta
+      name="description"
+      content="Track your period and cycle privately. No account, no ads, no data collection. AES-256 encrypted, stored only on your device. Free forever."
+    />
+    <meta
+      name="keywords"
+      content="private period tracker, cycle tracker no account, offline period app, secure menstrual tracker, free period tracker, no data collection period app"
+    />
+    <meta
+      property="og:title"
+      content="Your Cycle Keeper — Free & Private Period Tracker"
+    />
+    <meta
+      property="og:description"
+      content="No accounts. No ads. No data collection. Your cycle data stays on your device, always."
+    />
+    <meta property="og:url" content="https://yourcyclekeeper.web.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="/period-tracker/" />
 
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48x48.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/favicon-180x180.png" />
-  <meta name="theme-color" content="#120818" />
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="icons/favicon-48x48.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="icons/favicon-96x96.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/favicon-180x180.png"
+    />
+    <meta name="theme-color" content="#120818" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Your Cycle Keeper" />
-  <meta property="og:image" content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Your Cycle Keeper" />
+    <meta
+      property="og:image"
+      content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+    />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    :root {
-      --rose: #e6233b;
-      --rose-light: #ff5a6e;
-      --rose-pale: #ffe8ee;
-      --coral: #ff6b4a;
-      --amber: #ffb347;
-      --lavender: #a78bfa;
-      --deep-purple: #5b1a8a;
-      --teal: #2dd4bf;
-      --fertile-green: #34d399;
-      --ovulation: #f59e0b;
-      --bg: #120818;
-      --bg2: #1e0f2e;
-      --bg3: #2a1538;
-      --card: #1c0f2b;
-      --text: #f9f0ff;
-      --text-muted: #c4b5fd;
-      --border: rgba(167, 139, 250, 0.28);
-    }
+      :root {
+        --rose: #e6233b;
+        --rose-light: #ff5a6e;
+        --rose-pale: #ffe8ee;
+        --coral: #ff6b4a;
+        --amber: #ffb347;
+        --lavender: #a78bfa;
+        --deep-purple: #5b1a8a;
+        --teal: #2dd4bf;
+        --fertile-green: #34d399;
+        --ovulation: #f59e0b;
+        --bg: #120818;
+        --bg2: #1e0f2e;
+        --bg3: #2a1538;
+        --card: #1c0f2b;
+        --text: #f9f0ff;
+        --text-muted: #c4b5fd;
+        --border: rgba(167, 139, 250, 0.28);
+      }
 
-    html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
+      body {
+        font-family: "Outfit", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 5vw;
-      background: rgba(18, 8, 24, 0.75);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo-img {
-      width: 28px; height: 28px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--lavender);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--rose-light); font-style: italic; }
-    .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
-    .nav-support {
-      color: var(--lavender);
-      text-decoration: none;
-      padding: 0.55rem 1rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .nav-support:hover { background: rgba(167,139,250,0.1); border-color: var(--lavender); }
-    .nav-cta {
-      background: var(--rose);
-      color: white;
-      text-decoration: none;
-      padding: 0.55rem 1.4rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: var(--rose-light); }
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.1rem 5vw;
+        background: rgba(18, 8, 24, 0.75);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo-img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        color: var(--lavender);
+        text-decoration: none;
+      }
+      .nav-logo span {
+        color: var(--rose-light);
+        font-style: italic;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .nav-support {
+        color: var(--lavender);
+        text-decoration: none;
+        padding: 0.55rem 1rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border: 1px solid var(--border);
+        transition: background 0.2s, border-color 0.2s;
+      }
+      .nav-support:hover {
+        background: rgba(167, 139, 250, 0.1);
+        border-color: var(--lavender);
+      }
+      .nav-cta {
+        background: var(--rose);
+        color: white;
+        text-decoration: none;
+        padding: 0.55rem 1.4rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: background 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--rose-light);
+      }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 7rem 5vw 5rem;
-      position: relative; overflow: hidden;
-    }
-    .hero-left { position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(167,139,250,0.1);
-      border: 1px solid var(--border);
-      color: var(--lavender);
-      font-size: 0.72rem; font-weight: 500;
-      padding: 0.35rem 0.9rem; border-radius: 4px;
-      margin-bottom: 1.8rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      animation: fadeUp 0.7s ease both;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 5.5vw, 5rem);
-      font-weight: 700; line-height: 1.08;
-      color: var(--text); letter-spacing: -0.02em;
-      animation: fadeUp 0.7s ease 0.1s both;
-    }
-    .hero h1 em { font-style: italic; color: var(--rose-light); }
-    .hero-sub {
-      margin-top: 1.5rem;
-      font-size: 1.05rem; color: var(--text-muted);
-      font-weight: 300; max-width: 480px; line-height: 1.8;
-      animation: fadeUp 0.7s ease 0.2s both;
-    }
-    .hero-actions {
-      margin-top: 2.5rem;
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: fadeUp 0.7s ease 0.3s both;
-    }
-    .btn-primary {
-      background: var(--rose); color: white;
-      text-decoration: none; padding: 0.9rem 2rem;
-      border-radius: 6px; font-size: 0.95rem; font-weight: 600;
-      transition: all 0.2s; letter-spacing: 0.02em;
-    }
-    .btn-primary:hover { background: var(--rose-light); }
-    .btn-ghost {
-      color: var(--lavender); text-decoration: none;
-      padding: 0.9rem 1.5rem; border-radius: 6px;
-      font-size: 0.9rem; font-weight: 400;
-      border: 1px solid var(--border); transition: all 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--lavender); background: rgba(167,139,250,0.08); }
-    .hero-trust {
-      margin-top: 2.2rem;
-      display: flex; gap: 1.8rem; flex-wrap: wrap;
-      animation: fadeUp 0.7s ease 0.4s both;
-    }
-    .hero-trust-item {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.8rem; color: var(--text-muted); font-weight: 300;
-    }
-    .trust-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--fertile-green); flex-shrink: 0;
-    }
-    .trust-dot.red { background: var(--rose-light); }
-    .trust-dot.purple { background: var(--lavender); }
-    .trust-dot.amber { background: var(--amber); }
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 7rem 5vw 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-left {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-badge {
+        display: inline-block;
+        background: rgba(167, 139, 250, 0.1);
+        border: 1px solid var(--border);
+        color: var(--lavender);
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 0.35rem 0.9rem;
+        border-radius: 4px;
+        margin-bottom: 1.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        animation: fadeUp 0.7s ease both;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.8rem, 5.5vw, 5rem);
+        font-weight: 700;
+        line-height: 1.08;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        animation: fadeUp 0.7s ease 0.1s both;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--rose-light);
+      }
+      .hero-sub {
+        margin-top: 1.5rem;
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        font-weight: 300;
+        max-width: 480px;
+        line-height: 1.8;
+        animation: fadeUp 0.7s ease 0.2s both;
+      }
+      .hero-actions {
+        margin-top: 2.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        animation: fadeUp 0.7s ease 0.3s both;
+      }
+      .btn-primary {
+        background: var(--rose);
+        color: white;
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.2s;
+        letter-spacing: 0.02em;
+      }
+      .btn-primary:hover {
+        background: var(--rose-light);
+      }
+      .btn-ghost {
+        color: var(--lavender);
+        text-decoration: none;
+        padding: 0.9rem 1.5rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        border: 1px solid var(--border);
+        transition: all 0.2s;
+      }
+      .btn-ghost:hover {
+        border-color: var(--lavender);
+        background: rgba(167, 139, 250, 0.08);
+      }
+      .hero-trust {
+        margin-top: 2.2rem;
+        display: flex;
+        gap: 1.8rem;
+        flex-wrap: wrap;
+        animation: fadeUp 0.7s ease 0.4s both;
+      }
+      .hero-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 300;
+      }
+      .trust-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--fertile-green);
+        flex-shrink: 0;
+      }
+      .trust-dot.red {
+        background: var(--rose-light);
+      }
+      .trust-dot.purple {
+        background: var(--lavender);
+      }
+      .trust-dot.amber {
+        background: var(--amber);
+      }
 
-    .hero-right { position: relative; z-index: 1; animation: fadeUp 0.9s ease 0.2s both; }
-    .hero-img-frame {
-      display: block;
-      border-radius: 24px; overflow: hidden;
-      max-height: 720px; position: relative;
-      border: 2px solid var(--border);
-      transition: transform 0.3s ease;
-    }
-    .hero-img-frame:hover { transform: translateY(-4px); }
-    .hero-img-frame img { width: 100%; height: auto; object-fit: contain; display: block; }
-    
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+      .hero-right {
+        position: relative;
+        z-index: 1;
+        animation: fadeUp 0.9s ease 0.2s both;
+      }
+      .hero-img-frame {
+        display: block;
+        border-radius: 24px;
+        overflow: hidden;
+        max-height: 720px;
+        position: relative;
+        border: 2px solid var(--border);
+        transition: transform 0.3s ease;
+      }
+      .hero-img-frame:hover {
+        transform: translateY(-4px);
+      }
+      .hero-img-frame img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
 
-    /* SHARED */
-    section { padding: 6rem 5vw; }
-    .section-label {
-      font-size: 0.72rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--rose-light);
-      font-weight: 500; margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700; color: var(--text);
-      line-height: 1.2; max-width: 600px;
-    }
-    .section-title em { font-style: italic; color: var(--rose-light); }
-    .inner { max-width: 1100px; margin: 0 auto; }
-    .hero-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      align-items: center; gap: 4rem;
-    }
-
-    /* PILLARS */
-    .pillars {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 4.5rem 5vw;
-    }
-    .pillars-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-    }
-    .pillar { padding: 0 2.5rem; border-left: 1px solid var(--border); }
-    .pillar:first-child { padding-left: 0; border-left: none; }
-    .pillar-line { width: 32px; height: 2px; background: var(--rose); margin-bottom: 1.2rem; }
-    .pillar h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-weight: 400;
-      color: var(--text); margin-bottom: 0.6rem;
-    }
-    .pillar p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
-
-    /* HOW IT WORKS */
-    .how-section { background: var(--bg); }
-    .how-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center; margin-top: 3.5rem;
-    }
-    .how-step {
-      display: flex; gap: 1.5rem;
-      padding: 1.8rem 0; border-bottom: 1px solid var(--border);
-    }
-    .how-step:last-child { border-bottom: none; }
-    .step-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem; font-weight: 400;
-      color: var(--rose); line-height: 1;
-      flex-shrink: 0; width: 2.5rem; opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .how-step:hover .step-num { opacity: 1; }
-    .step-content h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
-    .step-content p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; }
-    .how-image { display: block; border-radius: 24px; overflow: hidden; position: relative; border: 2px solid var(--border); transition: transform 0.3s ease; }
-    .how-image.visible:hover { transform: translateY(-4px); }
-    .how-image img { width: 100%; height: auto; object-fit: contain; display: block; }
-
-    /* FEATURES */
-    .features-section { background: var(--bg2); }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; margin-top: 3.5rem;
-      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
-    }
-    .feat-card { background: var(--card); padding: 2rem; transition: background 0.2s; }
-    .feat-card:hover { background: var(--bg3); }
-    .feat-accent {
-      width: 38px; height: 38px; border-radius: 8px;
-      margin-bottom: 1.2rem;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .feat-accent svg { width: 18px; height: 18px; }
-    .feat-card h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
-    .feat-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; }
-
-    /* COMPARISON */
-    .comparison-section { background: var(--bg); }
-    .comparison-table { width: 100%; margin-top: 3rem; border-collapse: collapse; }
-    .comparison-table thead th {
-      padding: 1rem 1.5rem; text-align: left;
-      font-size: 0.78rem; font-weight: 500;
-      letter-spacing: 0.09em; text-transform: uppercase;
-      color: var(--text-muted); border-bottom: 1px solid var(--border);
-    }
-    .comparison-table thead th:not(:first-child) { text-align: center; }
-    .comparison-table thead th.col-us { color: var(--rose-light); border-bottom-color: var(--rose); }
-    .comparison-table tbody tr {
-      border-bottom: 1px solid rgba(167,139,250,0.1);
-      transition: background 0.15s;
-    }
-    .comparison-table tbody tr:hover { background: rgba(167,139,250,0.04); }
-    .comparison-table td { padding: 1rem 1.5rem; font-size: 0.88rem; color: var(--text-muted); vertical-align: middle; }
-    .comparison-table td:first-child { color: var(--text); font-weight: 400; }
-    .comparison-table td:not(:first-child) { text-align: center; }
-    .comparison-table td.col-us { color: var(--text); }
-    .check { color: var(--fertile-green); font-size: 0.88rem; font-weight: 600; }
-    .cross { color: rgba(167,139,250,0.3); font-size: 0.88rem; }
-    .partial { color: var(--amber); font-size: 0.8rem; font-weight: 500; }
-
-    /* FAQ */
-    .faq-section { background: var(--bg2); }
-    .faq-layout {
-      display: grid; grid-template-columns: 1fr 2fr;
-      gap: 5rem; align-items: start; margin-top: 3rem;
-    }
-    .faq-left p { margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
-    details { border-bottom: 1px solid var(--border); }
-    summary {
-      padding: 1.2rem 0; font-size: 0.95rem; font-weight: 500;
-      color: var(--text); cursor: pointer; list-style: none;
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 1rem; transition: color 0.2s;
-    }
-    summary:hover { color: var(--rose-light); }
-    summary::after { content: '+'; font-size: 1.3rem; font-weight: 300; color: var(--rose); flex-shrink: 0; transition: transform 0.2s; }
-    details[open] summary::after { transform: rotate(45deg); }
-    details p { padding-bottom: 1.2rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
-
-    /* CTA */
-    .cta-section { position: relative; overflow: hidden; text-align: center; padding: 8rem 5vw; }
-    .cta-section img.cta-bg {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center; z-index: 0;
-    }
-    .cta-overlay {
-      position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(135deg, rgba(18,8,24,0.94) 0%, rgba(91,26,138,0.78) 100%);
-    }
-    .cta-inner { position: relative; z-index: 2; }
-    .cta-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-      font-weight: 700; color: var(--text); line-height: 1.15;
-      max-width: 600px; margin: 0 auto 1rem;
-    }
-    .cta-section h2 em { font-style: italic; color: var(--rose-light); }
-    .cta-section p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2.5rem; font-weight: 300; }
-
-    /* FOOTER */
-    footer {
-      background: var(--bg); border-top: 1px solid var(--border);
-      color: var(--text-muted); padding: 2.2rem 5vw;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.8rem; flex-wrap: wrap; gap: 1rem;
-    }
-    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--lavender); }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--lavender); }
-
-    /* SCROLL REVEAL */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .how-layout { grid-template-columns: 1fr; }
-      .how-image { display: none; }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .pillars-grid { grid-template-columns: 1fr 1fr; }
-      .pillar, .pillar:first-child { padding: 1.5rem; border-left: none; border-top: 1px solid var(--border); }
-      .pillar:nth-child(-n+2) { border-top: none; }
-      .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
-      .comparison-table thead th:last-child,
-      .comparison-table td:last-child { display: none; }
-    }
-    @media (max-width: 600px) {
-      .nav-logo { font-size: 1rem; }
-      .nav-actions { gap: 0.5rem; }
-      .nav-support { padding: 0.45rem 0.7rem; font-size: 0.75rem; }
-      .nav-cta { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
-      .features-grid { grid-template-columns: 1fr; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .pillar, .pillar:first-child { padding: 1.5rem; }
-      footer { flex-direction: column; text-align: center; align-items: center; }
-    }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <a href="#" class="nav-logo">Your <span>Cycle</span> Keeper</a>
-    <div class="nav-actions">
-      <a href="https://paypal.me/pythonime" target="_blank" rel="noopener" class="nav-support">Support</a>
-      <a href="/period-tracker/" target="_blank" class="nav-cta">Open App</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="inner hero-inner">
-      <div class="hero-left">
-        <div class="hero-badge">100% Private — No Account Needed</div>
-      <h1>Track your cycle.<br><em>Own your data.</em></h1>
-      <p class="hero-sub">
-        Your Cycle Keeper is a free period and cycle tracker that lives entirely on your device.
-        No servers. No accounts. No ads. Just your health data, encrypted and private.
-      </p>
-      <div class="hero-actions">
-        <a href="/period-tracker/" target="_blank" class="btn-primary">Start Tracking — It's Free</a>
-        <a href="#how-it-works" class="btn-ghost">See how it works</a>
-      </div>
-      <div class="hero-trust">
-        <div class="hero-trust-item"><div class="trust-dot"></div>AES-256 Encrypted</div>
-        <div class="hero-trust-item"><div class="trust-dot red"></div>No internet required</div>
-        <div class="hero-trust-item"><div class="trust-dot purple"></div>No ads, ever</div>
-        <div class="hero-trust-item"><div class="trust-dot amber"></div>Open source</div>
-      </div>
-    </div>
-    <div class="hero-right">
-      <a href="/period-tracker/" target="_blank" class="hero-img-frame">
-        <img src="icons/yourcyclekeeper_pinscreen.svg" alt="Your Cycle Keeper app PIN screen" loading="lazy" />
-      </a>
-    </div>
-  </div>
-  </section>
-
-  <!-- PILLARS -->
-  <div class="pillars">
-    <div class="pillars-grid">
-      <div class="pillar reveal">
-        <div class="pillar-line"></div>
-        <h3>Stays On Your Device</h3>
-        <p>All data is stored in your browser's local storage. Nothing is ever sent to any server, ever.</p>
-      </div>
-      <div class="pillar reveal">
-        <div class="pillar-line"></div>
-        <h3>PIN Encrypted</h3>
-        <p>Your data is encrypted with AES-256-GCM using your PIN before being written to storage. We hold no keys.</p>
-      </div>
-      <div class="pillar reveal">
-        <div class="pillar-line"></div>
-        <h3>No Account Required</h3>
-        <p>Zero sign-ups. Zero emails. Zero identity. Open the app and start tracking immediately.</p>
-      </div>
-      <div class="pillar reveal">
-        <div class="pillar-line"></div>
-        <h3>Free Forever</h3>
-        <p>No freemium. No premium tier. No subscription. Your Cycle Keeper will always be completely free.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-section" id="how-it-works">
-    <div class="inner">
-      <p class="section-label reveal">How it works</p>
-      <h2 class="section-title reveal">Simple tracking,<br><em>serious privacy</em></h2>
-      <div class="how-layout">
-        <div class="how-steps">
-          <div class="how-step reveal">
-            <div class="step-num">01</div>
-            <div class="step-content">
-              <h3>Enter Your Cycle Details</h3>
-              <p>Add the first day of your last period and your average cycle length. No forms, no sign-up, no email required.</p>
-            </div>
-          </div>
-          <div class="how-step reveal">
-            <div class="step-num">02</div>
-            <div class="step-content">
-              <h3>Set a Private PIN</h3>
-              <p>Choose a 4-digit PIN that encrypts your data using AES-256-GCM — the same standard used for HTTPS. Only you can unlock your information.</p>
-            </div>
-          </div>
-          <div class="how-step reveal">
-            <div class="step-num">03</div>
-            <div class="step-content">
-              <h3>Track Daily Symptoms</h3>
-              <p>Log flow, pain, and mood every day. See your history build into insights — all calculated on your device, privately.</p>
-            </div>
-          </div>
-          <div class="how-step reveal">
-            <div class="step-num">04</div>
-            <div class="step-content">
-              <h3>Understand Your Cycle</h3>
-              <p>View your fertile window, predicted ovulation, and cycle patterns on a visual calendar. Know your body better, on your own terms.</p>
-            </div>
-          </div>
-        </div>
-        <a href="/period-tracker/" target="_blank" class="how-image reveal">
-          <img src="icons/yourcyclekeeper_calendar.svg" alt="Your Cycle Keeper calendar view" loading="lazy" />
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features-section">
-    <div class="inner">
-      <p class="section-label reveal">Features</p>
-      <h2 class="section-title reveal">Everything you need,<br><em>nothing you don't</em></h2>
-      <div class="features-grid">
-        <div class="feat-card reveal">
-          <div class="feat-accent" style="background:rgba(230,35,59,0.15)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#e6233b" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3>Cycle Calendar</h3>
-          <p>Visual calendar showing period days, fertile window, and predicted ovulation. Navigate months and log symptoms for any day.</p>
-        </div>
-        <div class="feat-card reveal">
-          <div class="feat-accent" style="background:rgba(52,211,153,0.12)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>Cycle Insights</h3>
-          <p>Track average cycle length, period duration, fertile window patterns, and symptom trends — all from your own data.</p>
-        </div>
-        <div class="feat-card reveal">
-          <div class="feat-accent" style="background:rgba(255,107,74,0.12)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ff6b4a" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Daily Symptom Logging</h3>
-          <p>Log flow intensity, pain levels, and mood each day. Add free-text notes for anything else you want to track.</p>
-        </div>
-        <div class="feat-card reveal">
-          <div class="feat-accent" style="background:rgba(167,139,250,0.12)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>AES-256 Encryption</h3>
-          <p>Your data is encrypted with your PIN before being stored, using the Web Crypto API — the same standard used by HTTPS.</p>
-        </div>
-        <div class="feat-card reveal">
-          <div class="feat-accent" style="background:rgba(45,212,191,0.12)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </div>
-          <h3>Encrypted Backup</h3>
-          <p>Export an encrypted backup file to protect your history. Restore it anytime — on the same device or a new one.</p>
-        </div>
-        <div class="feat-card reveal">
-          <div class="feat-accent" style="background:rgba(255,179,71,0.12)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <h3>Works on Any Device</h3>
-          <p>Runs in any modern browser on phone, tablet, or desktop. Install as a PWA for an offline app-like experience.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARISON -->
-  <section class="comparison-section">
-    <div class="inner">
-      <p class="section-label reveal">Comparison</p>
-      <h2 class="section-title reveal">Why choose <em>Your Cycle Keeper?</em></h2>
-      <p style="margin-top:1rem;color:var(--text-muted);font-size:0.9rem;font-weight:300;" class="reveal">Most period apps make money from your health data. We don't.</p>
-      <div style="overflow-x:auto" class="reveal">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th style="width:40%">Feature</th>
-              <th class="col-us">Your Cycle Keeper</th>
-              <th>Flo / Clue</th>
-              <th>Other Free Apps</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Completely free</td><td class="col-us"><span class="check">Yes</span></td><td><span class="partial">Freemium</span></td><td><span class="partial">With ads</span></td></tr>
-            <tr><td>No account required</td><td class="col-us"><span class="check">Yes</span></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td></tr>
-            <tr><td>Data stays on your device</td><td class="col-us"><span class="check">Yes</span></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td></tr>
-            <tr><td>No ads</td><td class="col-us"><span class="check">Yes</span></td><td><span class="partial">Paid only</span></td><td><span class="cross">No</span></td></tr>
-            <tr><td>No data collection or sharing</td><td class="col-us"><span class="check">Yes</span></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td></tr>
-            <tr><td>AES-256 encrypted storage</td><td class="col-us"><span class="check">Yes</span></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td></tr>
-            <tr><td>Open source</td><td class="col-us"><span class="check">Yes</span></td><td><span class="cross">No</span></td><td><span class="partial">Rarely</span></td></tr>
-            <tr><td>Works offline</td><td class="col-us"><span class="check">Yes</span></td><td><span class="partial">Limited</span></td><td><span class="partial">Varies</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq-section">
-    <div class="inner">
-      <div class="faq-layout">
-        <div class="faq-left reveal">
-          <p class="section-label">FAQ</p>
-          <h2 class="section-title">Common <em>questions</em></h2>
-          <p>Everything you need to know about privacy, security, and how Your Cycle Keeper works.</p>
-        </div>
-        <div class="faq-right reveal">
-          <details>
-            <summary>Is my data really private?</summary>
-            <p>Yes. Your Cycle Keeper has no server, no backend, and no analytics of any kind. Your data is encrypted with your PIN using AES-256-GCM via the browser's Web Crypto API and stored only in your browser's IndexedDB. We have no ability to access it even if we wanted to.</p>
-          </details>
-          <details>
-            <summary>What happens if I forget my PIN?</summary>
-            <p>For your security, there is no PIN recovery mechanism. If you forget your PIN, the encrypted data cannot be recovered and will be erased. This is intentional — it means no one can access your data without your PIN. We strongly recommend exporting an encrypted backup regularly.</p>
-          </details>
-          <details>
-            <summary>Can I use this on my phone?</summary>
-            <p>Yes. Your Cycle Keeper works in any modern mobile browser. You can also install it as a Progressive Web App (PWA) from your browser's "Add to Home Screen" option for a native app experience that works offline.</p>
-          </details>
-          <details>
-            <summary>How accurate are the predictions?</summary>
-            <p>Predictions are based on the Calendar Rhythm Method using your logged cycle history. They become more accurate as you log more cycles. This is an estimation tool only — not a contraceptive. Stress, illness, and medications can all shift cycle timing.</p>
-          </details>
-          <details>
-            <summary>What if I clear my browser data?</summary>
-            <p>Clearing browser cache is safe. However, clearing "cookies and site data" in your browser settings will erase your cycle data. Always export an encrypted backup before doing so. You can restore it anytime from the Settings screen.</p>
-          </details>
-          <details>
-            <summary>Is this really free forever?</summary>
-            <p>Yes. Your Cycle Keeper is open-source software under the MIT License. There is no premium tier, no subscription, and no ads — ever. Optional donations support development but are never required.</p>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <img class="cta-bg" src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1400&q=80" alt="Abstract background" loading="lazy" />
-    <div class="cta-overlay"></div>
-    <div class="cta-inner">
-      <h2>Your health data<br>deserves to be <em>yours</em></h2>
-      <p>Free, private, and ready in seconds. No sign-up required.</p>
-      <a href="/period-tracker/" target="_blank" class="btn-primary" style="font-size:1rem;padding:1rem 2.4rem;">Open Your Cycle Keeper</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">Your Cycle Keeper</span>
-    <span>
-      <a href="https://github.com/pythonime-lab/yourcyclekeeper" target="_blank">GitHub</a>
-      &nbsp;&middot;&nbsp;
-      <a href="/period-tracker/" target="_blank">Open App</a>
-    </span>
-    <span>Not medical advice &middot; Not for contraceptive use &middot; MIT License</span>
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const group = entry.target.parentElement.querySelectorAll('.reveal:not(.visible)');
-          group.forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 90));
-          entry.target.classList.add('visible');
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
         }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
-</body>
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* SHARED */
+      section {
+        padding: 6rem 5vw;
+      }
+      .section-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--rose-light);
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+      }
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 3.5vw, 2.8rem);
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.2;
+        max-width: 600px;
+      }
+      .section-title em {
+        font-style: italic;
+        color: var(--rose-light);
+      }
+      .inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 4rem;
+      }
+
+      /* PILLARS */
+      .pillars {
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 4.5rem 5vw;
+      }
+      .pillars-grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .pillar {
+        padding: 0 2.5rem;
+        border-left: 1px solid var(--border);
+      }
+      .pillar:first-child {
+        padding-left: 0;
+        border-left: none;
+      }
+      .pillar-line {
+        width: 32px;
+        height: 2px;
+        background: var(--rose);
+        margin-bottom: 1.2rem;
+      }
+      .pillar h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 0.6rem;
+      }
+      .pillar p {
+        font-size: 0.84rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+
+      /* HOW IT WORKS */
+      .how-section {
+        background: var(--bg);
+      }
+      .how-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+        margin-top: 3.5rem;
+      }
+      .how-step {
+        display: flex;
+        gap: 1.5rem;
+        padding: 1.8rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .how-step:last-child {
+        border-bottom: none;
+      }
+      .step-num {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 400;
+        color: var(--rose);
+        line-height: 1;
+        flex-shrink: 0;
+        width: 2.5rem;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+      }
+      .how-step:hover .step-num {
+        opacity: 1;
+      }
+      .step-content h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+      .step-content p {
+        font-size: 0.87rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+        font-weight: 300;
+      }
+      .how-image {
+        display: block;
+        border-radius: 24px;
+        overflow: hidden;
+        position: relative;
+        border: 2px solid var(--border);
+        transition: transform 0.3s ease;
+      }
+      .how-image.visible:hover {
+        transform: translateY(-4px);
+      }
+      .how-image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      /* FEATURES */
+      .features-section {
+        background: var(--bg2);
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 3.5rem;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .feat-card {
+        background: var(--card);
+        padding: 2rem;
+        transition: background 0.2s;
+      }
+      .feat-card:hover {
+        background: var(--bg3);
+      }
+      .feat-accent {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .feat-accent svg {
+        width: 18px;
+        height: 18px;
+      }
+      .feat-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .feat-card p {
+        font-size: 0.84rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+        font-weight: 300;
+      }
+
+      /* COMPARISON */
+      .comparison-section {
+        background: var(--bg);
+      }
+      .comparison-table {
+        width: 100%;
+        margin-top: 3rem;
+        border-collapse: collapse;
+      }
+      .comparison-table thead th {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+      }
+      .comparison-table thead th:not(:first-child) {
+        text-align: center;
+      }
+      .comparison-table thead th.col-us {
+        color: var(--rose-light);
+        border-bottom-color: var(--rose);
+      }
+      .comparison-table tbody tr {
+        border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+        transition: background 0.15s;
+      }
+      .comparison-table tbody tr:hover {
+        background: rgba(167, 139, 250, 0.04);
+      }
+      .comparison-table td {
+        padding: 1rem 1.5rem;
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        vertical-align: middle;
+      }
+      .comparison-table td:first-child {
+        color: var(--text);
+        font-weight: 400;
+      }
+      .comparison-table td:not(:first-child) {
+        text-align: center;
+      }
+      .comparison-table td.col-us {
+        color: var(--text);
+      }
+      .check {
+        color: var(--fertile-green);
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+      .cross {
+        color: rgba(167, 139, 250, 0.3);
+        font-size: 0.88rem;
+      }
+      .partial {
+        color: var(--amber);
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      /* FAQ */
+      .faq-section {
+        background: var(--bg2);
+      }
+      .faq-layout {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 5rem;
+        align-items: start;
+        margin-top: 3rem;
+      }
+      .faq-left p {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-weight: 300;
+      }
+      details {
+        border-bottom: 1px solid var(--border);
+      }
+      summary {
+        padding: 1.2rem 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text);
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        transition: color 0.2s;
+      }
+      summary:hover {
+        color: var(--rose-light);
+      }
+      summary::after {
+        content: "+";
+        font-size: 1.3rem;
+        font-weight: 300;
+        color: var(--rose);
+        flex-shrink: 0;
+        transition: transform 0.2s;
+      }
+      details[open] summary::after {
+        transform: rotate(45deg);
+      }
+      details p {
+        padding-bottom: 1.2rem;
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-weight: 300;
+      }
+
+      /* CTA */
+      .cta-section {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        padding: 8rem 5vw;
+      }
+      .cta-section img.cta-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        z-index: 0;
+        background: var(--bg);
+      }
+      .cta-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          135deg,
+          rgba(18, 8, 24, 0.94) 0%,
+          rgba(91, 26, 138, 0.78) 100%
+        );
+      }
+      .cta-inner {
+        position: relative;
+        z-index: 2;
+      }
+      .cta-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.15;
+        max-width: 600px;
+        margin: 0 auto 1rem;
+      }
+      .cta-section h2 em {
+        font-style: italic;
+        color: var(--rose-light);
+      }
+      .cta-section p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 2.2rem 5vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      footer a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      footer a:hover {
+        color: var(--lavender);
+      }
+      .footer-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        color: var(--lavender);
+      }
+
+      /* SCROLL REVEAL */
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .hero-right {
+          display: none;
+        }
+        .how-layout {
+          grid-template-columns: 1fr;
+        }
+        .how-image {
+          display: none;
+        }
+        .features-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .pillars-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .pillar,
+        .pillar:first-child {
+          padding: 1.5rem;
+          border-left: none;
+          border-top: 1px solid var(--border);
+        }
+        .pillar:nth-child(-n + 2) {
+          border-top: none;
+        }
+        .faq-layout {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .comparison-table thead th:last-child,
+        .comparison-table td:last-child {
+          display: none;
+        }
+      }
+      @media (max-width: 600px) {
+        .nav-logo {
+          font-size: 1rem;
+        }
+        .nav-actions {
+          gap: 0.5rem;
+        }
+        .nav-support {
+          padding: 0.45rem 0.7rem;
+          font-size: 0.75rem;
+        }
+        .nav-cta {
+          padding: 0.45rem 0.9rem;
+          font-size: 0.75rem;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .pillars-grid {
+          grid-template-columns: 1fr;
+        }
+        .pillar,
+        .pillar:first-child {
+          padding: 1.5rem;
+        }
+        footer {
+          flex-direction: column;
+          text-align: center;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#" class="nav-logo">Your <span>Cycle</span> Keeper</a>
+      <div class="nav-actions">
+        <a href="/period-tracker/" target="_blank" class="nav-cta">Open App</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="inner hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge">100% Private — No Account Needed</div>
+          <h1>Track your cycle.<br /><em>Own your data.</em></h1>
+          <p class="hero-sub">
+            Your Cycle Keeper is a free period and cycle tracker that lives
+            entirely on your device. No servers. No accounts. No ads. Just your
+            health data, encrypted and private.
+          </p>
+          <div class="hero-actions">
+            <a href="/period-tracker/" target="_blank" class="btn-primary"
+              >Start Tracking — It's Free</a
+            >
+            <a href="#how-it-works" class="btn-ghost">See how it works</a>
+          </div>
+          <div class="hero-trust">
+            <div class="hero-trust-item">
+              <div class="trust-dot"></div>
+              AES-256 Encrypted
+            </div>
+            <div class="hero-trust-item">
+              <div class="trust-dot red"></div>
+              No internet required
+            </div>
+            <div class="hero-trust-item">
+              <div class="trust-dot purple"></div>
+              No ads, ever
+            </div>
+            <div class="hero-trust-item">
+              <div class="trust-dot amber"></div>
+              Open source
+            </div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <a href="/period-tracker/" target="_blank" class="hero-img-frame">
+            <img
+              src="icons/yourcyclekeeper_pinscreen.svg"
+              alt="Your Cycle Keeper app PIN screen"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILLARS -->
+    <div class="pillars">
+      <div class="pillars-grid">
+        <div class="pillar reveal">
+          <div class="pillar-line"></div>
+          <h3>Stays On Your Device</h3>
+          <p>
+            All data is stored in your browser's local storage. Nothing is ever
+            sent to any server, ever.
+          </p>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-line"></div>
+          <h3>PIN Encrypted</h3>
+          <p>
+            Your data is encrypted with AES-256-GCM using your PIN before being
+            written to storage. We hold no keys.
+          </p>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-line"></div>
+          <h3>No Account Required</h3>
+          <p>
+            Zero sign-ups. Zero emails. Zero identity. Open the app and start
+            tracking immediately.
+          </p>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-line"></div>
+          <h3>Free Forever</h3>
+          <p>
+            No freemium. No premium tier. No subscription. Your Cycle Keeper
+            will always be completely free.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how-it-works">
+      <div class="inner">
+        <p class="section-label reveal">How it works</p>
+        <h2 class="section-title reveal">
+          Simple tracking,<br /><em>serious privacy</em>
+        </h2>
+        <div class="how-layout">
+          <div class="how-steps">
+            <div class="how-step reveal">
+              <div class="step-num">01</div>
+              <div class="step-content">
+                <h3>Enter Your Cycle Details</h3>
+                <p>
+                  Add the first day of your last period and your average cycle
+                  length. No forms, no sign-up, no email required.
+                </p>
+              </div>
+            </div>
+            <div class="how-step reveal">
+              <div class="step-num">02</div>
+              <div class="step-content">
+                <h3>Set a Private PIN</h3>
+                <p>
+                  Choose a 4-digit PIN that encrypts your data using AES-256-GCM
+                  — the same standard used for HTTPS. Only you can unlock your
+                  information.
+                </p>
+              </div>
+            </div>
+            <div class="how-step reveal">
+              <div class="step-num">03</div>
+              <div class="step-content">
+                <h3>Track Daily Symptoms</h3>
+                <p>
+                  Log flow, pain, and mood every day. See your history build
+                  into insights — all calculated on your device, privately.
+                </p>
+              </div>
+            </div>
+            <div class="how-step reveal">
+              <div class="step-num">04</div>
+              <div class="step-content">
+                <h3>Understand Your Cycle</h3>
+                <p>
+                  View your fertile window, predicted ovulation, and cycle
+                  patterns on a visual calendar. Know your body better, on your
+                  own terms.
+                </p>
+              </div>
+            </div>
+          </div>
+          <a href="/period-tracker/" target="_blank" class="how-image reveal">
+            <img
+              src="icons/yourcyclekeeper_calendar.svg"
+              alt="Your Cycle Keeper calendar view"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+      <div class="inner">
+        <p class="section-label reveal">Features</p>
+        <h2 class="section-title reveal">
+          Everything you need,<br /><em>nothing you don't</em>
+        </h2>
+        <div class="features-grid">
+          <div class="feat-card reveal">
+            <div
+              class="feat-accent"
+              style="background: rgba(230, 35, 59, 0.15)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#e6233b"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
+            <h3>Cycle Calendar</h3>
+            <p>
+              Visual calendar showing period days, fertile window, and predicted
+              ovulation. Navigate months and log symptoms for any day.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="feat-accent"
+              style="background: rgba(52, 211, 153, 0.12)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#34d399"
+                stroke-width="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <h3>Cycle Insights</h3>
+            <p>
+              Track average cycle length, period duration, fertile window
+              patterns, and symptom trends — all from your own data.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="feat-accent"
+              style="background: rgba(255, 107, 74, 0.12)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#ff6b4a"
+                stroke-width="2"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+            </div>
+            <h3>Daily Symptom Logging</h3>
+            <p>
+              Log flow intensity, pain levels, and mood each day. Add free-text
+              notes for anything else you want to track.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="feat-accent"
+              style="background: rgba(167, 139, 250, 0.12)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#a78bfa"
+                stroke-width="2"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3>AES-256 Encryption</h3>
+            <p>
+              Your data is encrypted with your PIN before being stored, using
+              the Web Crypto API — the same standard used by HTTPS.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="feat-accent"
+              style="background: rgba(45, 212, 191, 0.12)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2dd4bf"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </div>
+            <h3>Encrypted Backup</h3>
+            <p>
+              Export an encrypted backup file to protect your history. Restore
+              it anytime — on the same device or a new one.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="feat-accent"
+              style="background: rgba(255, 179, 71, 0.12)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#ffb347"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+            </div>
+            <h3>Works on Any Device</h3>
+            <p>
+              Runs in any modern browser on phone, tablet, or desktop. Install
+              as a PWA for an offline app-like experience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="comparison-section">
+      <div class="inner">
+        <p class="section-label reveal">Comparison</p>
+        <h2 class="section-title reveal">
+          Why choose <em>Your Cycle Keeper?</em>
+        </h2>
+        <p
+          style="
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 300;
+          "
+          class="reveal"
+        >
+          Most period apps make money from your health data. We don't.
+        </p>
+        <div style="overflow-x: auto" class="reveal">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th style="width: 40%">Feature</th>
+                <th class="col-us">Your Cycle Keeper</th>
+                <th>Flo / Clue</th>
+                <th>Other Free Apps</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Completely free</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="partial">Freemium</span></td>
+                <td><span class="partial">With ads</span></td>
+              </tr>
+              <tr>
+                <td>No account required</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="cross">No</span></td>
+                <td><span class="cross">No</span></td>
+              </tr>
+              <tr>
+                <td>Data stays on your device</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="cross">No</span></td>
+                <td><span class="cross">No</span></td>
+              </tr>
+              <tr>
+                <td>No ads</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="partial">Paid only</span></td>
+                <td><span class="cross">No</span></td>
+              </tr>
+              <tr>
+                <td>No data collection or sharing</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="cross">No</span></td>
+                <td><span class="cross">No</span></td>
+              </tr>
+              <tr>
+                <td>AES-256 encrypted storage</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="cross">No</span></td>
+                <td><span class="cross">No</span></td>
+              </tr>
+              <tr>
+                <td>Open source</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="cross">No</span></td>
+                <td><span class="partial">Rarely</span></td>
+              </tr>
+              <tr>
+                <td>Works offline</td>
+                <td class="col-us"><span class="check">Yes</span></td>
+                <td><span class="partial">Limited</span></td>
+                <td><span class="partial">Varies</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="inner">
+        <div class="faq-layout">
+          <div class="faq-left reveal">
+            <p class="section-label">FAQ</p>
+            <h2 class="section-title">Common <em>questions</em></h2>
+            <p>
+              Everything you need to know about privacy, security, and how Your
+              Cycle Keeper works.
+            </p>
+          </div>
+          <div class="faq-right reveal">
+            <details>
+              <summary>Is my data really private?</summary>
+              <p>
+                Yes. Your Cycle Keeper has no server, no backend, and no
+                analytics of any kind. Your data is encrypted with your PIN
+                using AES-256-GCM via the browser's Web Crypto API and stored
+                only in your browser's IndexedDB. We have no ability to access
+                it even if we wanted to.
+              </p>
+            </details>
+            <details>
+              <summary>What happens if I forget my PIN?</summary>
+              <p>
+                For your security, there is no PIN recovery mechanism. If you
+                forget your PIN, the encrypted data cannot be recovered and will
+                be erased. This is intentional — it means no one can access your
+                data without your PIN. We strongly recommend exporting an
+                encrypted backup regularly.
+              </p>
+            </details>
+            <details>
+              <summary>Can I use this on my phone?</summary>
+              <p>
+                Yes. Your Cycle Keeper works in any modern mobile browser. You
+                can also install it as a Progressive Web App (PWA) from your
+                browser's "Add to Home Screen" option for a native app
+                experience that works offline.
+              </p>
+            </details>
+            <details>
+              <summary>How accurate are the predictions?</summary>
+              <p>
+                Predictions are based on the Calendar Rhythm Method using your
+                logged cycle history. They become more accurate as you log more
+                cycles. This is an estimation tool only — not a contraceptive.
+                Stress, illness, and medications can all shift cycle timing.
+              </p>
+            </details>
+            <details>
+              <summary>What if I clear my browser data?</summary>
+              <p>
+                Clearing browser cache is safe. However, clearing "cookies and
+                site data" in your browser settings will erase your cycle data.
+                Always export an encrypted backup before doing so. You can
+                restore it anytime from the Settings screen.
+              </p>
+            </details>
+            <details>
+              <summary>Is this really free forever?</summary>
+              <p>
+                Yes. Your Cycle Keeper is open-source software under the MIT
+                License. There is no premium tier, no subscription, and no ads —
+                ever. Optional donations support development but are never
+                required.
+              </p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <img
+        class="cta-bg"
+        src="icons/yourcyclekeeper_background.png"
+        alt="Hearts and roses border"
+        loading="lazy"
+      />
+      <div class="cta-overlay"></div>
+      <div class="cta-inner">
+        <h2>Your health data<br />deserves to be <em>yours</em></h2>
+        <p>Free, private, and ready in seconds. No sign-up required.</p>
+        <a
+          href="/period-tracker/"
+          target="_blank"
+          class="btn-primary"
+          style="font-size: 1rem; padding: 1rem 2.4rem"
+          >Open Your Cycle Keeper</a
+        >
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span class="footer-logo">Your Cycle Keeper</span>
+      <span>
+        <a
+          href="https://github.com/pythonime-lab/yourcyclekeeper"
+          target="_blank"
+          >GitHub</a
+        >
+        &nbsp;&middot;&nbsp;
+        <a href="/period-tracker/" target="_blank">Open App</a>
+      </span>
+      <span
+        >Not medical advice &middot; Not for contraceptive use &middot; MIT
+        License</span
+      >
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const group = entry.target.parentElement.querySelectorAll(
+                ".reveal:not(.visible)"
+              );
+              group.forEach((el, i) =>
+                setTimeout(() => el.classList.add("visible"), i * 90)
+              );
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.08 }
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>

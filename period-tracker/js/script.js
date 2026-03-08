@@ -38,6 +38,7 @@ import {
 const STORE_KEY = "yourcyclekeeper_enc_v1"; // encrypted blob
 const SALT_KEY = "yourcyclekeeper_salt_v1"; // random salt (not secret)
 const PINHASH_KEY = "yourcyclekeeper_ph_v1"; // HMAC of PIN for fast wrong-PIN detection
+const BACKUP_KEY = "yourcyclekeeper_lastbackup_v1"; // ISO date of last export
 const SCHEMA_VERSION = 1; // bump when state shape changes
 
 // The old deriveKey, encryptData, decryptData, hashPin functions are now imported from crypto.js
@@ -78,6 +79,7 @@ let sessionPin = null; // PIN held only in JS memory (never persisted)
 let viewMonth = new Date();
 let selectedDate = null;
 let currentTab = "calendar";
+let backupReminderShownThisSession = false;
 
 // Reset on any user interaction (deferred until DOM ready)
 function setupEventListeners() {
@@ -253,6 +255,7 @@ async function submitPin() {
     renderCalendar();
     switchTab("calendar");
     updateInsights(); // Populate insights for desktop view
+    checkBackupReminder();
   } catch (error) {
     console.error("🚨 PIN submission error:", error);
     document.getElementById("lock-error").textContent =
@@ -419,6 +422,7 @@ async function startApp() {
     renderCalendar();
     updateInsights();
     switchTab("calendar");
+    checkBackupReminder();
   } catch (error) {
     console.error("🚨 App startup error:", error);
     showModal({
@@ -1918,6 +1922,55 @@ async function applySettings() {
   });
 }
 
+async function updateBackupStatus() {
+  const el = document.getElementById("backup-status");
+  if (!el) return;
+  const lastBackup = await getFromDB(BACKUP_KEY);
+  if (!lastBackup) {
+    el.textContent = "Last backup: Never";
+    el.className = "backup-status backup-status--warn";
+    return;
+  }
+  const days = Math.floor((new Date() - fromISO(lastBackup)) / 86400000);
+  if (days === 0) {
+    el.textContent = "Last backup: Today";
+    el.className = "backup-status backup-status--ok";
+  } else if (days === 1) {
+    el.textContent = "Last backup: Yesterday";
+    el.className = "backup-status backup-status--ok";
+  } else if (days <= 30) {
+    el.textContent = `Last backup: ${days} days ago`;
+    el.className = "backup-status backup-status--ok";
+  } else {
+    el.textContent = `Last backup: ${days} days ago — overdue!`;
+    el.className = "backup-status backup-status--warn";
+  }
+}
+
+async function checkBackupReminder() {
+  if (backupReminderShownThisSession) return;
+  const hasLogs = Object.keys(state.logs || {}).length > 0;
+  if (!hasLogs) return;
+  const lastBackup = await getFromDB(BACKUP_KEY);
+  const daysSinceBackup = lastBackup
+    ? Math.floor((new Date() - fromISO(lastBackup)) / 86400000)
+    : Infinity;
+  if (daysSinceBackup <= 30) return;
+  backupReminderShownThisSession = true;
+  setTimeout(() => {
+    showModal({
+      icon: "💾",
+      title: "Back Up Your Data",
+      msg: lastBackup
+        ? `It's been ${daysSinceBackup} days since your last backup. Export an encrypted backup to keep your cycle data safe.`
+        : "You haven't backed up your data yet. Export an encrypted backup to protect against data loss if you clear your browser data.",
+      confirmText: "Export Now",
+      cancelText: "Remind Me Later",
+      onConfirm: () => exportData(),
+    });
+  }, 2000);
+}
+
 function loadSettingsFields() {
   document.getElementById("s-last-period").value = state.lastPeriodStart || "";
   document.getElementById("s-cycle-len").value = state.cycleLength;
@@ -1925,6 +1978,7 @@ function loadSettingsFields() {
 
   // Calculate and display storage usage
   calculateStorageUsage();
+  updateBackupStatus();
 }
 
 async function exportData() {
@@ -1949,6 +2003,9 @@ async function exportData() {
         a.download = `yourcyclekeeper_backup_${today()}.bin`;
         a.click();
         URL.revokeObjectURL(a.href);
+        await setInDB(BACKUP_KEY, today());
+        backupReminderShownThisSession = true;
+        updateBackupStatus();
       } catch (error) {
         console.error("🚨 Export error:", error);
         showModal({
@@ -1962,6 +2019,135 @@ async function exportData() {
   });
 }
 
+let _importPinBuffer = "";
+
+function _showImportPinModal(bundle, backupSalt) {
+  _importPinBuffer = "";
+  const overlay = document.getElementById("modal-overlay");
+  const box = overlay.querySelector(".modal-box");
+
+  const iconEl = document.createElement("div");
+  iconEl.className = "modal-icon";
+  iconEl.textContent = "🔑";
+
+  const titleEl = document.createElement("div");
+  titleEl.className = "modal-title";
+  titleEl.textContent = "Enter Backup PIN";
+
+  const msgEl = document.createElement("div");
+  msgEl.className = "modal-msg";
+  msgEl.id = "ipin-msg";
+  msgEl.textContent = "Enter the PIN that was active when this backup was created.";
+
+  const dotsWrap = document.createElement("div");
+  dotsWrap.style.cssText =
+    "display:flex;gap:0.75rem;justify-content:center;margin:1rem 0";
+  for (let i = 0; i < 4; i++) {
+    const dot = document.createElement("div");
+    dot.className = "pin-dot";
+    dot.id = "ipd" + i;
+    dotsWrap.appendChild(dot);
+  }
+
+  const padWrap = document.createElement("div");
+  padWrap.style.cssText =
+    "display:grid;grid-template-columns:repeat(3,4.25rem);gap:0.625rem;justify-content:center;margin-bottom:0.875rem";
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "⌫"].forEach((k) => {
+    if (k === "") {
+      padWrap.appendChild(document.createElement("div"));
+      return;
+    }
+    const btn = document.createElement("div");
+    btn.className = "num-btn";
+    btn.style.cssText = "width:4.25rem;height:4.25rem";
+    btn.textContent = k;
+    btn.addEventListener("click", () =>
+      _importPinInput(k, bundle, backupSalt)
+    );
+    padWrap.appendChild(btn);
+  });
+
+  const btnsDiv = document.createElement("div");
+  btnsDiv.className = "modal-btns";
+  const cancelBtn = document.createElement("button");
+  cancelBtn.className = "modal-btn secondary";
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.addEventListener("click", () =>
+    overlay.classList.remove("visible")
+  );
+  btnsDiv.appendChild(cancelBtn);
+
+  box.replaceChildren(iconEl, titleEl, msgEl, dotsWrap, padWrap, btnsDiv);
+  overlay.classList.add("visible");
+}
+
+function _importPinInput(key, bundle, backupSalt) {
+  if (key === "⌫") {
+    _importPinBuffer = _importPinBuffer.slice(0, -1);
+    for (let i = 0; i < 4; i++) {
+      const el = document.getElementById("ipd" + i);
+      if (el) el.classList.toggle("filled", i < _importPinBuffer.length);
+    }
+    return;
+  }
+  if (_importPinBuffer.length >= 4) return;
+  _importPinBuffer += key;
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById("ipd" + i);
+    if (el) el.classList.toggle("filled", i < _importPinBuffer.length);
+  }
+  if (_importPinBuffer.length === 4) {
+    setTimeout(() => _submitImportPin(bundle, backupSalt), 150);
+  }
+}
+
+async function _submitImportPin(bundle, backupSalt) {
+  const enteredPin = _importPinBuffer;
+  try {
+    const restored = await decryptData(bundle.enc, enteredPin, backupSalt);
+    if (!restored) {
+      const msgEl = document.getElementById("ipin-msg");
+      if (msgEl) {
+        msgEl.textContent = "Incorrect PIN. Try again.";
+        msgEl.style.color = "var(--danger, #f87171)";
+      }
+      _importPinBuffer = "";
+      for (let i = 0; i < 4; i++) {
+        const el = document.getElementById("ipd" + i);
+        if (el) el.classList.remove("filled");
+      }
+      return;
+    }
+    // Decryption succeeded — restore data, keep current session PIN and salt
+    state = restored;
+    setCyclesState(state);
+    setPeriodMarkingState(state);
+    await save(); // re-encrypts with current sessionPin + current salt
+    document.getElementById("modal-overlay").classList.remove("visible");
+    renderCalendar();
+    updateStatusCard();
+    updateInsights();
+    showModal({
+      icon: "✅",
+      title: "Restored",
+      msg: "Your backup has been restored successfully.",
+      cancelText: "",
+      confirmText: "OK",
+    });
+  } catch {
+    const msgEl = document.getElementById("ipin-msg");
+    if (msgEl) {
+      msgEl.textContent = "Incorrect PIN. Try again.";
+      msgEl.style.color = "var(--danger, #f87171)";
+    }
+    _importPinBuffer = "";
+    for (let i = 0; i < 4; i++) {
+      const el = document.getElementById("ipd" + i);
+      if (el) el.classList.remove("filled");
+    }
+  }
+}
+
 async function importData() {
   const input = document.createElement("input");
   input.type = "file";
@@ -1972,7 +2158,9 @@ async function importData() {
     try {
       const text = await file.text();
       const bundle = JSON.parse(text);
-      const salt = Uint8Array.from(atob(bundle.salt), (c) => c.charCodeAt(0));
+      const backupSalt = Uint8Array.from(atob(bundle.salt), (c) =>
+        c.charCodeAt(0)
+      );
 
       // Validate backup version
       if (bundle.v !== 1) {
@@ -1986,54 +2174,7 @@ async function importData() {
         return;
       }
 
-      showModal({
-        icon: "🔑",
-        title: "Restore Backup",
-        msg: "Enter your PIN to decrypt and restore the backup.",
-        confirmText: "Restore",
-        cancelText: "Cancel",
-        onConfirm: async () => {
-          try {
-            const testDecrypted = await decryptData(
-              bundle.enc,
-              sessionPin,
-              salt
-            );
-            if (testDecrypted) {
-              state = testDecrypted;
-              await setInDB(STORE_KEY, bundle.enc);
-              await setInDB(SALT_KEY, bundle.salt);
-              await save();
-              renderCalendar();
-              updateStatusCard();
-              updateInsights();
-              showModal({
-                icon: "✅",
-                title: "Restored",
-                msg: "Your backup has been restored successfully.",
-                cancelText: "",
-                confirmText: "OK",
-              });
-            } else {
-              showModal({
-                icon: "❌",
-                title: "Decryption Failed",
-                msg: "The PIN is incorrect or the backup is corrupted.",
-                cancelText: "",
-                confirmText: "OK",
-              });
-            }
-          } catch (err) {
-            showModal({
-              icon: "❌",
-              title: "Restore Error",
-              msg: "Could not restore backup: " + err.message,
-              cancelText: "",
-              confirmText: "OK",
-            });
-          }
-        },
-      });
+      _showImportPinModal(bundle, backupSalt);
     } catch (err) {
       showModal({
         icon: "❌",
@@ -2210,7 +2351,7 @@ async function _submitChangePinStep() {
       showModal({
         icon: "✅",
         title: "PIN Changed",
-        msg: "Your PIN has been updated and all data re-encrypted.",
+        msg: "Your PIN has been updated and all data re-encrypted.\n\nNote: any backups made before this change will still require your old PIN to restore.",
         cancelText: "",
         confirmText: "OK",
       });

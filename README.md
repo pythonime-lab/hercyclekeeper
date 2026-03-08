@@ -4,6 +4,8 @@
 
 > **AES-256-GCM encrypted. Zero data collection. Forever free.**
 
+[![Support via PayPal](https://img.shields.io/badge/Support-PayPal-0070ba?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/pythonime)
+
 Your Cycle Keeper is a privacy-first period and cycle tracking PWA (Progressive Web App). All data is encrypted locally on your device using AES-256-GCM. **Nothing is sent to any server. No accounts. No analytics. No tracking.**
 
 ## Features
@@ -133,8 +135,6 @@ Your Cycle Keeper follows **WCAG 2.0 accessibility standards**:
 - **Form Controls:** Native keyboard support for inputs, selects, and textareas
 
 Standards based on [Salesforce Accessibility Guidelines](https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation).
-opment. Features may change and bugs may occur. Please report issues!
-**Do NOT use as a contraceptive or fertility guarantee.** Always consult a qualified healthcare professional.
 
 ## Contributing
 
