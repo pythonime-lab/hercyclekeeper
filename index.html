@@ -67,21 +67,24 @@
     <style>
       @font-face {
         font-family: "Outfit";
-        src: url("/fonts/Outfit/Outfit-VariableFont_wght.ttf") format("truetype");
+        src: url("/fonts/Outfit/Outfit-VariableFont_wght.ttf")
+          format("truetype");
         font-weight: 100 900;
         font-style: normal;
         font-display: swap;
       }
       @font-face {
         font-family: "Playfair Display";
-        src: url("/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
+        src: url("/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
+          format("truetype");
         font-weight: 400 900;
         font-style: normal;
         font-display: swap;
       }
       @font-face {
         font-family: "Playfair Display";
-        src: url("/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf") format("truetype");
+        src: url("/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf")
+          format("truetype");
         font-weight: 400 900;
         font-style: italic;
         font-display: swap;
@@ -194,6 +197,25 @@
       }
       .nav-cta:hover {
         background: var(--rose-light);
+      }
+      .nav-lang {
+        background: transparent;
+        color: var(--lavender);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.45rem 0.55rem;
+        font-size: 0.8rem;
+        font-family: "Outfit", sans-serif;
+        cursor: pointer;
+        outline: none;
+        appearance: auto;
+      }
+      .nav-lang:hover {
+        border-color: var(--lavender);
+      }
+      .nav-lang option {
+        background: #1e0f2e;
+        color: var(--text);
       }
 
       /* HERO */
@@ -820,504 +842,1057 @@
     <nav>
       <a href="#" class="nav-logo">Your <span>Cycle</span> Keeper</a>
       <div class="nav-actions">
-        <a href="/period-tracker/" target="_blank" class="nav-cta">Open App</a>
+        <a
+          href="/period-tracker/"
+          target="_blank"
+          class="nav-cta"
+          data-i18n="nav_open_app"
+          >Open App</a
+        >
+        <select id="landing-lang" class="nav-lang">
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+          <option value="be">BE</option>
+          <option value="es">ES</option>
+        </select>
       </div>
     </nav>
 
     <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="inner hero-inner">
-        <div class="hero-left">
-          <div class="hero-badge">100% Private — No Account Needed</div>
-          <h1>Track your cycle.<br /><em>Own your data.</em></h1>
-          <p class="hero-sub">
-            Your Cycle Keeper is a free period and cycle tracker that lives
-            entirely on your device. No servers. No accounts. No ads. Just your
-            health data, encrypted and private.
-          </p>
-          <div class="hero-actions">
-            <a href="/period-tracker/" target="_blank" class="btn-primary"
-              >Start Tracking — It's Free</a
-            >
-            <a href="#how-it-works" class="btn-ghost">See how it works</a>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="inner hero-inner">
+          <div class="hero-left">
+            <div class="hero-badge" data-i18n="hero_badge">
+              100% Private — No Account Needed
+            </div>
+            <h1 data-i18n-html="hero_h1">
+              Track your cycle.<br /><em>Own your data.</em>
+            </h1>
+            <p class="hero-sub" data-i18n="hero_sub">
+              Your Cycle Keeper is a free period and cycle tracker that lives
+              entirely on your device. No servers. No accounts. No ads. Just
+              your health data, encrypted and private.
+            </p>
+            <div class="hero-actions">
+              <a
+                href="/period-tracker/"
+                target="_blank"
+                class="btn-primary"
+                data-i18n="hero_btn_primary"
+                >Start Tracking — It's Free</a
+              >
+              <a
+                href="#how-it-works"
+                class="btn-ghost"
+                data-i18n="hero_btn_ghost"
+                >See how it works</a
+              >
+            </div>
+            <div class="hero-trust">
+              <div class="hero-trust-item">
+                <div class="trust-dot"></div>
+                <span data-i18n="trust_aes">AES-256 Encrypted</span>
+              </div>
+              <div class="hero-trust-item">
+                <div class="trust-dot red"></div>
+                <span data-i18n="trust_offline">No internet required</span>
+              </div>
+              <div class="hero-trust-item">
+                <div class="trust-dot purple"></div>
+                <span data-i18n="trust_ads">No ads, ever</span>
+              </div>
+              <div class="hero-trust-item">
+                <div class="trust-dot amber"></div>
+                <span data-i18n="trust_open">Open source</span>
+              </div>
+            </div>
           </div>
-          <div class="hero-trust">
-            <div class="hero-trust-item">
-              <div class="trust-dot"></div>
-              AES-256 Encrypted
-            </div>
-            <div class="hero-trust-item">
-              <div class="trust-dot red"></div>
-              No internet required
-            </div>
-            <div class="hero-trust-item">
-              <div class="trust-dot purple"></div>
-              No ads, ever
-            </div>
-            <div class="hero-trust-item">
-              <div class="trust-dot amber"></div>
-              Open source
-            </div>
+          <div class="hero-right">
+            <a href="/period-tracker/" target="_blank" class="hero-img-frame">
+              <img
+                src="icons/yourcyclekeeper_pinscreen.svg"
+                alt="Your Cycle Keeper app PIN screen"
+                loading="lazy"
+              />
+            </a>
           </div>
         </div>
-        <div class="hero-right">
-          <a href="/period-tracker/" target="_blank" class="hero-img-frame">
-            <img
-              src="icons/yourcyclekeeper_pinscreen.svg"
-              alt="Your Cycle Keeper app PIN screen"
-              loading="lazy"
-            />
-          </a>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- PILLARS -->
-    <div class="pillars">
-      <div class="pillars-grid">
-        <div class="pillar reveal">
-          <div class="pillar-line"></div>
-          <h2>Stays On Your Device</h2>
-          <p>
-            All data is stored in your browser's local storage. Nothing is ever
-            sent to any server, ever.
-          </p>
-        </div>
-        <div class="pillar reveal">
-          <div class="pillar-line"></div>
-          <h2>PIN Encrypted</h2>
-          <p>
-            Your data is encrypted with AES-256-GCM using your PIN before being
-            written to storage. We hold no keys.
-          </p>
-        </div>
-        <div class="pillar reveal">
-          <div class="pillar-line"></div>
-          <h2>No Account Required</h2>
-          <p>
-            Zero sign-ups. Zero emails. Zero identity. Open the app and start
-            tracking immediately.
-          </p>
-        </div>
-        <div class="pillar reveal">
-          <div class="pillar-line"></div>
-          <h2>Free Forever</h2>
-          <p>
-            No freemium. No premium tier. No subscription. Your Cycle Keeper
-            will always be completely free.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- HOW IT WORKS -->
-    <section class="how-section" id="how-it-works">
-      <div class="inner">
-        <p class="section-label reveal">How it works</p>
-        <h2 class="section-title reveal">
-          Simple tracking,<br /><em>serious privacy</em>
-        </h2>
-        <div class="how-layout">
-          <div class="how-steps">
-            <div class="how-step reveal">
-              <div class="step-num" aria-hidden="true">01</div>
-              <div class="step-content">
-                <h3>Enter Your Cycle Details</h3>
-                <p>
-                  Add the first day of your last period and your average cycle
-                  length. No forms, no sign-up, no email required.
-                </p>
-              </div>
-            </div>
-            <div class="how-step reveal">
-              <div class="step-num" aria-hidden="true">02</div>
-              <div class="step-content">
-                <h3>Set a Private PIN</h3>
-                <p>
-                  Choose a 4-digit PIN that encrypts your data using AES-256-GCM
-                  — the same standard used for HTTPS. Only you can unlock your
-                  information.
-                </p>
-              </div>
-            </div>
-            <div class="how-step reveal">
-              <div class="step-num" aria-hidden="true">03</div>
-              <div class="step-content">
-                <h3>Track Daily Symptoms</h3>
-                <p>
-                  Log flow, pain, and mood every day. See your history build
-                  into insights — all calculated on your device, privately.
-                </p>
-              </div>
-            </div>
-            <div class="how-step reveal">
-              <div class="step-num" aria-hidden="true">04</div>
-              <div class="step-content">
-                <h3>Understand Your Cycle</h3>
-                <p>
-                  View your fertile window, predicted ovulation, and cycle
-                  patterns on a visual calendar. Know your body better, on your
-                  own terms.
-                </p>
-              </div>
-            </div>
-          </div>
-          <a href="/period-tracker/" target="_blank" class="how-image reveal">
-            <img
-              src="icons/yourcyclekeeper_calendar.svg"
-              alt="Your Cycle Keeper calendar view"
-              loading="lazy"
-            />
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="features-section">
-      <div class="inner">
-        <p class="section-label reveal">Features</p>
-        <h2 class="section-title reveal">
-          Everything you need,<br /><em>nothing you don't</em>
-        </h2>
-        <div class="features-grid">
-          <div class="feat-card reveal">
-            <div
-              class="feat-accent"
-              style="background: rgba(230, 35, 59, 0.15)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#e6233b"
-                stroke-width="2"
-              >
-                <rect x="3" y="4" width="18" height="18" rx="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-            </div>
-            <h3>Cycle Calendar</h3>
-            <p>
-              Visual calendar showing period days, fertile window, and predicted
-              ovulation. Navigate months and log symptoms for any day.
+      <!-- PILLARS -->
+      <div class="pillars">
+        <div class="pillars-grid">
+          <div class="pillar reveal">
+            <div class="pillar-line"></div>
+            <h2 data-i18n="pillar1_h">Stays On Your Device</h2>
+            <p data-i18n="pillar1_p">
+              All data is stored in your browser's local storage. Nothing is
+              ever sent to any server, ever.
             </p>
           </div>
-          <div class="feat-card reveal">
-            <div
-              class="feat-accent"
-              style="background: rgba(52, 211, 153, 0.12)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#34d399"
-                stroke-width="2"
-              >
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-              </svg>
-            </div>
-            <h3>Cycle Insights</h3>
-            <p>
-              Track average cycle length, period duration, fertile window
-              patterns, and symptom trends — all from your own data.
+          <div class="pillar reveal">
+            <div class="pillar-line"></div>
+            <h2 data-i18n="pillar2_h">PIN Encrypted</h2>
+            <p data-i18n="pillar2_p">
+              Your data is encrypted with AES-256-GCM using your PIN before
+              being written to storage. We hold no keys.
             </p>
           </div>
-          <div class="feat-card reveal">
-            <div
-              class="feat-accent"
-              style="background: rgba(255, 107, 74, 0.12)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ff6b4a"
-                stroke-width="2"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-                <polyline points="10 9 9 9 8 9" />
-              </svg>
-            </div>
-            <h3>Daily Symptom Logging</h3>
-            <p>
-              Log flow intensity, pain levels, and mood each day. Add free-text
-              notes for anything else you want to track.
+          <div class="pillar reveal">
+            <div class="pillar-line"></div>
+            <h2 data-i18n="pillar3_h">No Account Required</h2>
+            <p data-i18n="pillar3_p">
+              Zero sign-ups. Zero emails. Zero identity. Open the app and start
+              tracking immediately.
             </p>
           </div>
-          <div class="feat-card reveal">
-            <div
-              class="feat-accent"
-              style="background: rgba(167, 139, 250, 0.12)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#a78bfa"
-                stroke-width="2"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <h3>AES-256 Encryption</h3>
-            <p>
-              Your data is encrypted with your PIN before being stored, using
-              the Web Crypto API — the same standard used by HTTPS.
-            </p>
-          </div>
-          <div class="feat-card reveal">
-            <div
-              class="feat-accent"
-              style="background: rgba(45, 212, 191, 0.12)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#2dd4bf"
-                stroke-width="2"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            </div>
-            <h3>Encrypted Backup</h3>
-            <p>
-              Export an encrypted backup file to protect your history. Restore
-              it anytime — on the same device or a new one.
-            </p>
-          </div>
-          <div class="feat-card reveal">
-            <div
-              class="feat-accent"
-              style="background: rgba(255, 179, 71, 0.12)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffb347"
-                stroke-width="2"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <path
-                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                />
-              </svg>
-            </div>
-            <h3>Works on Any Device</h3>
-            <p>
-              Runs in any modern browser on phone, tablet, or desktop. Install
-              as a PWA for an offline app-like experience.
+          <div class="pillar reveal">
+            <div class="pillar-line"></div>
+            <h2 data-i18n="pillar4_h">Free Forever</h2>
+            <p data-i18n="pillar4_p">
+              No freemium. No premium tier. No subscription. Your Cycle Keeper
+              will always be completely free.
             </p>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- COMPARISON -->
-    <section class="comparison-section">
-      <div class="inner">
-        <p class="section-label reveal">Comparison</p>
-        <h2 class="section-title reveal">
-          Why choose <em>Your Cycle Keeper?</em>
-        </h2>
-        <p
-          style="
-            margin-top: 1rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 300;
-          "
-          class="reveal"
+      <!-- HOW IT WORKS -->
+      <section class="how-section" id="how-it-works">
+        <div class="inner">
+          <p class="section-label reveal" data-i18n="how_label">How it works</p>
+          <h2 class="section-title reveal" data-i18n-html="how_title">
+            Simple tracking,<br /><em>serious privacy</em>
+          </h2>
+          <div class="how-layout">
+            <div class="how-steps">
+              <div class="how-step reveal">
+                <div class="step-num" aria-hidden="true">01</div>
+                <div class="step-content">
+                  <h3 data-i18n="step1_h">Enter Your Cycle Details</h3>
+                  <p data-i18n="step1_p">
+                    Add the first day of your last period and your average cycle
+                    length. No forms, no sign-up, no email required.
+                  </p>
+                </div>
+              </div>
+              <div class="how-step reveal">
+                <div class="step-num" aria-hidden="true">02</div>
+                <div class="step-content">
+                  <h3 data-i18n="step2_h">Set a Private PIN</h3>
+                  <p data-i18n="step2_p">
+                    Choose a 4-digit PIN that encrypts your data using
+                    AES-256-GCM — the same standard used for HTTPS. Only you can
+                    unlock your information.
+                  </p>
+                </div>
+              </div>
+              <div class="how-step reveal">
+                <div class="step-num" aria-hidden="true">03</div>
+                <div class="step-content">
+                  <h3 data-i18n="step3_h">Track Daily Symptoms</h3>
+                  <p data-i18n="step3_p">
+                    Log flow, pain, and mood every day. See your history build
+                    into insights — all calculated on your device, privately.
+                  </p>
+                </div>
+              </div>
+              <div class="how-step reveal">
+                <div class="step-num" aria-hidden="true">04</div>
+                <div class="step-content">
+                  <h3 data-i18n="step4_h">Understand Your Cycle</h3>
+                  <p data-i18n="step4_p">
+                    View your fertile window, predicted ovulation, and cycle
+                    patterns on a visual calendar. Know your body better, on
+                    your own terms.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <a href="/period-tracker/" target="_blank" class="how-image reveal">
+              <img
+                src="icons/yourcyclekeeper_calendar.svg"
+                alt="Your Cycle Keeper calendar view"
+                loading="lazy"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="features-section">
+        <div class="inner">
+          <p class="section-label reveal" data-i18n="feat_label">Features</p>
+          <h2 class="section-title reveal" data-i18n-html="feat_title">
+            Everything you need,<br /><em>nothing you don't</em>
+          </h2>
+          <div class="features-grid">
+            <div class="feat-card reveal">
+              <div
+                class="feat-accent"
+                style="background: rgba(230, 35, 59, 0.15)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#e6233b"
+                  stroke-width="2"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <h3 data-i18n="feat1_h">Cycle Calendar</h3>
+              <p data-i18n="feat1_p">
+                Visual calendar showing period days, fertile window, and
+                predicted ovulation. Navigate months and log symptoms for any
+                day.
+              </p>
+            </div>
+            <div class="feat-card reveal">
+              <div
+                class="feat-accent"
+                style="background: rgba(52, 211, 153, 0.12)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#34d399"
+                  stroke-width="2"
+                >
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <h3 data-i18n="feat2_h">Cycle Insights</h3>
+              <p data-i18n="feat2_p">
+                Track average cycle length, period duration, fertile window
+                patterns, and symptom trends — all from your own data.
+              </p>
+            </div>
+            <div class="feat-card reveal">
+              <div
+                class="feat-accent"
+                style="background: rgba(255, 107, 74, 0.12)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ff6b4a"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                  />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </div>
+              <h3 data-i18n="feat3_h">Daily Symptom Logging</h3>
+              <p data-i18n="feat3_p">
+                Log flow intensity, pain levels, and mood each day. Add
+                free-text notes for anything else you want to track.
+              </p>
+            </div>
+            <div class="feat-card reveal">
+              <div
+                class="feat-accent"
+                style="background: rgba(167, 139, 250, 0.12)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#a78bfa"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h3 data-i18n="feat4_h">AES-256 Encryption</h3>
+              <p data-i18n="feat4_p">
+                Your data is encrypted with your PIN before being stored, using
+                the Web Crypto API — the same standard used by HTTPS.
+              </p>
+            </div>
+            <div class="feat-card reveal">
+              <div
+                class="feat-accent"
+                style="background: rgba(45, 212, 191, 0.12)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#2dd4bf"
+                  stroke-width="2"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </div>
+              <h3 data-i18n="feat5_h">Encrypted Backup</h3>
+              <p data-i18n="feat5_p">
+                Export an encrypted backup file to protect your history. Restore
+                it anytime — on the same device or a new one.
+              </p>
+            </div>
+            <div class="feat-card reveal">
+              <div
+                class="feat-accent"
+                style="background: rgba(255, 179, 71, 0.12)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ffb347"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  />
+                </svg>
+              </div>
+              <h3 data-i18n="feat6_h">Works on Any Device</h3>
+              <p data-i18n="feat6_p">
+                Runs in any modern browser on phone, tablet, or desktop. Install
+                as a PWA for an offline app-like experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPARISON -->
+      <section class="comparison-section">
+        <div class="inner">
+          <p class="section-label reveal" data-i18n="cmp_label">Comparison</p>
+          <h2 class="section-title reveal" data-i18n-html="cmp_title">
+            Why choose <em>Your Cycle Keeper?</em>
+          </h2>
+          <p
+            style="
+              margin-top: 1rem;
+              color: var(--text-muted);
+              font-size: 0.9rem;
+              font-weight: 300;
+            "
+            class="reveal"
+            data-i18n="cmp_sub"
+          >
+            Most period apps make money from your health data. We don't.
+          </p>
+          <div style="overflow-x: auto" class="reveal">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th style="width: 40%" data-i18n="cmp_col_feature">
+                    Feature
+                  </th>
+                  <th class="col-us">Your Cycle Keeper</th>
+                  <th>Flo / Clue</th>
+                  <th>Other Free Apps</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-i18n="cmp_row1">Completely free</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td>
+                    <span class="partial" data-i18n="cmp_val_freemium"
+                      >Freemium</span
+                    >
+                  </td>
+                  <td>
+                    <span class="partial" data-i18n="cmp_val_with_ads"
+                      >With ads</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row2">No account required</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td><span class="cross">No</span></td>
+                  <td><span class="cross">No</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row3">Data stays on your device</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td><span class="cross">No</span></td>
+                  <td><span class="cross">No</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row4">No ads</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td>
+                    <span class="partial" data-i18n="cmp_val_paid_only"
+                      >Paid only</span
+                    >
+                  </td>
+                  <td><span class="cross">No</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row5">No data collection or sharing</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td><span class="cross">No</span></td>
+                  <td><span class="cross">No</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row6">AES-256 encrypted storage</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td><span class="cross">No</span></td>
+                  <td><span class="cross">No</span></td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row7">Open source</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td><span class="cross">No</span></td>
+                  <td>
+                    <span class="partial" data-i18n="cmp_val_rarely"
+                      >Rarely</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td data-i18n="cmp_row8">Works offline</td>
+                  <td class="col-us"><span class="check">Yes</span></td>
+                  <td>
+                    <span class="partial" data-i18n="cmp_val_limited"
+                      >Limited</span
+                    >
+                  </td>
+                  <td>
+                    <span class="partial" data-i18n="cmp_val_varies"
+                      >Varies</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq-section">
+        <div class="inner">
+          <div class="faq-layout">
+            <div class="faq-left reveal">
+              <p class="section-label" data-i18n="faq_label">FAQ</p>
+              <h2 class="section-title" data-i18n-html="faq_title">
+                Common <em>questions</em>
+              </h2>
+              <p data-i18n="faq_sub">
+                Everything you need to know about privacy, security, and how
+                Your Cycle Keeper works.
+              </p>
+            </div>
+            <div class="faq-right reveal">
+              <details>
+                <summary data-i18n="faq1_q">Is my data really private?</summary>
+                <p data-i18n="faq1_a">
+                  Yes. Your Cycle Keeper has no server, no backend, and no
+                  analytics of any kind. Your data is encrypted with your PIN
+                  using AES-256-GCM via the browser's Web Crypto API and stored
+                  only in your browser's IndexedDB. We have no ability to access
+                  it even if we wanted to.
+                </p>
+              </details>
+              <details>
+                <summary data-i18n="faq2_q">
+                  What happens if I forget my PIN?
+                </summary>
+                <p data-i18n="faq2_a">
+                  For your security, there is no PIN recovery mechanism. If you
+                  forget your PIN, the encrypted data cannot be recovered and
+                  will be erased. This is intentional — it means no one can
+                  access your data without your PIN. We strongly recommend
+                  exporting an encrypted backup regularly.
+                </p>
+              </details>
+              <details>
+                <summary data-i18n="faq3_q">
+                  Can I use this on my phone?
+                </summary>
+                <p data-i18n="faq3_a">
+                  Yes. Your Cycle Keeper works in any modern mobile browser. You
+                  can also install it as a Progressive Web App (PWA) from your
+                  browser's "Add to Home Screen" option for a native app
+                  experience that works offline.
+                </p>
+              </details>
+              <details>
+                <summary data-i18n="faq4_q">
+                  How accurate are the predictions?
+                </summary>
+                <p data-i18n="faq4_a">
+                  Predictions are based on the Calendar Rhythm Method using your
+                  logged cycle history. They become more accurate as you log
+                  more cycles. This is an estimation tool only — not a
+                  contraceptive. Stress, illness, and medications can all shift
+                  cycle timing.
+                </p>
+              </details>
+              <details>
+                <summary data-i18n="faq5_q">
+                  What if I clear my browser data?
+                </summary>
+                <p data-i18n="faq5_a">
+                  Clearing browser cache is safe. However, clearing "cookies and
+                  site data" in your browser settings will erase your cycle
+                  data. Always export an encrypted backup before doing so. You
+                  can restore it anytime from the Settings screen.
+                </p>
+              </details>
+              <details>
+                <summary data-i18n="faq6_q">
+                  Is this really free forever?
+                </summary>
+                <p data-i18n="faq6_a">
+                  Yes. Your Cycle Keeper is open-source software under the GPL
+                  v3 License. There is no premium tier, no subscription, and no
+                  ads — ever. Optional donations support development but are
+                  never required.
+                </p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <img
+          class="cta-bg"
+          src="icons/yourcyclekeeper_background.png"
+          alt="Hearts and roses border"
+          loading="lazy"
+        />
+        <div class="cta-overlay"></div>
+        <div class="cta-inner">
+          <h2 data-i18n-html="cta_h2">
+            Your health data<br />deserves to be <em>yours</em>
+          </h2>
+          <p data-i18n="cta_sub">
+            Free, private, and ready in seconds. No sign-up required.
+          </p>
+          <a
+            href="/period-tracker/"
+            target="_blank"
+            class="btn-primary"
+            style="font-size: 1rem; padding: 1rem 2.4rem"
+            data-i18n="cta_btn"
+            >Open Your Cycle Keeper</a
+          >
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <span class="footer-logo">Your Cycle Keeper</span>
+        <span>
+          <a
+            href="https://github.com/pythonime-lab/yourcyclekeeper"
+            target="_blank"
+            >GitHub</a
+          >
+          &nbsp;&middot;&nbsp;
+          <a href="/period-tracker/" target="_blank" data-i18n="footer_open"
+            >Open App</a
+          >
+        </span>
+        <span data-i18n="footer_legal"
+          >Not medical advice &middot; Not for contraceptive use &middot; GPL v3
+          License</span
         >
-          Most period apps make money from your health data. We don't.
-        </p>
-        <div style="overflow-x: auto" class="reveal">
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th style="width: 40%">Feature</th>
-                <th class="col-us">Your Cycle Keeper</th>
-                <th>Flo / Clue</th>
-                <th>Other Free Apps</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Completely free</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="partial">Freemium</span></td>
-                <td><span class="partial">With ads</span></td>
-              </tr>
-              <tr>
-                <td>No account required</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="cross">No</span></td>
-                <td><span class="cross">No</span></td>
-              </tr>
-              <tr>
-                <td>Data stays on your device</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="cross">No</span></td>
-                <td><span class="cross">No</span></td>
-              </tr>
-              <tr>
-                <td>No ads</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="partial">Paid only</span></td>
-                <td><span class="cross">No</span></td>
-              </tr>
-              <tr>
-                <td>No data collection or sharing</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="cross">No</span></td>
-                <td><span class="cross">No</span></td>
-              </tr>
-              <tr>
-                <td>AES-256 encrypted storage</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="cross">No</span></td>
-                <td><span class="cross">No</span></td>
-              </tr>
-              <tr>
-                <td>Open source</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="cross">No</span></td>
-                <td><span class="partial">Rarely</span></td>
-              </tr>
-              <tr>
-                <td>Works offline</td>
-                <td class="col-us"><span class="check">Yes</span></td>
-                <td><span class="partial">Limited</span></td>
-                <td><span class="partial">Varies</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq-section">
-      <div class="inner">
-        <div class="faq-layout">
-          <div class="faq-left reveal">
-            <p class="section-label">FAQ</p>
-            <h2 class="section-title">Common <em>questions</em></h2>
-            <p>
-              Everything you need to know about privacy, security, and how Your
-              Cycle Keeper works.
-            </p>
-          </div>
-          <div class="faq-right reveal">
-            <details>
-              <summary>Is my data really private?</summary>
-              <p>
-                Yes. Your Cycle Keeper has no server, no backend, and no
-                analytics of any kind. Your data is encrypted with your PIN
-                using AES-256-GCM via the browser's Web Crypto API and stored
-                only in your browser's IndexedDB. We have no ability to access
-                it even if we wanted to.
-              </p>
-            </details>
-            <details>
-              <summary>What happens if I forget my PIN?</summary>
-              <p>
-                For your security, there is no PIN recovery mechanism. If you
-                forget your PIN, the encrypted data cannot be recovered and will
-                be erased. This is intentional — it means no one can access your
-                data without your PIN. We strongly recommend exporting an
-                encrypted backup regularly.
-              </p>
-            </details>
-            <details>
-              <summary>Can I use this on my phone?</summary>
-              <p>
-                Yes. Your Cycle Keeper works in any modern mobile browser. You
-                can also install it as a Progressive Web App (PWA) from your
-                browser's "Add to Home Screen" option for a native app
-                experience that works offline.
-              </p>
-            </details>
-            <details>
-              <summary>How accurate are the predictions?</summary>
-              <p>
-                Predictions are based on the Calendar Rhythm Method using your
-                logged cycle history. They become more accurate as you log more
-                cycles. This is an estimation tool only — not a contraceptive.
-                Stress, illness, and medications can all shift cycle timing.
-              </p>
-            </details>
-            <details>
-              <summary>What if I clear my browser data?</summary>
-              <p>
-                Clearing browser cache is safe. However, clearing "cookies and
-                site data" in your browser settings will erase your cycle data.
-                Always export an encrypted backup before doing so. You can
-                restore it anytime from the Settings screen.
-              </p>
-            </details>
-            <details>
-              <summary>Is this really free forever?</summary>
-              <p>
-                Yes. Your Cycle Keeper is open-source software under the MIT
-                License. There is no premium tier, no subscription, and no ads —
-                ever. Optional donations support development but are never
-                required.
-              </p>
-            </details>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section">
-      <img
-        class="cta-bg"
-        src="icons/yourcyclekeeper_background.png"
-        alt="Hearts and roses border"
-        loading="lazy"
-      />
-      <div class="cta-overlay"></div>
-      <div class="cta-inner">
-        <h2>Your health data<br />deserves to be <em>yours</em></h2>
-        <p>Free, private, and ready in seconds. No sign-up required.</p>
-        <a
-          href="/period-tracker/"
-          target="_blank"
-          class="btn-primary"
-          style="font-size: 1rem; padding: 1rem 2.4rem"
-          >Open Your Cycle Keeper</a
-        >
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <span class="footer-logo">Your Cycle Keeper</span>
-      <span>
-        <a
-          href="https://github.com/pythonime-lab/yourcyclekeeper"
-          target="_blank"
-          >GitHub</a
-        >
-        &nbsp;&middot;&nbsp;
-        <a href="/period-tracker/" target="_blank">Open App</a>
-      </span>
-      <span
-        >Not medical advice &middot; Not for contraceptive use &middot; MIT
-        License</span
-      >
-    </footer>
+      </footer>
     </main>
+
+    <script>
+      (function () {
+        const LANG_KEY = "yck_lang";
+        const SUPPORTED = ["en", "ru", "be", "es"];
+
+        const LOCALES = {
+          en: {
+            nav_open_app: "Open App",
+            hero_badge: "100% Private — No Account Needed",
+            hero_h1: "Track your cycle.<br /><em>Own your data.</em>",
+            hero_sub:
+              "Your Cycle Keeper is a free period and cycle tracker that lives entirely on your device. No servers. No accounts. No ads. Just your health data, encrypted and private.",
+            hero_btn_primary: "Start Tracking — It's Free",
+            hero_btn_ghost: "See how it works",
+            trust_aes: "AES-256 Encrypted",
+            trust_offline: "No internet required",
+            trust_ads: "No ads, ever",
+            trust_open: "Open source",
+            pillar1_h: "Stays On Your Device",
+            pillar1_p:
+              "All data is stored in your browser's local storage. Nothing is ever sent to any server, ever.",
+            pillar2_h: "PIN Encrypted",
+            pillar2_p:
+              "Your data is encrypted with AES-256-GCM using your PIN before being written to storage. We hold no keys.",
+            pillar3_h: "No Account Required",
+            pillar3_p:
+              "Zero sign-ups. Zero emails. Zero identity. Open the app and start tracking immediately.",
+            pillar4_h: "Free Forever",
+            pillar4_p:
+              "No freemium. No premium tier. No subscription. Your Cycle Keeper will always be completely free.",
+            how_label: "How it works",
+            how_title: "Simple tracking,<br /><em>serious privacy</em>",
+            step1_h: "Enter Your Cycle Details",
+            step1_p:
+              "Add the first day of your last period and your average cycle length. No forms, no sign-up, no email required.",
+            step2_h: "Set a Private PIN",
+            step2_p:
+              "Choose a 4-digit PIN that encrypts your data using AES-256-GCM — the same standard used for HTTPS. Only you can unlock your information.",
+            step3_h: "Track Daily Symptoms",
+            step3_p:
+              "Log flow, pain, and mood every day. See your history build into insights — all calculated on your device, privately.",
+            step4_h: "Understand Your Cycle",
+            step4_p:
+              "View your fertile window, predicted ovulation, and cycle patterns on a visual calendar. Know your body better, on your own terms.",
+            feat_label: "Features",
+            feat_title: "Everything you need,<br /><em>nothing you don't</em>",
+            feat1_h: "Cycle Calendar",
+            feat1_p:
+              "Visual calendar showing period days, fertile window, and predicted ovulation. Navigate months and log symptoms for any day.",
+            feat2_h: "Cycle Insights",
+            feat2_p:
+              "Track average cycle length, period duration, fertile window patterns, and symptom trends — all from your own data.",
+            feat3_h: "Daily Symptom Logging",
+            feat3_p:
+              "Log flow intensity, pain levels, and mood each day. Add free-text notes for anything else you want to track.",
+            feat4_h: "AES-256 Encryption",
+            feat4_p:
+              "Your data is encrypted with your PIN before being stored, using the Web Crypto API — the same standard used by HTTPS.",
+            feat5_h: "Encrypted Backup",
+            feat5_p:
+              "Export an encrypted backup file to protect your history. Restore it anytime — on the same device or a new one.",
+            feat6_h: "Works on Any Device",
+            feat6_p:
+              "Runs in any modern browser on phone, tablet, or desktop. Install as a PWA for an offline app-like experience.",
+            cmp_label: "Comparison",
+            cmp_title: "Why choose <em>Your Cycle Keeper?</em>",
+            cmp_sub:
+              "Most period apps make money from your health data. We don't.",
+            cmp_col_feature: "Feature",
+            cmp_row1: "Completely free",
+            cmp_row2: "No account required",
+            cmp_row3: "Data stays on your device",
+            cmp_row4: "No ads",
+            cmp_row5: "No data collection or sharing",
+            cmp_row6: "AES-256 encrypted storage",
+            cmp_row7: "Open source",
+            cmp_row8: "Works offline",
+            cmp_val_freemium: "Freemium",
+            cmp_val_with_ads: "With ads",
+            cmp_val_paid_only: "Paid only",
+            cmp_val_limited: "Limited",
+            cmp_val_varies: "Varies",
+            cmp_val_rarely: "Rarely",
+            faq_label: "FAQ",
+            faq_title: "Common <em>questions</em>",
+            faq_sub:
+              "Everything you need to know about privacy, security, and how Your Cycle Keeper works.",
+            faq1_q: "Is my data really private?",
+            faq1_a:
+              "Yes. Your Cycle Keeper has no server, no backend, and no analytics of any kind. Your data is encrypted with your PIN using AES-256-GCM via the browser's Web Crypto API and stored only in your browser's IndexedDB. We have no ability to access it even if we wanted to.",
+            faq2_q: "What happens if I forget my PIN?",
+            faq2_a:
+              "For your security, there is no PIN recovery mechanism. If you forget your PIN, the encrypted data cannot be recovered and will be erased. This is intentional — it means no one can access your data without your PIN. We strongly recommend exporting an encrypted backup regularly.",
+            faq3_q: "Can I use this on my phone?",
+            faq3_a:
+              'Yes. Your Cycle Keeper works in any modern mobile browser. You can also install it as a Progressive Web App (PWA) from your browser\'s "Add to Home Screen" option for a native app experience that works offline.',
+            faq4_q: "How accurate are the predictions?",
+            faq4_a:
+              "Predictions are based on the Calendar Rhythm Method using your logged cycle history. They become more accurate as you log more cycles. This is an estimation tool only — not a contraceptive. Stress, illness, and medications can all shift cycle timing.",
+            faq5_q: "What if I clear my browser data?",
+            faq5_a:
+              'Clearing browser cache is safe. However, clearing "cookies and site data" in your browser settings will erase your cycle data. Always export an encrypted backup before doing so. You can restore it anytime from the Settings screen.',
+            faq6_q: "Is this really free forever?",
+            faq6_a:
+              "Yes. Your Cycle Keeper is open-source software under the GPL v3 License. There is no premium tier, no subscription, and no ads — ever. Optional donations support development but are never required.",
+            cta_h2: "Your health data<br />deserves to be <em>yours</em>",
+            cta_sub:
+              "Free, private, and ready in seconds. No sign-up required.",
+            cta_btn: "Open Your Cycle Keeper",
+            footer_open: "Open App",
+            footer_legal:
+              "Not medical advice \u00b7 Not for contraceptive use \u00b7 GPL v3 License",
+          },
+          ru: {
+            nav_open_app: "Открыть приложение",
+            hero_badge: "100% приватно — без регистрации",
+            hero_h1: "Следите за циклом.<br /><em>Владейте данными.</em>",
+            hero_sub:
+              "Your Cycle Keeper — бесплатный трекер цикла, который работает полностью на вашем устройстве. Без серверов. Без аккаунтов. Без рекламы. Только ваши зашифрованные и приватные данные.",
+            hero_btn_primary: "Начать — это бесплатно",
+            hero_btn_ghost: "Как это работает",
+            trust_aes: "Шифрование AES-256",
+            trust_offline: "Работает без интернета",
+            trust_ads: "Без рекламы",
+            trust_open: "Открытый исходный код",
+            pillar1_h: "Данные на вашем устройстве",
+            pillar1_p:
+              "Все данные хранятся в локальном хранилище браузера. Ничто никогда не отправляется на серверы.",
+            pillar2_h: "Шифрование PIN-кодом",
+            pillar2_p:
+              "Данные шифруются с помощью AES-256-GCM и вашего PIN-кода перед сохранением. Мы не храним ключи.",
+            pillar3_h: "Без регистрации",
+            pillar3_p:
+              "Никакой регистрации, email, личных данных. Откройте приложение и сразу начинайте.",
+            pillar4_h: "Навсегда бесплатно",
+            pillar4_p:
+              "Без freemium, без подписки. Your Cycle Keeper всегда будет полностью бесплатным.",
+            how_label: "Как это работает",
+            how_title:
+              "Простое отслеживание,<br /><em>серьёзная приватность</em>",
+            step1_h: "Введите данные о цикле",
+            step1_p:
+              "Укажите первый день последней менструации и среднюю длину цикла. Никаких форм, никакой регистрации.",
+            step2_h: "Задайте PIN-код",
+            step2_p:
+              "Выберите 4-значный PIN, который шифрует данные с помощью AES-256-GCM — стандарта HTTPS. Только вы можете разблокировать свои данные.",
+            step3_h: "Записывайте симптомы",
+            step3_p:
+              "Отмечайте интенсивность выделений, уровень боли и настроение каждый день. Вся аналитика рассчитывается локально.",
+            step4_h: "Понимайте свой цикл",
+            step4_p:
+              "Просматривайте фертильное окно, прогноз овуляции и паттерны цикла на визуальном календаре.",
+            feat_label: "Возможности",
+            feat_title: "Всё необходимое,<br /><em>ничего лишнего</em>",
+            feat1_h: "Календарь цикла",
+            feat1_p:
+              "Визуальный календарь с днями менструации, фертильным окном и прогнозом овуляции. Записывайте симптомы для любого дня.",
+            feat2_h: "Аналитика цикла",
+            feat2_p:
+              "Средняя длина цикла, продолжительность менструации и тенденции — всё рассчитывается на основе ваших данных.",
+            feat3_h: "Ежедневный дневник",
+            feat3_p:
+              "Записывайте интенсивность выделений, уровень боли и настроение. Добавляйте заметки.",
+            feat4_h: "Шифрование AES-256",
+            feat4_p:
+              "Данные шифруются вашим PIN перед сохранением с использованием Web Crypto API — стандарта HTTPS.",
+            feat5_h: "Зашифрованный бэкап",
+            feat5_p:
+              "Экспортируйте зашыфраваны файл резервной копии. Восстановите его в любое время на этом или новом устройстве.",
+            feat6_h: "Работает на любом устройстве",
+            feat6_p:
+              "Работает в любом современном браузере. Установите как PWA для офлайн-приложения.",
+            cmp_label: "Сравнение",
+            cmp_title: "Почему <em>Your Cycle Keeper?</em>",
+            cmp_sub:
+              "Большинство приложений зарабатывают на ваших данных. Мы — нет.",
+            cmp_col_feature: "Функция",
+            cmp_row1: "Полностью бесплатно",
+            cmp_row2: "Без регистрации",
+            cmp_row3: "Данные остаются на устройстве",
+            cmp_row4: "Без рекламы",
+            cmp_row5: "Без сбора и передачи данных",
+            cmp_row6: "Хранилище с AES-256",
+            cmp_row7: "Открытый исходный код",
+            cmp_row8: "Работает офлайн",
+            cmp_val_freemium: "Freemium",
+            cmp_val_with_ads: "С рекламой",
+            cmp_val_paid_only: "Только платная",
+            cmp_val_limited: "Частично",
+            cmp_val_varies: "По-разному",
+            cmp_val_rarely: "Редко",
+            faq_label: "Вопросы",
+            faq_title: "Частые <em>вопросы</em>",
+            faq_sub:
+              "Всё о приватности, безопасности и работе Your Cycle Keeper.",
+            faq1_q: "Мои данные действительно приватны?",
+            faq1_a:
+              "Да. У Your Cycle Keeper нет сервера, бэкенда и аналитики. Ваши данные шифруются PIN-кодом с помощью AES-256-GCM через Web Crypto API и хранятся только в IndexedDB вашего браузера. Мы не имеем доступа к ним.",
+            faq2_q: "Что будет, если я забуду PIN?",
+            faq2_a:
+              "В целях безопасности механизма восстановления PIN не существует. Если вы забудете PIN, зашифрованные данные невозможно будет восстановить и они будут удалены. Это сделано намеренно. Мы настоятельно рекомендуем регулярно делать зашифрованную резервную копию.",
+            faq3_q: "Можно ли использовать на телефоне?",
+            faq3_a:
+              "Да. Your Cycle Keeper работает в любом современном мобильном браузере. Вы также можете установить его как Progressive Web App (PWA) через «Добавить на главный экран».",
+            faq4_q: "Насколько точны прогнозы?",
+            faq4_a:
+              "Прогнозы основаны на методе календарного ритма с учётом истории. Они становятся точнее по мере добавления данных. Это инструмент оценки — не контрацептив.",
+            faq5_q: "Что если я очищу данные браузера?",
+            faq5_a:
+              "Очистка кэша браузера безопасна. Однако очистка «cookies и данные сайтов» удалит ваши данные. Всегда делайте резервную копию заранее. Восстановить её можно в Настройках.",
+            faq6_q: "Это действительно навсегда бесплатно?",
+            faq6_a:
+              "Да. Your Cycle Keeper — открытое ПО под лицензией GPL v3. Нет премиум-подписки, нет рекламы. Необязательные пожертвования поддерживают разработку.",
+            cta_h2:
+              "Ваши данные о здоровье<br />заслуживают быть <em>вашими</em>",
+            cta_sub:
+              "Бесплатно, приватно и готово за секунды. Без регистрации.",
+            cta_btn: "Открыть Your Cycle Keeper",
+            footer_open: "Открыть приложение",
+            footer_legal:
+              "Не является медицинской консультацией \u00b7 Не для контрацепции \u00b7 Лицензия GPL v3",
+          },
+          be: {
+            nav_open_app: "Адкрыць праграму",
+            hero_badge: "100% прыватна — без рэгістрацыі",
+            hero_h1: "Сачыце за цыклам.<br /><em>Валодайце данымі.</em>",
+            hero_sub:
+              "Your Cycle Keeper — бясплатны трэкер цыкла, які працуе цалкам на вашай прыладзе. Без сервераў. Без акаўнтаў. Без рэкламы. Толькі вашы зашыфраваныя і прыватныя даныя.",
+            hero_btn_primary: "Пачаць — гэта бясплатна",
+            hero_btn_ghost: "Як гэта працуе",
+            trust_aes: "Шыфраванне AES-256",
+            trust_offline: "Працуе без інтэрнэту",
+            trust_ads: "Без рэкламы",
+            trust_open: "Адкрыты зыходны код",
+            pillar1_h: "Даныя на вашай прыладзе",
+            pillar1_p:
+              "Усе даныя захоўваюцца ў лакальным сховішчы браўзера. Нішто ніколі не адпраўляецца на серверы.",
+            pillar2_h: "Шыфраванне PIN-кодам",
+            pillar2_p:
+              "Даныя шыфруюцца з дапамогай AES-256-GCM і вашага PIN-коду перад захаваннем. Мы не захоўваем ключы.",
+            pillar3_h: "Без рэгістрацыі",
+            pillar3_p:
+              "Ніякай рэгістрацыі, email, асабістых даных. Адкрыйце праграму і адразу пачынайце.",
+            pillar4_h: "Назаўжды бясплатна",
+            pillar4_p:
+              "Без freemium, без падпіскі. Your Cycle Keeper заўсёды будзе цалкам бясплатным.",
+            how_label: "Як гэта працуе",
+            how_title:
+              "Простае адсочванне,<br /><em>сур'ёзная прыватнасць</em>",
+            step1_h: "Увядзіце даныя аб цыкле",
+            step1_p:
+              "Укажыце першы дзень апошняй менструацыі і сярэднюю даўжыню цыкла. Ніякіх формаў, ніякай рэгістрацыі.",
+            step2_h: "Задайце PIN-код",
+            step2_p:
+              "Абярыце 4-значны PIN, які шыфруе даныя з дапамогай AES-256-GCM — стандарту HTTPS. Толькі вы можаце разблакаваць свае даныя.",
+            step3_h: "Запісвайце сімптомы",
+            step3_p:
+              "Адзначайце інтэнсіўнасць выдзяленняў, узровень болю і настрой кожны дзень. Уся аналітыка разлічваецца лакальна.",
+            step4_h: "Разумейце свой цыкл",
+            step4_p:
+              "Праглядайце фертыльнае акно, прагноз авуляцыі і паттэрны цыкла на візуальным календары.",
+            feat_label: "Магчымасці",
+            feat_title: "Усё неабходнае,<br /><em>нічога лішняга</em>",
+            feat1_h: "Каляндар цыкла",
+            feat1_p:
+              "Візуальны каляндар з днямі менструацыі, фертыльным акном і прагнозам авуляцыі.",
+            feat2_h: "Аналітыка цыкла",
+            feat2_p:
+              "Сярэдняя даўжыня цыкла, працягласць менструацыі і тэндэнцыі — усё разлічваецца на аснове вашых даных.",
+            feat3_h: "Штодзённы дзённік",
+            feat3_p:
+              "Запісвайце інтэнсіўнасць выдзяленняў, узровень болю і настрой. Дадавайце нататкі.",
+            feat4_h: "Шыфраванне AES-256",
+            feat4_p:
+              "Даныя шыфруюцца вашым PIN перад захаваннем з выкарыстаннем Web Crypto API.",
+            feat5_h: "Зашыфраваная рэзервовая копія",
+            feat5_p:
+              "Экспартуйце зашыфраваны файл. Аднавіце яго ў любы час на гэтай або новай прыладзе.",
+            feat6_h: "Працуе на любой прыладзе",
+            feat6_p:
+              "Працуе ў любым сучасным браўзеры. Усталюйце як PWA для афлайн-рэжыму.",
+            cmp_label: "Параўнанне",
+            cmp_title: "Чаму <em>Your Cycle Keeper?</em>",
+            cmp_sub: "Большасць праграм зарабляюць на вашых даных. Мы — не.",
+            cmp_col_feature: "Функцыя",
+            cmp_row1: "Цалкам бясплатна",
+            cmp_row2: "Без рэгістрацыі",
+            cmp_row3: "Даныя застаюцца на прыладзе",
+            cmp_row4: "Без рэкламы",
+            cmp_row5: "Без збору і перадачы даных",
+            cmp_row6: "Сховішча з AES-256",
+            cmp_row7: "Адкрыты зыходны код",
+            cmp_row8: "Працуе афлайн",
+            cmp_val_freemium: "Freemium",
+            cmp_val_with_ads: "З рэкламай",
+            cmp_val_paid_only: "Толькі платная",
+            cmp_val_limited: "Часткова",
+            cmp_val_varies: "Па-рознаму",
+            cmp_val_rarely: "Рэдка",
+            faq_label: "Пытанні",
+            faq_title: "Частыя <em>пытанні</em>",
+            faq_sub: "Усё аб прыватнасці, бяспецы і рабоце Your Cycle Keeper.",
+            faq1_q: "Мае даныя сапраўды прыватныя?",
+            faq1_a:
+              "Так. У Your Cycle Keeper няма сервера, бэкенда і аналітыкі. Вашы даныя шыфруюцца PIN-кодам з дапамогай AES-256-GCM праз Web Crypto API і захоўваюцца толькі ў IndexedDB вашага браўзера.",
+            faq2_q: "Што будзе, калі я забуду PIN?",
+            faq2_a:
+              "З мэтаў бяспекі механізму аднаўлення PIN не існуе. Калі вы забудзецеся PIN, зашыфраваныя даныя немагчыма будзе аднавіць і яны будуць выдалены. Настойліва рэкамендуем рэгулярна рабіць зашыфраваную рэзервовую копію.",
+            faq3_q: "Ці можна выкарыстоўваць на тэлефоне?",
+            faq3_a:
+              "Так. Your Cycle Keeper працуе ў любым сучасным мабільным браўзеры. Вы таксама можаце ўсталяваць яго як Progressive Web App (PWA) праз «Дадаць на галоўны экран».",
+            faq4_q: "Наколькі дакладныя прагнозы?",
+            faq4_a:
+              "Прагнозы заснаваны на метадзе календарнага рытму з улікам гісторыі. Яны становяцца дакладнейшымі па меры дадання даных. Гэта інструмент ацэнкі — не кантрацэптыў.",
+            faq5_q: "Што калі я ачышчу даныя браўзера?",
+            faq5_a:
+              "Ачыстка кэша браўзера бяспечная. Аднак ачыстка «cookies і даных сайтаў» выдаліць вашы даныя. Заўсёды рабіце рэзервовую копію загадзя.",
+            faq6_q: "Гэта сапраўды назаўжды бясплатна?",
+            faq6_a:
+              "Так. Your Cycle Keeper — адкрытае ПА пад ліцэнзіяй GPL v3. Няма прэміум-падпіскі, няма рэкламы.",
+            cta_h2:
+              "Вашы даныя аб здароўі<br />заслугоўваюць быць <em>вашымі</em>",
+            cta_sub:
+              "Бясплатна, прыватна і гатова за секунды. Без рэгістрацыі.",
+            cta_btn: "Адкрыць Your Cycle Keeper",
+            footer_open: "Адкрыць праграму",
+            footer_legal:
+              "Не з'яўляецца медыцынскай кансультацыяй \u00b7 Не для кантрацэпцыі \u00b7 Ліцэнзія GPL v3",
+          },
+          es: {
+            nav_open_app: "Abrir aplicación",
+            hero_badge: "100% Privada — Sin cuenta necesaria",
+            hero_h1: "Rastrea tu ciclo.<br /><em>Tus datos, tuyos.</em>",
+            hero_sub:
+              "Your Cycle Keeper es un rastreador de ciclo gratuito que vive completamente en tu dispositivo. Sin servidores. Sin cuentas. Sin anuncios. Solo tus datos de salud, cifrados y privados.",
+            hero_btn_primary: "Comenzar — Es gratis",
+            hero_btn_ghost: "Cómo funciona",
+            trust_aes: "Cifrado AES-256",
+            trust_offline: "Sin internet requerido",
+            trust_ads: "Sin anuncios",
+            trust_open: "Código abierto",
+            pillar1_h: "En tu dispositivo",
+            pillar1_p:
+              "Todos los datos se almacenan en el almacenamiento local del navegador. Nada se envía jamás a ningún servidor.",
+            pillar2_h: "Cifrado con PIN",
+            pillar2_p:
+              "Tus datos se cifran con AES-256-GCM usando tu PIN antes de guardarse. No guardamos las claves.",
+            pillar3_h: "Sin cuenta requerida",
+            pillar3_p:
+              "Cero registros. Cero correos. Cero identidad. Abre la aplicación y comienza a rastrear de inmediato.",
+            pillar4_h: "Gratis para siempre",
+            pillar4_p:
+              "Sin freemium, sin suscripción. Your Cycle Keeper siempre será completamente gratuito.",
+            how_label: "Cómo funciona",
+            how_title: "Seguimiento simple,<br /><em>privacidad seria</em>",
+            step1_h: "Ingresa los detalles de tu ciclo",
+            step1_p:
+              "Añade el primer día de tu último período y la duración promedio de tu ciclo. Sin formularios, sin registro.",
+            step2_h: "Establece un PIN privado",
+            step2_p:
+              "Elige un PIN de 4 dígitos que cifra tus datos con AES-256-GCM — el mismo estándar de HTTPS. Solo tú puedes desbloquear tu información.",
+            step3_h: "Registra síntomas diarios",
+            step3_p:
+              "Anota el flujo, el dolor y el estado de ánimo cada día. Todo se calcula en tu dispositivo, de forma privada.",
+            step4_h: "Comprende tu ciclo",
+            step4_p:
+              "Visualiza tu ventana fértil, la ovulación prevista y los patrones del ciclo en un calendario visual.",
+            feat_label: "Características",
+            feat_title: "Todo lo que necesitas,<br /><em>nada más</em>",
+            feat1_h: "Calendario del ciclo",
+            feat1_p:
+              "Calendario visual con días de período, ventana fértil y ovulación prevista. Navega meses y registra síntomas.",
+            feat2_h: "Perspectivas del ciclo",
+            feat2_p:
+              "Duración promedio del ciclo, duración del período y tendencias de síntomas — todo desde tus datos.",
+            feat3_h: "Registro diario de síntomas",
+            feat3_p:
+              "Registra intensidad del flujo, niveles de dolor y estado de ánimo. Añade notas de texto libre.",
+            feat4_h: "Cifrado AES-256",
+            feat4_p:
+              "Tus datos se cifran con tu PIN antes de guardarse, usando la Web Crypto API — el mismo estándar que HTTPS.",
+            feat5_h: "Copia de seguridad cifrada",
+            feat5_p:
+              "Exporta un archivo de copia de seguridad cifrada. Restáuralo cuando quieras — en el mismo dispositivo o uno nuevo.",
+            feat6_h: "Funciona en cualquier dispositivo",
+            feat6_p:
+              "Funciona en cualquier navegador moderno. Instálalo como PWA para una experiencia sin conexión.",
+            cmp_label: "Comparación",
+            cmp_title: "¿Por qué <em>Your Cycle Keeper?</em>",
+            cmp_sub:
+              "La mayoría de las apps de ciclo ganan dinero con tus datos. Nosotros no.",
+            cmp_col_feature: "Característica",
+            cmp_row1: "Completamente gratis",
+            cmp_row2: "Sin cuenta requerida",
+            cmp_row3: "Datos en tu dispositivo",
+            cmp_row4: "Sin anuncios",
+            cmp_row5: "Sin recopilación de datos",
+            cmp_row6: "Almacenamiento AES-256",
+            cmp_row7: "Código abierto",
+            cmp_row8: "Funciona sin conexión",
+            cmp_val_freemium: "Freemium",
+            cmp_val_with_ads: "Con anuncios",
+            cmp_val_paid_only: "Solo versión paga",
+            cmp_val_limited: "Limitado",
+            cmp_val_varies: "Varía",
+            cmp_val_rarely: "Raramente",
+            faq_label: "FAQ",
+            faq_title: "Preguntas <em>frecuentes</em>",
+            faq_sub:
+              "Todo lo que necesitas saber sobre privacidad, seguridad y cómo funciona Your Cycle Keeper.",
+            faq1_q: "¿Mis datos son realmente privados?",
+            faq1_a:
+              "Sí. Your Cycle Keeper no tiene servidor, backend ni analíticas. Tus datos se cifran con tu PIN usando AES-256-GCM a través de la Web Crypto API del navegador y se almacenan solo en el IndexedDB de tu navegador. No podemos acceder a ellos.",
+            faq2_q: "¿Qué pasa si olvido mi PIN?",
+            faq2_a:
+              "Por seguridad, no existe mecanismo de recuperación de PIN. Si olvidas tu PIN, los datos cifrados no se pueden recuperar y serán borrados. Recomendamos exportar una copia de seguridad cifrada regularmente.",
+            faq3_q: "¿Puedo usarlo en mi teléfono?",
+            faq3_a:
+              "Sí. Your Cycle Keeper funciona en cualquier navegador móvil moderno. También puedes instalarlo como Progressive Web App (PWA) desde «Añadir a pantalla de inicio».",
+            faq4_q: "¿Qué tan precisas son las predicciones?",
+            faq4_a:
+              "Las predicciones se basan en el Método del Ritmo del Calendario usando tu historial de ciclos. Se vuelven más precisas a medida que registras más ciclos. Es solo una herramienta de estimación — no un anticonceptivo.",
+            faq5_q: "¿Qué pasa si borro los datos del navegador?",
+            faq5_a:
+              "Borrar la caché del navegador es seguro. Sin embargo, borrar «cookies y datos del sitio» borrará tus datos del ciclo. Siempre exporta una copia de seguridad antes.",
+            faq6_q: "¿Es realmente gratuito para siempre?",
+            faq6_a:
+              "Sí. Your Cycle Keeper es software de código abierto bajo la Licencia GPL v3. No hay nivel premium, suscripción ni anuncios.",
+            cta_h2: "Tus datos de salud<br />merecen ser <em>tuyos</em>",
+            cta_sub:
+              "Gratis, privado y listo en segundos. Sin registro requerido.",
+            cta_btn: "Abrir Your Cycle Keeper",
+            footer_open: "Abrir aplicación",
+            footer_legal:
+              "No es consejo médico \u00b7 No para uso anticonceptivo \u00b7 Licencia GPL v3",
+          },
+        };
+
+        function detectLang() {
+          try {
+            const s = localStorage.getItem(LANG_KEY);
+            if (s && SUPPORTED.includes(s)) return s;
+          } catch (_) {}
+          const nav = (navigator.language || "en").split("-")[0].toLowerCase();
+          return SUPPORTED.includes(nav) ? nav : "en";
+        }
+
+        function applyLang(lang) {
+          const locale = LOCALES[lang] || LOCALES.en;
+          document.documentElement.lang = lang;
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.dataset.i18n;
+            if (locale[key] !== undefined) el.textContent = locale[key];
+          });
+          document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+            const key = el.dataset.i18nHtml;
+            if (locale[key] !== undefined) el.innerHTML = locale[key];
+          });
+          const sel = document.getElementById("landing-lang");
+          if (sel) sel.value = lang;
+          try {
+            localStorage.setItem(LANG_KEY, lang);
+          } catch (_) {}
+        }
+
+        const currentLang = detectLang();
+
+        document.addEventListener("DOMContentLoaded", function () {
+          applyLang(currentLang);
+          const sel = document.getElementById("landing-lang");
+          if (sel) {
+            sel.value = currentLang;
+            sel.addEventListener("change", function () {
+              applyLang(sel.value);
+            });
+          }
+        });
+      })();
+    </script>
 
     <script>
       const observer = new IntersectionObserver(

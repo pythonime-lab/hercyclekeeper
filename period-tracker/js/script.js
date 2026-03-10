@@ -28,6 +28,7 @@ import {
   setState as setCyclesState,
 } from "./cycles.js";
 import { initKeyboardNavigation, setNavigationState } from "./navigation.js";
+import { t, tp, applyI18n, setLanguage, getLanguage, getSupportedLanguages } from "./i18n.js";
 import {
   cleanupConsecutiveMarkers,
   cleanupEmptyLogs,
@@ -55,9 +56,9 @@ async function getOrCreateSalt() {
     console.error("🚨 Error in getOrCreateSalt:", error);
     showModal({
       icon: "⚠️",
-      title: "Storage Error",
-      msg: "Could not access storage. Please refresh the page.",
-      confirmText: "OK",
+      title: t("storage_error_title"),
+      msg: t("storage_error_msg"),
+      confirmText: t("ok"),
     });
     throw error;
   }
@@ -192,7 +193,7 @@ async function submitPin() {
     const secsLeft = Math.ceil((pinLockUntil - Date.now()) / 1000);
     document.getElementById(
       "lock-error"
-    ).textContent = `Too many attempts. Try again in ${secsLeft}s.`;
+    ).textContent = t("too_many_attempts", { secs: secsLeft });
     return;
   }
 
@@ -212,20 +213,18 @@ async function submitPin() {
       if (remaining <= 0) {
         pinLockUntil = Date.now() + LOCKOUT_MS;
         document.getElementById("lock-error").textContent =
-          "🚫 Too many attempts. Locked for 60 seconds.";
+          t("locked_out");
         setTimeout(() => {
           // After lockout period: reset and allow retry without erasing
           pinAttempts = 0;
           pinLockUntil = 0;
           document.getElementById("lock-error").textContent =
-            "Lockout ended. Try again.";
+            t("lockout_ended");
         }, LOCKOUT_MS);
       } else {
         document.getElementById(
           "lock-error"
-        ).textContent = `Incorrect PIN. ${remaining} attempt${
-          remaining === 1 ? "" : "s"
-        } remaining.`;
+        ).textContent = tp("incorrect_pin", remaining, { remaining });
       }
       return;
     }
@@ -240,7 +239,7 @@ async function submitPin() {
         setPeriodMarkingState(state);
       } catch {
         document.getElementById("lock-error").textContent =
-          "Decryption failed. Data may be corrupted.";
+          t("decryption_failed");
         return;
       }
     }
@@ -259,7 +258,7 @@ async function submitPin() {
   } catch (error) {
     console.error("🚨 PIN submission error:", error);
     document.getElementById("lock-error").textContent =
-      "An error occurred. Please try again.";
+      t("error_try_again");
   }
 }
 
@@ -289,10 +288,10 @@ setLockApp(lockApp);
 async function forgotPinFlow() {
   showModal({
     icon: "⚠️",
-    title: "Forgot PIN?",
-    msg: "This will permanently erase all your cycle data and reset Your Cycle Keeper. This cannot be undone. Are you sure?",
-    confirmText: "Yes, erase and reset",
-    cancelText: "Cancel",
+    title: t("forgot_pin_title"),
+    msg: t("forgot_pin_msg"),
+    confirmText: t("forgot_pin_confirm"),
+    cancelText: t("cancel"),
     onConfirm: async () => {
       try {
         await clearDB();
@@ -317,18 +316,18 @@ async function forgotPinFlow() {
         document.getElementById("lock-error").textContent = "";
         showModal({
           icon: "✅",
-          title: "Reset Complete",
-          msg: "Your Cycle Keeper has been reset. Please set a new PIN to get started.",
+          title: t("reset_complete_title"),
+          msg: t("reset_complete_msg"),
           cancelText: "",
-          confirmText: "OK",
+          confirmText: t("ok"),
         });
       } catch (error) {
         console.error("🚨 Reset error:", error);
         showModal({
           icon: "⚠️",
-          title: "Reset Failed",
-          msg: "Could not clear your data. Please refresh the page and try again.",
-          confirmText: "OK",
+          title: t("reset_failed_title"),
+          msg: t("reset_failed_msg"),
+          confirmText: t("ok"),
         });
       }
     },
@@ -345,9 +344,9 @@ async function save() {
     console.error("🚨 Save error:", error);
     showModal({
       icon: "⚠️",
-      title: "Save Failed",
-      msg: "Could not save your data. Please try again.",
-      confirmText: "OK",
+      title: t("save_failed_title"),
+      msg: t("save_failed_msg"),
+      confirmText: t("ok"),
     });
   }
 }
@@ -382,20 +381,20 @@ async function startApp() {
   if (!lp) {
     showModal({
       icon: "📅",
-      title: "Missing Date",
-      msg: "Please enter the first day of your last period.",
+      title: t("missing_date_title"),
+      msg: t("missing_date_msg"),
       cancelText: "",
-      confirmText: "OK",
+      confirmText: t("ok"),
     });
     return;
   }
   if (setupPin.length < 4) {
     showModal({
       icon: "🔢",
-      title: "Set a PIN",
-      msg: "Enter a 4-digit PIN to protect your data.",
+      title: t("set_pin_title"),
+      msg: t("set_pin_msg"),
       cancelText: "",
-      confirmText: "OK",
+      confirmText: t("ok"),
     });
     return;
   }
@@ -427,9 +426,9 @@ async function startApp() {
     console.error("🚨 App startup error:", error);
     showModal({
       icon: "⚠️",
-      title: "Setup Error",
-      msg: "Could not complete setup. Please refresh the page and try again.",
-      confirmText: "OK",
+      title: t("setup_error_title"),
+      msg: t("setup_error_msg"),
+      confirmText: t("ok"),
     });
   }
 }
@@ -445,7 +444,7 @@ async function startApp() {
 function updateNoteCount() {
   const ta = document.getElementById("log-note");
   const el = document.getElementById("note-limit");
-  if (ta && el) el.textContent = `${ta.value.length} / 500`;
+  if (ta && el) el.textContent = t("note_count", { count: ta.value.length });
 }
 
 let currentFlowValue = 1;
@@ -524,10 +523,10 @@ async function togglePeriodStart() {
   if (daysDiff > 7) {
     showModal({
       icon: "📅",
-      title: "Set Past Period",
-      msg: "To set periods from more than a week ago, please use Cycle Settings for accurate predictions.",
-      confirmText: "Go to Settings",
-      cancelText: "Cancel",
+      title: t("set_past_period_title"),
+      msg: t("set_past_period_msg"),
+      confirmText: t("go_to_settings"),
+      cancelText: t("cancel"),
       onConfirm: () => {
         closeLogPanel();
         switchTab("settings");
@@ -578,10 +577,10 @@ async function togglePeriodEnd() {
   if (daysDiff > 7) {
     showModal({
       icon: "📅",
-      title: "Set Past Period",
-      msg: "To set periods from more than a week ago, please use Cycle Settings for accurate predictions.",
-      confirmText: "Go to Settings",
-      cancelText: "Cancel",
+      title: t("set_past_period_title"),
+      msg: t("set_past_period_msg"),
+      confirmText: t("go_to_settings"),
+      cancelText: t("cancel"),
       onConfirm: () => {
         closeLogPanel();
         switchTab("settings");
@@ -709,7 +708,7 @@ function showFlowModal() {
     return;
 
   iconEl.textContent = "🩸";
-  titleEl.textContent = "Set Flow";
+  titleEl.textContent = t("set_flow");
   msgEl.textContent = "";
 
   const wrap = document.createElement("div");
@@ -732,8 +731,8 @@ function showFlowModal() {
   wrap.appendChild(slider);
   msgEl.appendChild(wrap);
 
-  confirmBtn.textContent = "Save";
-  cancelBtn.textContent = "Cancel";
+  confirmBtn.textContent = t("save");
+  cancelBtn.textContent = t("cancel");
   cancelBtn.style.display = "";
 
   updateFlowModalPreview(currentFlowValue);
@@ -771,7 +770,7 @@ function painColorFromValue(value) {
 
 function painLabelFromValue(value) {
   const v = normalizePainValue(value, 5);
-  return `Pain ${v.toFixed(1)} / 10`;
+  return t("pain_label", { value: v.toFixed(1) });
 }
 
 function updatePainButtonVisual(value, isSet = true) {
@@ -822,7 +821,7 @@ function showPainModal() {
     return;
 
   iconEl.textContent = "🤕";
-  titleEl.textContent = "Set Pain";
+  titleEl.textContent = t("set_pain");
   msgEl.textContent = "";
 
   const wrap = document.createElement("div");
@@ -845,8 +844,8 @@ function showPainModal() {
   wrap.appendChild(slider);
   msgEl.appendChild(wrap);
 
-  confirmBtn.textContent = "Save";
-  cancelBtn.textContent = "Cancel";
+  confirmBtn.textContent = t("save");
+  cancelBtn.textContent = t("cancel");
   cancelBtn.style.display = "";
 
   updatePainModalPreview(currentPainValue);
@@ -884,9 +883,9 @@ function moodColorFromValue(value) {
 
 function moodLabelFromValue(value) {
   const v = normalizeMoodValue(value, 50);
-  if (v < 35) return "Low Mood";
-  if (v > 65) return "Happy";
-  return "Neutral";
+  if (v < 35) return t("mood_low");
+  if (v > 65) return t("mood_happy");
+  return t("mood_neutral");
 }
 
 function moodIconFromValue(value) {
@@ -944,7 +943,7 @@ function showMoodModal() {
     return;
 
   iconEl.textContent = "🎚️";
-  titleEl.textContent = "Set Mood";
+  titleEl.textContent = t("set_mood");
   msgEl.textContent = "";
 
   const wrap = document.createElement("div");
@@ -987,8 +986,8 @@ function showMoodModal() {
   wrap.appendChild(tickLabels);
   msgEl.appendChild(wrap);
 
-  confirmBtn.textContent = "Save";
-  cancelBtn.textContent = "Cancel";
+  confirmBtn.textContent = t("save");
+  cancelBtn.textContent = t("cancel");
   cancelBtn.style.display = "";
 
   updateMoodModalPreview(currentMoodValue);
@@ -1022,7 +1021,7 @@ function updateStatusCard() {
   safeText("cycle-day", info.cycleDay);
   safeText(
     "days-until-next",
-    info.daysUntilNext > 0 ? info.daysUntilNext : "Now"
+    info.daysUntilNext > 0 ? info.daysUntilNext : t("now")
   );
   safeText("cycle-len-disp", info.cl);
   updateCycleBar(info);
@@ -1036,8 +1035,7 @@ function updateReminderBanner(info) {
 
   // Show banner if period is coming within 3 days
   if (info.daysUntilNext > 0 && info.daysUntilNext <= 3) {
-    const dayText = info.daysUntilNext === 1 ? "day" : "days";
-    text.textContent = `Your period is expected in ${info.daysUntilNext} ${dayText}`;
+    text.textContent = tp("period_expected_in", info.daysUntilNext);
     banner.style.display = "block";
   } else {
     banner.style.display = "none";
@@ -1045,24 +1043,24 @@ function updateReminderBanner(info) {
 }
 
 function getPhaseMessage(info) {
-  if (info.phase === "Menstruation") return "Your period 🩸";
-  if (info.phase === "Follicular") return "Building up ✨";
-  if (info.phase === "Fertile Window") return "Fertile days 🌿";
-  if (info.phase === "Ovulation Day") return "Ovulation day 🌟";
-  return "Luteal phase 🌙";
+  if (info.phase === "Menstruation") return t("phase_menstruation");
+  if (info.phase === "Follicular") return t("phase_follicular");
+  if (info.phase === "Fertile Window") return t("phase_fertile");
+  if (info.phase === "Ovulation Day") return t("phase_ovulation");
+  return t("phase_luteal");
 }
 function getPhaseSubtitle(info) {
   if (info.phase === "Menstruation")
-    return `Day ${info.cycleDay} of your period`;
+    return t("subtitle_menstruation", { day: info.cycleDay });
   if (info.phase === "Fertile Window")
-    return `Days ${info.fertileStart}–${info.fertileEnd} are fertile`;
-  if (info.phase === "Ovulation Day") return "Peak fertility today";
-  return `Next period in ${info.daysUntilNext} days`;
+    return t("subtitle_fertile", { start: info.fertileStart, end: info.fertileEnd });
+  if (info.phase === "Ovulation Day") return t("subtitle_ovulation");
+  return t("subtitle_other", { n: info.daysUntilNext });
 }
 
 function updateCycleBar(info) {
   const bar = document.getElementById("cycle-bar");
-  safeText("bar-cycle-end", `Day ${info.cl}`);
+  safeText("bar-cycle-end", t("bar_day", { n: info.cl }));
   const segs = [
     { c: "linear-gradient(90deg,#FF3D6B,#FF6B4A)", w: info.pd },
     {
@@ -1118,7 +1116,7 @@ function updateInsights() {
     hist.innerHTML = "";
     const p = document.createElement("p");
     p.style.cssText = "color:var(--text-muted);font-size:0.875rem";
-    p.textContent = "Log at least 2 period start dates to see cycle history.";
+    p.textContent = t("cycle_history_empty");
     hist.appendChild(p);
     return;
   }
@@ -1136,7 +1134,7 @@ function updateInsights() {
       const col =
         c.length < 26 ? "#34D399" : c.length > 32 ? "#FF6B4A" : "#A78BFA";
       lenSpan.style.cssText = `background:${col}22;color:${col}`;
-      lenSpan.textContent = `${parseInt(c.length)} days`; // parseInt guards injections
+      lenSpan.textContent = tp("history_days", parseInt(c.length)); // parseInt guards injections
       row.appendChild(dateSpan);
       row.appendChild(lenSpan);
       hist.appendChild(row);
@@ -1257,7 +1255,7 @@ function renderPainChart() {
     ctx.fillStyle = "#666";
     ctx.font = "14px sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("No tracking data logged yet", width / 2, height / 2);
+    ctx.fillText(t("no_data_yet"), width / 2, height / 2);
     return;
   }
 
@@ -1481,7 +1479,7 @@ function getPainDataYear(year) {
     const avgMood = moodCount > 0 ? moodSum / moodCount : null;
 
     data.push({
-      label: monthStart.toLocaleString("default", { month: "short" }),
+      label: monthStart.toLocaleString(getLanguage(), { month: "short" }),
       hasFlow: flowCount > 0,
       hasPain: painCount > 0,
       hasMood: moodCount > 0,
@@ -1512,13 +1510,13 @@ function downloadChart() {
     // Create month/year label
     let periodLabel;
     if (selectedMonth === "") {
-      periodLabel = `Full Year ${selectedYear}`;
+      periodLabel = t("chart_full_year", { year: selectedYear });
     } else {
       const monthName = new Date(
         selectedYear,
         parseInt(selectedMonth)
-      ).toLocaleString("default", { month: "long" });
-      periodLabel = `${monthName} ${selectedYear}`;
+      ).toLocaleString(getLanguage(), { month: "long" });
+      periodLabel = t("chart_month_year", { month: monthName, year: selectedYear });
     }
 
     // Create a new canvas with header and footer
@@ -1653,9 +1651,9 @@ function downloadChart() {
     console.error("🚨 Chart download error:", error);
     showModal({
       icon: "⚠️",
-      title: "Download Failed",
-      msg: "Could not download chart. Please try again.",
-      confirmText: "OK",
+      title: t("download_failed_title"),
+      msg: t("download_failed_msg"),
+      confirmText: t("ok"),
     });
   }
 }
@@ -1671,7 +1669,7 @@ function renderCalendar() {
     year,
     month,
     1
-  ).toLocaleString("default", { month: "long", year: "numeric" });
+  ).toLocaleString(getLanguage(), { month: "long", year: "numeric" });
 
   grid.innerHTML = "";
   const firstDay = new Date(year, month, 1).getDay();
@@ -1706,12 +1704,12 @@ function renderCalendar() {
       "aria-label",
       `${d}, ${
         dayType === "period"
-          ? "period day"
+          ? t("calendar_day_period")
           : dayType === "ovulation"
-          ? "ovulation day"
+          ? t("calendar_day_ovulation")
           : dayType === "fertile"
-          ? "fertile day"
-          : "regular day"
+          ? t("calendar_day_fertile")
+          : t("calendar_day_regular")
       }`
     );
     cell.addEventListener("click", () => selectDay(dateStr));
@@ -1874,30 +1872,30 @@ async function applySettings() {
   if (!lp || !/^\d{4}-\d{2}-\d{2}$/.test(lp)) {
     showModal({
       icon: "📅",
-      title: "Invalid Date",
-      msg: "Please enter a valid last period date.",
+      title: t("invalid_date_title"),
+      msg: t("invalid_date_msg"),
       cancelText: "",
-      confirmText: "OK",
+      confirmText: t("ok"),
     });
     return;
   }
   if (cl < 20 || cl > 45) {
     showModal({
       icon: "⚠️",
-      title: "Invalid Cycle Length",
-      msg: "Cycle length must be between 20 and 45 days.",
+      title: t("invalid_cycle_title"),
+      msg: t("invalid_cycle_msg"),
       cancelText: "",
-      confirmText: "OK",
+      confirmText: t("ok"),
     });
     return;
   }
   if (pd < 1 || pd > 10) {
     showModal({
       icon: "⚠️",
-      title: "Invalid Duration",
-      msg: "Period duration must be between 1 and 10 days.",
+      title: t("invalid_duration_title"),
+      msg: t("invalid_duration_msg"),
       cancelText: "",
-      confirmText: "OK",
+      confirmText: t("ok"),
     });
     return;
   }
@@ -1905,10 +1903,10 @@ async function applySettings() {
   // Show confirmation modal before applying changes
   showModal({
     icon: "⚠️",
-    title: "Update Predictions?",
-    msg: "This will recalculate all cycle predictions based on your new settings. Your logged symptoms and notes will remain unchanged. Continue?",
-    confirmText: "Yes, Update",
-    cancelText: "Cancel",
+    title: t("update_predictions_title"),
+    msg: t("update_predictions_msg"),
+    confirmText: t("update_predictions_confirm"),
+    cancelText: t("cancel"),
     onConfirm: async () => {
       state.lastPeriodStart = lp;
       state.cycleLength = cl;
@@ -1927,22 +1925,22 @@ async function updateBackupStatus() {
   if (!el) return;
   const lastBackup = await getFromDB(BACKUP_KEY);
   if (!lastBackup) {
-    el.textContent = "Last backup: Never";
+    el.textContent = t("backup_never");
     el.className = "backup-status backup-status--warn";
     return;
   }
   const days = Math.floor((new Date() - fromISO(lastBackup)) / 86400000);
   if (days === 0) {
-    el.textContent = "Last backup: Today";
+    el.textContent = t("backup_today");
     el.className = "backup-status backup-status--ok";
   } else if (days === 1) {
-    el.textContent = "Last backup: Yesterday";
+    el.textContent = t("backup_yesterday");
     el.className = "backup-status backup-status--ok";
   } else if (days <= 30) {
-    el.textContent = `Last backup: ${days} days ago`;
+    el.textContent = tp("backup_days_ago", days);
     el.className = "backup-status backup-status--ok";
   } else {
-    el.textContent = `Last backup: ${days} days ago — overdue!`;
+    el.textContent = tp("backup_overdue", days);
     el.className = "backup-status backup-status--warn";
   }
 }
@@ -1960,12 +1958,12 @@ async function checkBackupReminder() {
   setTimeout(() => {
     showModal({
       icon: "💾",
-      title: "Back Up Your Data",
+      title: t("backup_reminder_title"),
       msg: lastBackup
-        ? `It's been ${daysSinceBackup} days since your last backup. Export an encrypted backup to keep your cycle data safe.`
-        : "You haven't backed up your data yet. Export an encrypted backup to protect against data loss if you clear your browser data.",
-      confirmText: "Export Now",
-      cancelText: "Remind Me Later",
+        ? t("backup_reminder_msg_existing", { n: daysSinceBackup })
+        : t("backup_reminder_msg_new"),
+      confirmText: t("export_now"),
+      cancelText: t("remind_later"),
       onConfirm: () => exportData(),
     });
   }, 2000);
@@ -1985,10 +1983,10 @@ async function exportData() {
   if (!sessionPin) return;
   showModal({
     icon: "📦",
-    title: "Export Backup",
-    msg: "Your backup will be exported as an encrypted file. It can only be decrypted with your PIN. Keep it private.",
-    confirmText: "Export",
-    cancelText: "Cancel",
+    title: t("export_backup_title"),
+    msg: t("export_backup_msg"),
+    confirmText: t("export"),
+    cancelText: t("cancel"),
     onConfirm: async () => {
       try {
         const salt = await getOrCreateSalt();
@@ -2010,9 +2008,9 @@ async function exportData() {
         console.error("🚨 Export error:", error);
         showModal({
           icon: "⚠️",
-          title: "Export Failed",
-          msg: "Could not export backup. Please try again.",
-          confirmText: "OK",
+          title: t("export_failed_title"),
+          msg: t("export_failed_msg"),
+          confirmText: t("ok"),
         });
       }
     },
@@ -2032,12 +2030,12 @@ function _showImportPinModal(bundle, backupSalt) {
 
   const titleEl = document.createElement("div");
   titleEl.className = "modal-title";
-  titleEl.textContent = "Enter Backup PIN";
+  titleEl.textContent = t("enter_backup_pin_title");
 
   const msgEl = document.createElement("div");
   msgEl.className = "modal-msg";
   msgEl.id = "ipin-msg";
-  msgEl.textContent = "Enter the PIN that was active when this backup was created.";
+  msgEl.textContent = t("enter_backup_pin_msg");
 
   const dotsWrap = document.createElement("div");
   dotsWrap.style.cssText =
@@ -2071,7 +2069,7 @@ function _showImportPinModal(bundle, backupSalt) {
   btnsDiv.className = "modal-btns";
   const cancelBtn = document.createElement("button");
   cancelBtn.className = "modal-btn secondary";
-  cancelBtn.textContent = "Cancel";
+  cancelBtn.textContent = t("cancel");
   cancelBtn.addEventListener("click", () =>
     overlay.classList.remove("visible")
   );
@@ -2108,7 +2106,7 @@ async function _submitImportPin(bundle, backupSalt) {
     if (!restored) {
       const msgEl = document.getElementById("ipin-msg");
       if (msgEl) {
-        msgEl.textContent = "Incorrect PIN. Try again.";
+        msgEl.textContent = t("incorrect_pin_simple");
         msgEl.style.color = "var(--danger, #f87171)";
       }
       _importPinBuffer = "";
@@ -2129,15 +2127,15 @@ async function _submitImportPin(bundle, backupSalt) {
     updateInsights();
     showModal({
       icon: "✅",
-      title: "Restored",
-      msg: "Your backup has been restored successfully.",
+      title: t("restored_title"),
+      msg: t("restored_msg"),
       cancelText: "",
-      confirmText: "OK",
+      confirmText: t("ok"),
     });
   } catch {
     const msgEl = document.getElementById("ipin-msg");
     if (msgEl) {
-      msgEl.textContent = "Incorrect PIN. Try again.";
+      msgEl.textContent = t("incorrect_pin_simple");
       msgEl.style.color = "var(--danger, #f87171)";
     }
     _importPinBuffer = "";
@@ -2166,10 +2164,10 @@ async function importData() {
       if (bundle.v !== 1) {
         showModal({
           icon: "❌",
-          title: "Invalid Backup",
-          msg: "This backup format is not supported.",
+          title: t("invalid_backup_title"),
+          msg: t("invalid_backup_msg"),
           cancelText: "",
-          confirmText: "OK",
+          confirmText: t("ok"),
         });
         return;
       }
@@ -2178,10 +2176,10 @@ async function importData() {
     } catch (err) {
       showModal({
         icon: "❌",
-        title: "Import Failed",
-        msg: "Could not read backup file. Ensure it's valid.",
+        title: t("import_failed_title"),
+        msg: t("import_failed_msg"),
         cancelText: "",
-        confirmText: "OK",
+        confirmText: t("ok"),
       });
     }
   });
@@ -2194,13 +2192,13 @@ async function calculateStorageUsage() {
     const sizeKB = (bytes / 1024).toFixed(2);
     const usageSpan = document.getElementById("storage-usage");
     if (usageSpan) {
-      usageSpan.textContent = `${sizeKB} KB (IndexedDB)`;
+      usageSpan.textContent = t("storage_used", { sizeKB });
     }
   } catch (error) {
     console.warn("⚠️ Could not calculate storage:", error);
     const usageSpan = document.getElementById("storage-usage");
     if (usageSpan) {
-      usageSpan.textContent = "Unknown";
+      usageSpan.textContent = t("storage_unknown");
     }
   }
 }
@@ -2208,10 +2206,10 @@ async function calculateStorageUsage() {
 function confirmClear() {
   showModal({
     icon: "🗑️",
-    title: "Erase All Data",
-    msg: "This will permanently delete all your cycle data and cannot be undone. Are you absolutely sure?",
-    confirmText: "Yes, erase everything",
-    cancelText: "Cancel",
+    title: t("erase_title"),
+    msg: t("erase_msg"),
+    confirmText: t("erase_confirm"),
+    cancelText: t("cancel"),
     onConfirm: async () => {
       try {
         await clearDB();
@@ -2220,9 +2218,9 @@ function confirmClear() {
         console.error("🚨 Clear error:", error);
         showModal({
           icon: "⚠️",
-          title: "Erase Failed",
-          msg: "Could not erase data. Please try again.",
-          confirmText: "OK",
+          title: t("erase_failed_title"),
+          msg: t("erase_failed_msg"),
+          confirmText: t("ok"),
         });
       }
     },
@@ -2251,13 +2249,13 @@ function _renderChangePinModal() {
   iconEl.textContent = "🔑";
   const titleEl = document.createElement("div");
   titleEl.className = "modal-title";
-  titleEl.textContent = isConfirm ? "Confirm New PIN" : "Enter New PIN";
+  titleEl.textContent = isConfirm ? t("confirm_new_pin") : t("enter_new_pin");
   const msgEl = document.createElement("div");
   msgEl.className = "modal-msg";
   msgEl.id = "cpin-msg";
   msgEl.textContent = isConfirm
-    ? "Re-enter your new PIN to confirm."
-    : "Choose a 4-digit PIN.";
+    ? t("reenter_pin_msg")
+    : t("choose_pin_msg");
 
   const dotsWrap = document.createElement("div");
   dotsWrap.id = "cpin-dots";
@@ -2290,7 +2288,7 @@ function _renderChangePinModal() {
   btnsDiv.className = "modal-btns";
   const cancelBtn = document.createElement("button");
   cancelBtn.className = "modal-btn secondary";
-  cancelBtn.textContent = "Cancel";
+  cancelBtn.textContent = t("cancel");
   cancelBtn.addEventListener("click", () =>
     document.getElementById("modal-overlay").classList.remove("visible")
   );
@@ -2330,7 +2328,7 @@ async function _submitChangePinStep() {
     if (changePinBuffer !== changePinFirst) {
       const msgEl = document.getElementById("cpin-msg");
       if (msgEl) {
-        msgEl.textContent = "PINs don't match. Try again.";
+        msgEl.textContent = t("pins_no_match");
         msgEl.style.color = "var(--danger)";
       }
       changePinBuffer = "";
@@ -2350,19 +2348,19 @@ async function _submitChangePinStep() {
       document.getElementById("modal-overlay").classList.remove("visible");
       showModal({
         icon: "✅",
-        title: "PIN Changed",
-        msg: "Your PIN has been updated and all data re-encrypted.\n\nNote: any backups made before this change will still require your old PIN to restore.",
+        title: t("pin_changed_title"),
+        msg: t("pin_changed_msg"),
         cancelText: "",
-        confirmText: "OK",
+        confirmText: t("ok"),
       });
     } catch (error) {
       console.error("🚨 PIN change error:", error);
       showModal({
         icon: "⚠️",
-        title: "PIN Change Failed",
-        msg: "Could not update PIN. Please try again.",
+        title: t("pin_change_failed_title"),
+        msg: t("pin_change_failed_msg"),
         cancelText: "",
-        confirmText: "OK",
+        confirmText: t("ok"),
       });
     }
   }
@@ -2407,6 +2405,14 @@ function switchTab(tab) {
   if (aboutView) {
     aboutView.className = "settings-wrap" + (isAboutMode ? " visible" : "");
     aboutView.classList.toggle("support-mode", tab === "support");
+    // Add official version notice if not already present
+    if (isAboutMode && !document.getElementById("official-version-notice")) {
+      const notice = document.createElement("div");
+      notice.id = "official-version-notice";
+      notice.style.cssText = "margin:1.5rem 0 0 0;padding:0.75rem 1.25rem;background:#221a33;color:#A78BFA;border-radius:8px;font-size:1rem;text-align:center;opacity:0.92;";
+      notice.textContent = "Official version: yourcyclekeeper.web.app";
+      aboutView.appendChild(notice);
+    }
   }
 
   // Add active to current tab button
@@ -2490,7 +2496,7 @@ async function init() {
       // Returning user: show lock screen
       document.getElementById("lock-screen").classList.remove("hidden");
       document.getElementById("lock-sub").textContent =
-        "Enter your PIN to unlock your private health data";
+        t("unlock_subtitle");
     } else {
       // First time: show onboarding
       document.getElementById("lock-screen").classList.add("hidden");
@@ -2500,9 +2506,9 @@ async function init() {
     console.error("🚨 Initialization error:", error);
     showModal({
       icon: "⚠️",
-      title: "Database Error",
-      msg: "Could not initialize app storage. Please try refreshing the page.",
-      confirmText: "Refresh",
+      title: t("db_error_title"),
+      msg: t("db_error_msg"),
+      confirmText: t("refresh"),
       onConfirm: () => location.reload(),
     });
     return;
@@ -2512,6 +2518,26 @@ async function init() {
   updatePainButtonVisual(5, false);
   updateMoodButtonVisual(50, false);
   initializePainChartControls();
+  applyI18n();
+  _initLangSwitcher();
+}
+
+function _initLangSwitcher() {
+  const sel = document.getElementById("lang-switcher");
+  if (!sel) return;
+  sel.value = getLanguage();
+  sel.addEventListener("change", () => {
+    setLanguage(sel.value);
+    applyI18n();
+    // Re-render dynamic content with new language
+    updateStatusCard();
+    renderCalendar();
+    updateInsights();
+    updateNoteCount();
+    if (document.getElementById("lock-sub")) {
+      document.getElementById("lock-sub").textContent = t("unlock_subtitle");
+    }
+  });
 }
 
 // Wait for DOM to be ready before initializing
@@ -2554,3 +2580,12 @@ window.exportData = exportData;
 window.importData = importData;
 window.confirmClear = confirmClear;
 window.switchTab = switchTab;
+window.changeLanguage = (lang) => {
+  setLanguage(lang);
+  applyI18n();
+  updateStatusCard();
+  renderCalendar();
+  updateInsights();
+  const lockSub = document.getElementById("lock-sub");
+  if (lockSub) lockSub.textContent = t("unlock_subtitle");
+};

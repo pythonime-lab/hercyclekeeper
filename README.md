@@ -102,9 +102,14 @@ Cycle Keeper stores in IndexedDB:
 
 All encrypted locally with your PIN. Never transmitted. No cloud storage.
 
+
+## Official Releases
+
+Official releases are published only by the original author. Any other distributions, builds, or app store listings are unofficial and not supported.
+
 ## License
 
-MIT License — See [LICENSE.txt](LICENSE.txt)
+GPL v3 — See [LICENSE.txt](LICENSE.txt)
 
 ## Medical Disclaimer
 
