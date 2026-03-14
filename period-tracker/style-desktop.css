@@ -1,7 +1,7 @@
-/* Desktop-only layout (this file is loaded only on desktop from index.html) */
 body {
-  overflow: hidden;
-  height: 100vh;
+  overflow: visible;
+  height: auto;
+  min-height: 100vh;
 }
 
 #app {
@@ -10,11 +10,12 @@ body {
   padding: 0 1rem 1.5rem;
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
   gap: 1.25rem 1.5rem;
-  align-items: stretch;
-  height: 100vh;
-  overflow: hidden;
+  align-items: start;
+  height: auto;
+  min-height: auto;
+  overflow: visible;
 }
 
 .header {
@@ -128,58 +129,20 @@ body {
   margin: 0;
   width: auto;
   min-height: 0;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 0.65rem;
+  height: auto;
+  overflow: visible;
+  padding-right: 0;
   padding-bottom: 2rem;
 }
 
-/* Custom scrollbar for scrollable columns */
-#view-insights::-webkit-scrollbar,
-#view-settings::-webkit-scrollbar,
-#view-about::-webkit-scrollbar,
-#desktop-right-column::-webkit-scrollbar {
-  width: 0.35rem;
-}
-
-#view-insights::-webkit-scrollbar-track,
-#view-settings::-webkit-scrollbar-track,
-#view-about::-webkit-scrollbar-track,
-#desktop-right-column::-webkit-scrollbar-track {
-  background: rgba(167, 139, 250, 0.015);
-  border-radius: 999px;
-}
-
-#view-insights::-webkit-scrollbar-thumb,
-#view-settings::-webkit-scrollbar-thumb,
-#view-about::-webkit-scrollbar-thumb,
-#desktop-right-column::-webkit-scrollbar-thumb {
-  background: rgba(167, 139, 250, 0.16);
-  border-radius: 999px;
-}
-
-#view-insights::-webkit-scrollbar-thumb:hover,
-#view-settings::-webkit-scrollbar-thumb:hover,
-#view-about::-webkit-scrollbar-thumb:hover,
-#desktop-right-column::-webkit-scrollbar-thumb:hover {
-  background: rgba(167, 139, 250, 0.28);
-}
-
-/* Firefox scrollbar */
-#view-insights,
-#view-settings,
-#view-about,
-#desktop-right-column {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(167, 139, 250, 0.2) rgba(167, 139, 250, 0.01);
-}
+/* Custom scrollbar styles removed because natural page scroll is used */
 
 /* Show insights by default on desktop (Calendar tab) */
 .insights-wrap {
   display: block !important;
 }
 
+/* Make cycle stats default */
 /* Settings and About tabs */
 #view-settings,
 #view-about {
@@ -209,12 +172,11 @@ body:has(.settings-wrap.visible) .insights-wrap {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-self: stretch;
+  align-self: start;
   min-height: 0;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 0.65rem;
+  height: auto;
+  overflow: visible;
+  padding-right: 0;
   padding-bottom: 0.5rem;
 }
 
@@ -249,7 +211,7 @@ body:has(.settings-wrap.visible) .insights-wrap {
 /* Responsive canvas for charts */
 .chart-container {
   margin: 0;
-  padding: 1rem;
+  padding: 0;
   overflow: hidden;
 }
 

@@ -653,64 +653,76 @@
             </div>
           </div>
         </div>
-        <div class="insight-card">
-          <div class="chart-header-row">
-            <h3 data-i18n="symptom_tracking">Symptom Tracking</h3>
-            <button
-              onclick="downloadChart()"
-              aria-label="Download chart"
-              class="chart-download-btn"
-              title="Download chart"
-            >
-              <svg
-                class="w-6 h-6"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4"
-                />
-              </svg>
+        <div class="insight-card" id="insight-tabs-card">
+          <div class="insight-tabs-nav">
+            <button id="tab-btn-chart" class="insight-tab-btn active" onclick="switchInsightTab('chart')">
+              <span data-i18n="symptom_tracking">Symptoms</span>
+            </button>
+            <button id="tab-btn-how" class="insight-tab-btn" onclick="switchInsightTab('how')">
+              <span data-i18n="how_it_works">How it Works</span>
+            </button>
+
+            <button id="tab-btn-history" class="insight-tab-btn" onclick="switchInsightTab('history')">
+              <span data-i18n="cycle_history">Cycle History</span>
             </button>
           </div>
 
-          <div class="chart-controls-row">
-            <select
-              id="pain-view-month"
-              onchange="updatePainChart()"
-              aria-label="Select month to view"
-              class="chart-select"
-            >
-              <option value="" class="chart-select option" data-i18n="all_months">All Months</option>
-              <option value="0" class="chart-select option">January</option>
-              <option value="1" class="chart-select option">February</option>
-              <option value="2" class="chart-select option">March</option>
-              <option value="3" class="chart-select option">April</option>
-              <option value="4" class="chart-select option">May</option>
-              <option value="5" class="chart-select option">June</option>
-              <option value="6" class="chart-select option">July</option>
-              <option value="7" class="chart-select option">August</option>
-              <option value="8" class="chart-select option">September</option>
-              <option value="9" class="chart-select option">October</option>
-              <option value="10" class="chart-select option">November</option>
-              <option value="11" class="chart-select option">December</option>
-            </select>
-            <select
-              id="pain-view-year"
-              onchange="updatePainChart()"
-              aria-label="Select year to view"
-              class="chart-select"
-            ></select>
-          </div>
+          <div id="insight-tab-chart" class="insight-tab-content">
+            <h3 class="mobile-only-title" data-i18n="symptom_tracking">Symptom Tracking</h3>
           <div id="pain-chart-container" class="chart-container">
+            <div class="chart-controls-row">
+              <select
+                id="pain-view-month"
+                onchange="updatePainChart()"
+                aria-label="Select month to view"
+                class="chart-select"
+              >
+                <option value="" class="chart-select option" data-i18n="all_months">All Months</option>
+                <option value="0" class="chart-select option">January</option>
+                <option value="1" class="chart-select option">February</option>
+                <option value="2" class="chart-select option">March</option>
+                <option value="3" class="chart-select option">April</option>
+                <option value="4" class="chart-select option">May</option>
+                <option value="5" class="chart-select option">June</option>
+                <option value="6" class="chart-select option">July</option>
+                <option value="7" class="chart-select option">August</option>
+                <option value="8" class="chart-select option">September</option>
+                <option value="9" class="chart-select option">October</option>
+                <option value="10" class="chart-select option">November</option>
+                <option value="11" class="chart-select option">December</option>
+              </select>
+              <select
+                id="pain-view-year"
+                onchange="updatePainChart()"
+                aria-label="Select year to view"
+                class="chart-select"
+              ></select>
+              <div class="flex-spacer"></div>
+              <button
+                onclick="downloadChart()"
+                aria-label="Export chart as image"
+                class="chart-export-btn"
+              >
+                <span data-i18n="export">Export</span>
+                <svg
+                  class="w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4"
+                  />
+                </svg>
+              </button>
+            </div>
             <canvas id="pain-chart" class="chart-canvas"></canvas>
           </div>
           <div id="chart-legend" class="chart-legend">
@@ -720,74 +732,74 @@
                 onclick="setChartFilter('period')"
                 tabindex="0"
                 role="button"
+                aria-pressed="true"
                 aria-label="Toggle period data visibility"
                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('period');}"
                 class="legend-item--period"
-                >▮ <span data-i18n="period_short">Period</span></span
+                ><span data-i18n="period_short">Period</span></span
               >
               <span
                 id="legend-ovulation"
                 onclick="setChartFilter('ovulation')"
                 tabindex="0"
                 role="button"
+                aria-pressed="true"
                 aria-label="Toggle ovulation data visibility"
                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('ovulation');}"
                 class="legend-item--ovulation"
-                >▮ <span data-i18n="ovulation_short">Ovulation</span></span
+                ><span data-i18n="ovulation_short">Ovulation</span></span
               >
               <span
                 id="legend-flow"
                 onclick="setChartFilter('flow')"
                 tabindex="0"
                 role="button"
+                aria-pressed="true"
                 aria-label="Toggle flow data visibility"
                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('flow');}"
                 class="legend-item--flow"
-                >▮ <span data-i18n="flow">Flow</span></span
+                ><span data-i18n="flow">Flow</span></span
               >
               <span
                 id="legend-pain"
                 onclick="setChartFilter('pain')"
                 tabindex="0"
                 role="button"
+                aria-pressed="true"
                 aria-label="Toggle pain data visibility"
                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('pain');}"
                 class="legend-item--pain"
-                >▮ <span data-i18n="pain">Pain</span></span
+                ><span data-i18n="pain">Pain</span></span
               >
               <span
                 id="legend-mood"
                 onclick="setChartFilter('mood')"
                 tabindex="0"
                 role="button"
+                aria-pressed="true"
                 aria-label="Toggle mood data visibility"
                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setChartFilter('mood');}"
                 class="legend-item--mood"
-                >▮ <span data-i18n="mood">Mood</span></span
+                ><span data-i18n="mood">Mood</span></span
               >
             </div>
           </div>
-        </div>
-        <div class="insight-card">
-          <h3 data-i18n="how_it_works">How Your Cycle Keeper Works</h3>
-          <div class="info-box" data-i18n="how_it_works_desc">
-            Your Cycle Keeper estimates your fertile window by tracking cycle
-            patterns.
-            Ovulation is estimated ~14 days before your next
-            period. Fertile days are calculated as day 8
-            through (cycle length − 11).
-
-            For regular 28-day cycles, this means days 8–17 are typically
-            fertile, with ovulation around day 14.
-
-            ⚠️ This is an estimation tool only. Not for
-            contraception. Stress, illness &amp; medications can shift timing.
           </div>
-        </div>
-        <div class="insight-card">
-          <h3 data-i18n="cycle_history">Cycle History</h3>
-          <div id="cycle-history">
-            <p class="empty-history">No history yet.</p>
+          <div id="insight-tab-how" class="insight-tab-content" style="display: none;">
+            <h3 class="mobile-only-title" data-i18n="how_it_works">How it Works</h3>
+            <div class="info-box" style="margin-bottom: 0.75rem;">
+              <p data-i18n="how_it_works_p1" style="margin-bottom: 0.75rem;">Your Cycle Keeper estimates your fertile window by tracking cycle patterns. Ovulation is estimated ~14 days before your next period. Fertile days are calculated as day 8 through (cycle length − 11).</p>
+              <p data-i18n="how_it_works_p2">For regular 28-day cycles, this means days 8–17 are typically fertile, with ovulation around day 14.</p>
+            </div>
+            <div class="info-box info-box--warning">
+              <p data-i18n="estimation_disclaimer">⚠️ This is an estimation tool only. Not for contraception. Stress, illness &amp; medications can shift timing.</p>
+            </div>
+          </div>
+          <div id="insight-tab-history" class="insight-tab-content" style="display: none;">
+            <h3 class="mobile-only-title" data-i18n="cycle_history">Cycle History</h3>
+            <div id="cycle-history">
+              <p class="empty-history" data-i18n="cycle_history_empty">No history yet.</p>
+            </div>
           </div>
         </div>
       </div>

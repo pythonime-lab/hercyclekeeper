@@ -47,6 +47,37 @@ const LOCALES = {
     accessibility_title: "Accessibility",
     accessibility_info:
       "Your Cycle Keeper follows WCAG 2.0 accessibility standards: Tab/Shift+Tab: Navigate forward/backward through all interactive elements; Arrow Keys: Navigate calendar dates (complex grid component); Enter/Space: Activate buttons and links; Escape: Close modals and return focus to trigger element; PIN Entry: Type digits 0-9 and Backspace on all PIN screens; Form Controls: Native keyboard support for inputs, selects, and textareas; Screen Readers: Semantic HTML with proper ARIA labels and roles; Focus Management: Visible focus indicators, logical tab order. Standards based on Salesforce Accessibility Guidelines.",
+    
+    cycle_stats: "Cycle Stats",
+    avg_length: "Avg Length",
+    cycles_logged: "Cycles Logged",
+    avg_period: "Avg Period",
+    fertile_days: "Fertile Days",
+    symptom_tracking: "Symptom Tracking",
+    period: "Period",
+    ovulation: "Ovulation",
+    flow: "Flow",
+    pain: "Pain",
+    mood: "Mood",
+    how_it_works: "How it Works",
+    how_it_works_p1:
+      "Your Cycle Keeper estimates your fertile window by tracking cycle patterns. Ovulation is estimated ~14 days before your next period. Fertile days are calculated as day 8 through (cycle length − 11).",
+    how_it_works_p2:
+      "For regular 28-day cycles, this means days 8–17 are typically fertile, with ovulation around day 14.",
+    disclaimer: "Disclaimer",
+    estimation_disclaimer:
+      "⚠️ This is an estimation tool only. Not for contraception. Stress, illness & medications can shift timing.",
+    cycle_history: "Cycle History",
+    all_months: "All Months",
+    cycle_day: "Cycle Day",
+    until_next: "Until Next",
+    day_1: "Day 1",
+    avg_length_short: "Avg Length",
+    period_short: "Period",
+    fertile: "Fertile",
+    ovulation_short: "Ovulation",
+    luteal: "Luteal",
+
     // Storage / init errors
     storage_error_title: "Storage Error",
     storage_error_msg: "Could not access storage. Please refresh the page.",
@@ -276,6 +307,36 @@ const LOCALES = {
     db_error_title: "Ошибка базы данных",
     db_error_msg:
       "Не удалось инициализировать хранилище. Пожалуйста, обновите страницу.",
+      
+    cycle_stats: "Статистика цикла",
+    avg_length: "Средняя длина",
+    cycles_logged: "Отмечено циклов",
+    avg_period: "Средняя менстр.",
+    fertile_days: "Фертильные дни",
+    symptom_tracking: "Отслеживание симптомов",
+    period: "Менструация",
+    ovulation: "Овуляция",
+    flow: "Выделения",
+    pain: "Боль",
+    mood: "Настроение",
+    how_it_works: "Как это работает",
+    how_it_works_p1:
+      "Your Cycle Keeper оценивает ваше фертильное окно, отслеживая паттерны цикла. Овуляция оценивается ~ за 14 дней до следующей менструации. Фертильные дни рассчитываются по формуле: день 8 — (длина цикла − 11).",
+    how_it_works_p2:
+      "При регулярном цикле в 28 дней это означает, что дни с 8 по 17 обычно являются фертильными с овуляцией примерно на 14 день.",
+    disclaimer: "Отказ от ответственности",
+    estimation_disclaimer:
+      "⚠️ Это только инструмент оценки. Не для контрацепции. Стресс, болезни и лекарства могут изменить время.",
+    cycle_history: "История цикла",
+    all_months: "Все месяцы",
+    cycle_day: "День цикла",
+    until_next: "До следующей",
+    day_1: "День 1",
+    avg_length_short: "Ср. длина",
+    period_short: "Менструация",
+    fertile: "Фертильные",
+    ovulation_short: "Овуляция",
+    luteal: "Лютеиновая",
 
     unlock_subtitle: "Введите PIN для разблокировки личных данных о здоровье",
     too_many_attempts: "Слишком много попыток. Повторите через {secs}с.",
@@ -710,9 +771,14 @@ const LOCALES = {
     flow: "Flujo",
     pain: "Dolor",
     mood: "Estado de ánimo",
-    how_it_works: "Cómo funciona Your Cycle Keeper",
-    how_it_works_desc:
-      "Your Cycle Keeper estima tu ventana fértil rastreando patrones del ciclo. La ovulación se estima ~14 días antes de tu próximo período. Los días fértiles se calculan como el día 8 hasta (longitud del ciclo − 11). Para ciclos regulares de 28 días, esto significa que los días 8–17 suelen ser fértiles, con ovulación alrededor del día 14. ⚠️ Esta es solo una herramienta de estimación. No para anticoncepción. El estrés, la enfermedad y los medicamentos pueden cambiar el momento.",
+    how_it_works: "Cómo funciona",
+    how_it_works_p1:
+      "Your Cycle Keeper estima tu ventana fértil rastreando patrones del ciclo. La ovulación se estima ~14 días antes de tu próximo período. Los días fértiles se calculan como el día 8 hasta (longitud del ciclo − 11).",
+    how_it_works_p2:
+      "Para ciclos regulares de 28 días, esto significa que los días 8–17 suelen ser fértiles, con ovulación alrededor del día 14.",
+    disclaimer: "Aviso",
+    estimation_disclaimer:
+      "⚠️ Esta es solo una herramienta de estimación. No para anticoncepción. El estrés, la enfermedad y los medicamentos pueden cambiar el momento.",
     cycle_history: "Historial del ciclo",
     all_months: "Todos los meses",
     cycle_day: "Día del ciclo",

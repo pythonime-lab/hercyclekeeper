@@ -1199,12 +1199,15 @@ function updateChartLegendUI() {
     if (activeChartFilter === "all") {
       el.style.opacity = "1";
       el.style.backgroundColor = "transparent";
+      el.setAttribute("aria-pressed", "true");
     } else if (activeChartFilter === item) {
       el.style.opacity = "1";
       el.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      el.setAttribute("aria-pressed", "true");
     } else {
       el.style.opacity = "0.3";
       el.style.backgroundColor = "transparent";
+      el.setAttribute("aria-pressed", "false");
     }
   });
 }
@@ -2577,7 +2580,26 @@ if (document.readyState === "loading") {
   });
 }
 
+function switchInsightTab(tabId) {
+  const tabs = ['chart', 'how', 'history'];
+  
+  tabs.forEach(tab => {
+    const btn = document.getElementById('tab-btn-' + tab);
+    const content = document.getElementById('insight-tab-' + tab);
+    if (!btn || !content) return;
+    
+    if (tab === tabId) {
+      btn.classList.add('active');
+      content.style.display = 'block';
+    } else {
+      btn.classList.remove('active');
+      content.style.display = 'none';
+    }
+  });
+}
+
 // Expose functions to window for HTML onclick handlers
+window.switchInsightTab = switchInsightTab;
 window.pinInput = pinInput;
 window.pinDelete = pinDelete;
 window.forgotPinFlow = forgotPinFlow;
