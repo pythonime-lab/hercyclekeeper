@@ -4,7 +4,7 @@ body {
   min-height: 100vh;
 }
 
-#app {
+#app[style*="display: block"] {
   max-width: 82rem;
   margin: 0 auto;
   padding: 0 1rem 1.5rem;
@@ -305,3 +305,4 @@ body:has(.settings-wrap.visible) .insights-wrap {
   max-width: 100%;
   display: block;
 }
+

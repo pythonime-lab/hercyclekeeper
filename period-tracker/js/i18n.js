@@ -196,15 +196,6 @@ const LOCALES = {
     backup_overdue_one: "Last backup: {n} day ago — overdue!",
     backup_overdue_many: "Last backup: {n} days ago — overdue!",
 
-    // Backup reminder
-    backup_reminder_title: "Back Up Your Data",
-    backup_reminder_msg_existing:
-      "It's been {n} days since your last backup. Export an encrypted backup to keep your cycle data safe.",
-    backup_reminder_msg_new:
-      "You haven't backed up your data yet. Export an encrypted backup to protect against data loss if you clear your browser data.",
-    export_now: "Export Now",
-    remind_later: "Remind Me Later",
-
     // Export/import
     export_backup_title: "Export Backup",
     export_backup_msg:
@@ -468,14 +459,6 @@ const LOCALES = {
     backup_overdue_few: "Резервная копия: {n} дня назад — устарела!",
     backup_overdue_many: "Резервная копия: {n} дней назад — устарела!",
 
-    backup_reminder_title: "Создайте резервную копию",
-    backup_reminder_msg_existing:
-      "Прошло {n} дней с последней резервной копии. Экспортируйте зашифрованную копию для защиты данных.",
-    backup_reminder_msg_new:
-      "Вы ещё не создавали резервную копию. Экспортируйте её для защиты от потери данных при очистке браузера.",
-    export_now: "Экспортировать",
-    remind_later: "Напомнить позже",
-
     export_backup_title: "Экспорт резервной копии",
     export_backup_msg:
       "Резервная копия будет экспортирована в зашифрованном файле. Расшифровать её можно только с помощью вашего PIN. Храните в безопасном месте.",
@@ -706,14 +689,6 @@ const LOCALES = {
     backup_overdue_one: "Рэзервовая копія: {n} дзень таму — пратэрмінавана!",
     backup_overdue_few: "Рэзервовая копія: {n} дні таму — пратэрмінавана!",
     backup_overdue_many: "Рэзервовая копія: {n} дзён таму — пратэрмінавана!",
-
-    backup_reminder_title: "Стварыце рэзервовую копію",
-    backup_reminder_msg_existing:
-      "Прайшло {n} дзён з апошняй рэзервовай копіі. Экспартуйце зашыфраваную копію для абароны даных.",
-    backup_reminder_msg_new:
-      "Вы яшчэ не стваралі рэзервовай копіі. Экспартуйце яе для абароны ад страты даных пры ачыстцы браўзера.",
-    export_now: "Экспартаваць",
-    remind_later: "Нагадаць пазней",
 
     export_backup_title: "Экспарт рэзервовай копіі",
     export_backup_msg:
@@ -975,14 +950,6 @@ const LOCALES = {
     backup_days_ago_many: "Última copia: hace {n} días",
     backup_overdue_one: "Última copia: hace {n} día — ¡vencida!",
     backup_overdue_many: "Última copia: hace {n} días — ¡vencida!",
-
-    backup_reminder_title: "Haz una copia de seguridad",
-    backup_reminder_msg_existing:
-      "Han pasado {n} días desde tu última copia de seguridad. Exporta una copia cifrada para mantener tus datos seguros.",
-    backup_reminder_msg_new:
-      "Aún no has hecho una copia de seguridad. Exporta una copia cifrada para protegerte de la pérdida de datos si limpias los datos del navegador.",
-    export_now: "Exportar ahora",
-    remind_later: "Recordármelo después",
 
     export_backup_title: "Exportar copia de seguridad",
     export_backup_msg:

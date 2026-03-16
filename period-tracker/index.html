@@ -72,10 +72,10 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yourcyclekeeper.web.app/period-tracker/" />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=20260316" />
     <link
       rel="stylesheet"
-      href="style-desktop.css"
+      href="style-desktop.css?v=20260316"
       media="screen and (min-width: 1024px)"
     />
     <link rel="manifest" href="manifest.json" />
@@ -85,8 +85,8 @@
       sizes="16x16"
       href="../icons/favicon-16x16.png"
     />
-    <script src="js/indexeddb-storage.js" defer></script>
-    <script type="module" src="js/script.js"></script>
+    <script src="js/indexeddb-storage.js?v=20260316" defer></script>
+    <script type="module" src="js/script.js?v=20260316"></script>
     <link
       rel="icon"
       type="image/png"
@@ -207,15 +207,15 @@
       </div>
     </div>
 
-    <div id="lock-screen">
+    <div id="lock-screen" class="hidden">
       <div class="lock-icon" id="lock-icon">
         <img
-          src="../icons/favicon-64x64.png"
-          srcset="../icons/favicon-64x64.png 1x, ../icons/favicon-192x192.png 3x"
+          src="../icons/favicon-192x192.png"
+          srcset="../icons/favicon-192x192.png 1x, ../icons/favicon-512x512.png 2x"
           alt="Your Cycle Keeper Logo"
           class="logo-lock"
-          width="64"
-          height="64"
+          width="192"
+          height="192"
         />
       </div>
       <div class="lock-logo">Your <span>Cycle</span> Keeper</div>
@@ -565,7 +565,7 @@
                   aria-label="Set pain level"
                   onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPainModal();}"
                 >
-                  <span class="icon" id="log-pain-icon">🤕</span>Pain
+                  <span class="icon" id="log-pain-icon">🤕</span><span id="log-pain-label">Pain</span>
                 </div>
                 <div
                   class="log-btn mood-btn"

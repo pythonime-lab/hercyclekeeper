@@ -77,7 +77,6 @@ let sessionPin = null; // PIN held only in JS memory (never persisted)
 let viewMonth = new Date();
 let selectedDate = null;
 let currentTab = "calendar";
-let backupReminderShownThisSession = false;
 
 // Reset on any user interaction (deferred until DOM ready)
 function setupEventListeners() {
@@ -264,7 +263,6 @@ async function submitPin() {
     renderCalendar();
     switchTab("calendar");
     updateInsights(); // Populate insights for desktop view
-    checkBackupReminder();
   } catch (error) {
     console.error("🚨 PIN submission error:", error);
     document.getElementById("lock-error").textContent =
@@ -468,7 +466,6 @@ async function startApp() {
     renderCalendar();
     updateInsights();
     switchTab("calendar");
-    checkBackupReminder();
   } catch (error) {
     console.error("🚨 App startup error:", error);
     showModal({
@@ -776,6 +773,8 @@ function updatePainButtonVisual(value, isSet = true) {
     }
   }
   if (painIcon) painIcon.textContent = "🤕";
+  const painLabel = document.getElementById("log-pain-label");
+  if (painLabel) painLabel.textContent = isSet ? `Pain: ${v.toFixed(1)}/10` : "Pain";
 }
 
 function updatePainModalPreview(value) {
@@ -1975,30 +1974,6 @@ async function updateBackupStatus() {
   }
 }
 
-async function checkBackupReminder() {
-  if (backupReminderShownThisSession) return;
-  const hasLogs = Object.keys(state.logs || {}).length > 0;
-  if (!hasLogs) return;
-  const lastBackup = await getFromDB(BACKUP_KEY);
-  const daysSinceBackup = lastBackup
-    ? Math.floor((new Date() - fromISO(lastBackup)) / 86400000)
-    : Infinity;
-  if (daysSinceBackup <= 30) return;
-  backupReminderShownThisSession = true;
-  setTimeout(() => {
-    showModal({
-      icon: "💾",
-      title: t("backup_reminder_title"),
-      msg: lastBackup
-        ? t("backup_reminder_msg_existing", { n: daysSinceBackup })
-        : t("backup_reminder_msg_new"),
-      confirmText: t("export_now"),
-      cancelText: t("remind_later"),
-      onConfirm: () => exportData(),
-    });
-  }, 2000);
-}
-
 function loadSettingsFields() {
   document.getElementById("s-last-period").value = state.lastPeriodStart || "";
   document.getElementById("s-cycle-len").value = state.cycleLength;
@@ -2501,7 +2476,7 @@ async function init() {
       "serviceWorker" in navigator &&
       (location.protocol === "http:" || location.protocol === "https:")
     ) {
-      const swUrl = `/period-tracker/service-worker.js?v=${new Date().getTime()}`;
+      const swUrl = `/period-tracker/service-worker.js`;
       navigator.serviceWorker
         .register(swUrl)
         .then((reg) => {
@@ -2510,6 +2485,12 @@ async function init() {
         .catch((err) => {
           console.warn("Service Worker registration failed:", err);
         });
+
+      // When a new SW takes over (skipWaiting + clients.claim), reload so
+      // the page runs the latest JS instead of the old in-memory version.
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        window.location.reload();
+      });
     } else if (!("serviceWorker" in navigator)) {
       console.log("Service Worker not supported in this browser");
     } else {

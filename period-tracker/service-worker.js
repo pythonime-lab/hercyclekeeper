@@ -15,14 +15,55 @@
 
 "use strict";
 
-const CACHE_VERSION = "production";
+const CACHE_VERSION = "v20260316";
 const CACHE_NAME = `yourcyclekeeper-${CACHE_VERSION}`;
 
+const ASSETS_TO_CACHE = [
+  "/period-tracker/",
+  "/period-tracker/index.html",
+  "/period-tracker/style.css?v=20260316",
+  "/period-tracker/style-desktop.css?v=20260316",
+  "/period-tracker/manifest.json",
+  "/period-tracker/js/script.js?v=20260316",
+  "/period-tracker/js/indexeddb-storage.js?v=20260316",
+  "/period-tracker/js/crypto.js",
+  "/period-tracker/js/cycles.js",
+  "/period-tracker/js/dateUtils.js",
+  "/period-tracker/js/i18n.js",
+  "/period-tracker/js/navigation.js",
+  "/period-tracker/js/periodMarking.js",
+  "/period-tracker/js/session.js",
+  "/period-tracker/js/validators.js",
+  "/icons/favicon-16x16.png",
+  "/icons/favicon-32x32.png",
+  "/icons/favicon-48x48.png",
+  "/icons/favicon-64x64.png",
+  "/icons/favicon-96x96.png",
+  "/icons/favicon-128x128.png",
+  "/icons/favicon-144x144.png",
+  "/icons/favicon-152x152.png",
+  "/icons/favicon-180x180.png",
+  "/icons/favicon-192x192.png",
+  "/icons/favicon-256x256.png",
+  "/icons/favicon-512x512.png",
+  "/icons/your_cycle_keeper_logo.png",
+  "/icons/yourcyclekeeper_background.png",
+  "/icons/yourcyclekeeper_calendar.svg",
+  "/icons/yourcyclekeeper_pinscreen.svg",
+];
+
 self.addEventListener("install", (event) => {
-  self.skipWaiting(); // activate new SW immediately
-  // Delete all old caches on install
+  self.skipWaiting();
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        ASSETS_TO_CACHE.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn(`[SW] Failed to pre-cache: ${url}`, err);
+          })
+        )
+      )
+    )
   );
 });
 
@@ -74,22 +115,20 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Network-first for CSS, JS, and logical assets
-  // This ensures updates are seen immediately while online,
-  // but the app still works offline as a PWA.
+  // Cache-first for versioned assets (CSS, JS, images).
+  // Safe because ?v= query params change on every deploy, and the old
+  // cache is deleted on SW activation — so cache hits are always fresh.
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request).then((response) => {
         if (response && response.status === 200 && response.type === "basic") {
           const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
         }
         return response;
-      })
-      .catch(() => {
-        // Offline? Fallback to cache.
-        return caches.match(event.request);
-      })
+      });
+    })
   );
 });
 
