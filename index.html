@@ -4,26 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="ymbneWMVr53VCTfZ4IzJmM1MyZjg_Ur37TP0ndrXnYw" />
-    <title>Your Cycle Keeper — Free Private Period & Cycle Tracker</title>
+    <title>Your Cycle Keeper — Free Period & Menstruation Tracker</title>
     <meta
       name="description"
-      content="Track your period and cycle privately. No account, no ads, no data collection. AES-256 encrypted, stored only on your device. Free forever."
+      content="Free period & menstruation tracker — no account, no data collection, no ads. Your data is encrypted and stays on your device. Export an encrypted backup anytime to keep your history safe."
     />
     <meta
       name="keywords"
-      content="private period tracker, cycle tracker no account, offline period app, secure menstrual tracker, free period tracker, no data collection period app"
+      content="menstruation tracker, period tracker, period calculator, menstrual cycle tracker, ovulation tracker, predict period, when will my period start, menstrual calendar, cycle calculator, private period tracker, free period app, no account period tracker, period tracker no data collection, offline period tracker, encrypted period tracker, period tracker no sign up, period tracker no registration"
     />
     <meta
       property="og:title"
-      content="Your Cycle Keeper — Free & Private Period Tracker"
+      content="Your Cycle Keeper — Free Period & Menstruation Tracker"
     />
     <meta
       property="og:description"
-      content="No accounts. No ads. No data collection. Your cycle data stays on your device, always."
+      content="Free period tracker with zero data collection. No account, no server, no ads. Your cycle data is AES-256 encrypted and stays only on your device — export an encrypted backup anytime."
     />
-    <meta property="og:url" content="https://yourcyclekeeper.web.app/" />
+    <meta property="og:url" content="https://yourcyclekeeper.com/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href="https://yourcyclekeeper.web.app/" />
+    <link rel="canonical" href="https://yourcyclekeeper.com/" />
 
     <!-- Favicons -->
     <link
@@ -62,8 +62,13 @@
     <meta property="og:site_name" content="Your Cycle Keeper" />
     <meta
       property="og:image"
-      content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+      content="https://yourcyclekeeper.com/icons/favicon-512x512.png"
     />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:image" content="https://yourcyclekeeper.com/icons/favicon-512x512.png" />
+    <link rel="image_src" href="https://yourcyclekeeper.com/icons/favicon-512x512.png" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -76,10 +81,10 @@
           "price": "0",
           "priceCurrency": "USD"
         },
-        "description": "A free, private, AES-256 encrypted period and cycle tracker that works entirely in your browser. No accounts, no data collection, and no ads.",
+        "description": "Free menstruation and period tracker. Predict your next period, track ovulation and symptoms. Know what's normal for your cycle — no account, no data collection, no ads.",
         "softwareVersion": "1.0",
-        "featureList": "AES-256 Encryption, Offline Support, PWA Support, Period Prediction, Symptom Tracking",
-        "screenshot": "https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+        "featureList": "Menstruation tracker, Period calculator, Ovulation tracker, Menstrual cycle calendar, Predict next period, Flow and symptom tracking, Cycle pattern analysis, No account required, 100% private",
+        "screenshot": "https://yourcyclekeeper.com/icons/favicon-512x512.png"
       }
     </script>
     <script type="application/ld+json">
@@ -109,6 +114,22 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Yes. Your Cycle Keeper is open-source software under the GPL v3 License. There is no premium tier, no subscription, and no ads — ever."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Your Cycle Keeper collect any data?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Your Cycle Keeper collects zero data. There is no server, no backend, and no analytics of any kind. Your cycle data is encrypted with your PIN using AES-256-GCM and stored only on your device. We have no ability to access it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if I clear my browser data or switch devices?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because your data stays on your device, clearing your browser's site data will erase it. To keep your history safe, export an encrypted backup from the Settings screen. You can restore it anytime — on the same device or a new one."
             }
           }
         ]
@@ -737,17 +758,13 @@
       .cta-bg-wrapper {
         position: absolute;
         inset: 0;
-        display: flex;
-        justify-content: center;
         z-index: 0;
         opacity: 0.6;
         pointer-events: none;
-      }
-      .cta-bg-wrapper img {
-        height: 100%;
-        width: auto;
-        object-fit: contain;
-        flex-shrink: 0;
+        background-image: url("icons/yourcyclekeeper_background.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: repeat-x;
       }
       .cta-overlay {
         position: absolute;
@@ -907,6 +924,7 @@
         >
         <select id="landing-lang" class="nav-lang">
           <option value="en">EN</option>
+          <option value="es">ES</option>
         </select>
       </div>
     </nav>
@@ -920,7 +938,7 @@
               100% Private — No Account Needed
             </div>
             <h1 data-i18n-html="hero_h1">
-              Track your cycle.<br /><em>Own your data.</em>
+              Free period tracker.<br /><em>Your data stays yours.</em>
             </h1>
             <p class="hero-sub" data-i18n="hero_sub">
               Your Cycle Keeper is a free period and cycle tracker that lives
@@ -933,7 +951,7 @@
                 target="_blank"
                 class="btn-primary"
                 data-i18n="hero_btn_primary"
-                >Start Tracking — It's Free</a
+                >Try the Web App — Free</a
               >
               <a
                 href="#how-it-works"
@@ -1071,6 +1089,7 @@
               />
             </a>
           </div>
+          <p data-i18n="webapp_note" style="margin-top:5rem;font-size:0.8rem;color:var(--text-muted);opacity:0.7;line-height:1.6;text-align:center;">No install needed · Data stays on your device · Don't clear site data to keep your history or backup your data</p>
         </div>
       </section>
 
@@ -1421,11 +1440,7 @@
 
       <!-- CTA -->
       <section class="cta-section">
-        <div class="cta-bg-wrapper">
-          <img src="icons/yourcyclekeeper_background.png" alt="" />
-          <img src="icons/yourcyclekeeper_background.png" alt="" />
-          <img src="icons/yourcyclekeeper_background.png" alt="" />
-        </div>
+        <div class="cta-bg-wrapper"></div>
         <div class="cta-overlay"></div>
         <div class="cta-inner">
           <h2 data-i18n-html="cta_h2">
@@ -1440,7 +1455,7 @@
             class="btn-primary"
             style="font-size: 1rem; padding: 1rem 2.4rem"
             data-i18n="cta_btn"
-            >Open Your Cycle Keeper</a
+            >Try the Web App — Free</a
           >
         </div>
       </section>
@@ -1469,17 +1484,18 @@
     <script>
       (function () {
         const LANG_KEY = "yck_lang";
-        const SUPPORTED = ["en"];
+        const SUPPORTED = ["en", "es"];
 
         const LOCALES = {
           en: {
             nav_open_app: "Open App",
             hero_badge: "100% Private — No Account Needed",
-            hero_h1: "Track your cycle.<br /><em>Own your data.</em>",
+            hero_h1: "Free period tracker.<br /><em>Your data stays yours.</em>",
             hero_sub:
               "Your Cycle Keeper is a free period and cycle tracker that lives entirely on your device. No servers. No accounts. No ads. Just your health data, encrypted and private.",
-            hero_btn_primary: "Start Tracking — It's Free",
+            hero_btn_primary: "Try the Web App — Free",
             hero_btn_ghost: "See how it works",
+            webapp_note: "No install needed · Data stays on your device · Don't clear site data to keep your history or backup your data",
             trust_aes: "AES-256 Encrypted",
             trust_offline: "No internet required",
             trust_ads: "No ads, ever",
@@ -1574,7 +1590,7 @@
             cta_h2: "Your health data<br />deserves to be <em>yours</em>",
             cta_sub:
               "Free, private, and ready in seconds. No sign-up required.",
-            cta_btn: "Open Your Cycle Keeper",
+            cta_btn: "Try the Web App — Free",
             footer_open: "Open App",
             footer_legal:
               "Not medical advice \u00b7 Not for contraceptive use \u00b7 GPL v3 License",
@@ -1798,11 +1814,12 @@
           es: {
             nav_open_app: "Abrir aplicación",
             hero_badge: "100% Privada — Sin cuenta necesaria",
-            hero_h1: "Rastrea tu ciclo.<br /><em>Tus datos, tuyos.</em>",
+            hero_h1: "Rastreador de período gratis.<br /><em>Tus datos, tuyos.</em>",
             hero_sub:
               "Your Cycle Keeper es un rastreador de ciclo gratuito que vive completamente en tu dispositivo. Sin servidores. Sin cuentas. Sin anuncios. Solo tus datos de salud, cifrados y privados.",
-            hero_btn_primary: "Comenzar — Es gratis",
+            hero_btn_primary: "Probar la app web — Gratis",
             hero_btn_ghost: "Cómo funciona",
+            webapp_note: "Sin instalación · Datos en tu dispositivo · No borres los datos del sitio para conservar tu historial o haz una copia de seguridad",
             trust_aes: "Cifrado AES-256",
             trust_offline: "Sin internet requerido",
             trust_ads: "Sin anuncios",
@@ -1897,7 +1914,7 @@
             cta_h2: "Tus datos de salud<br />merecen ser <em>tuyos</em>",
             cta_sub:
               "Gratis, privado y listo en segundos. Sin registro requerido.",
-            cta_btn: "Abrir Your Cycle Keeper",
+            cta_btn: "Probar la app web — Gratis",
             footer_open: "Abrir aplicación",
             footer_legal:
               "No es consejo médico \u00b7 No para uso anticonceptivo \u00b7 Licencia GPL v3",

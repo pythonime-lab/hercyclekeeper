@@ -15,17 +15,21 @@
 
 "use strict";
 
-const CACHE_VERSION = "v20260316";
+const IS_DEV =
+  self.location.hostname === "localhost" ||
+  self.location.hostname === "127.0.0.1";
+
+const CACHE_VERSION = "v20260413";
 const CACHE_NAME = `yourcyclekeeper-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
   "/period-tracker/",
   "/period-tracker/index.html",
-  "/period-tracker/style.css?v=20260316",
-  "/period-tracker/style-desktop.css?v=20260316",
+  "/period-tracker/style.css",
+  "/period-tracker/style-desktop.css",
   "/period-tracker/manifest.json",
-  "/period-tracker/js/script.js?v=20260316",
-  "/period-tracker/js/indexeddb-storage.js?v=20260316",
+  "/period-tracker/js/script.js",
+  "/period-tracker/js/indexeddb-storage.js",
   "/period-tracker/js/crypto.js",
   "/period-tracker/js/cycles.js",
   "/period-tracker/js/dateUtils.js",
@@ -54,6 +58,7 @@ const ASSETS_TO_CACHE = [
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
+  if (IS_DEV) return;
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
       Promise.all(
@@ -86,6 +91,12 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
+  // In dev, bypass browser HTTP cache so edits show immediately on reload
+  if (IS_DEV) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
+    return;
+  }
+
   // Network-first strategy for HTML to ensure updates
   if (
     event.request.headers.get("accept")?.includes("text/html") ||
@@ -115,16 +126,42 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Cache-first for versioned assets (CSS, JS, images).
-  // Safe because ?v= query params change on every deploy, and the old
-  // cache is deleted on SW activation — so cache hits are always fresh.
+  // Network-first for CSS and JS — ensures a reload always fetches fresh
+  // code. Cache-Control: no-cache on the server makes this fast (ETag check),
+  // and the cache fallback keeps the app usable offline.
+  if (
+    url.pathname.endsWith(".css") ||
+    url.pathname.endsWith(".js")
+  ) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200 && response.type === "basic") {
+            const cloned = response.clone();
+            caches
+              .open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, cloned));
+          }
+          return response;
+        })
+        .catch(() =>
+          caches.match(event.request, { ignoreSearch: true })
+        )
+    );
+    return;
+  }
+
+  // Cache-first for images and other static assets — large files that
+  // rarely change; CACHE_NAME rotation on deploy keeps them fresh.
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
       return fetch(event.request).then((response) => {
         if (response && response.status === 200 && response.type === "basic") {
           const cloned = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
+          caches
+            .open(CACHE_NAME)
+            .then((cache) => cache.put(event.request, cloned));
         }
         return response;
       });

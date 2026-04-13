@@ -3,7 +3,6 @@
     "public": ".",
     "ignore": [
       "firebase.json",
-      "**/.*",
       "**/node_modules/**",
       ".git/**",
       "README.md",
@@ -39,7 +38,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=2592000, immutable"
+            "value": "no-cache"
           }
         ]
       },
@@ -48,7 +47,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=31536000, immutable"
+            "value": "no-cache"
           }
         ]
       },

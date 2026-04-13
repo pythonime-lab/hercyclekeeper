@@ -50,7 +50,7 @@ const LOCALES = {
     accessibility_title: "Accessibility",
     accessibility_info:
       "Your Cycle Keeper follows WCAG 2.0 accessibility standards: Tab/Shift+Tab: Navigate forward/backward through all interactive elements; Arrow Keys: Navigate calendar dates (complex grid component); Enter/Space: Activate buttons and links; Escape: Close modals and return focus to trigger element; PIN Entry: Type digits 0-9 and Backspace on all PIN screens; Form Controls: Native keyboard support for inputs, selects, and textareas; Screen Readers: Semantic HTML with proper ARIA labels and roles; Focus Management: Visible focus indicators, logical tab order. Standards based on Salesforce Accessibility Guidelines.",
-    
+
     cycle_stats: "Cycle Stats",
     avg_length: "Avg Length",
     cycles_logged: "Cycles Logged",
@@ -124,7 +124,7 @@ const LOCALES = {
 
     // Note
     note_count: "{count} / 500",
-
+    note_placeholder: "Add a note…",
 
     // Symptom modals
     set_flow: "Set Flow",
@@ -253,6 +253,12 @@ const LOCALES = {
     lang_ru: "Русский",
     lang_es: "Español",
 
+    // Nav tabs
+    nav_calendar: "Calendar",
+    nav_insights: "Insights",
+    nav_settings: "Settings",
+    nav_about: "About",
+
     // Settings HTML labels
     settings_cycle_tab: "Cycle Settings",
     settings_security_tab: "Security & Privacy",
@@ -297,25 +303,49 @@ const LOCALES = {
 
     // Toast messages
     settings_saved_toast: "Settings saved",
-    status_no_data_hint: "Set your last period date in Settings to get cycle predictions.",
+    status_no_data_hint:
+      "Set your last period date in Settings to get cycle predictions.",
 
     // Storage full error
     storage_full_title: "Storage Full",
-    storage_full_msg: "Your device storage is full. Please export your data or clear some logs to free up space.",
+    storage_full_msg:
+      "Your device storage is full. Please export your data or clear some logs to free up space.",
 
     // Forgot PIN second confirmation
     forgot_pin_confirm2_title: "Last Warning",
-    forgot_pin_confirm2_msg: "ALL your period tracking data will be permanently deleted and cannot be recovered. This cannot be undone.",
+    forgot_pin_confirm2_msg:
+      "ALL your period tracking data will be permanently deleted and cannot be recovered. This cannot be undone.",
     forgot_pin_confirm2_btn: "Yes, Delete Everything",
 
     // Cycle history
-    no_cycle_history: "No cycle history yet. Log at least 2 periods to see history.",
+    no_cycle_history:
+      "No cycle history yet. Log at least 2 periods to see history.",
     history_showing: "Showing last {shown} of {total} cycles",
 
     // History legend
     legend_short: "Short (<26d)",
     legend_normal: "Normal (26–32d)",
     legend_long: "Long (>32d)",
+
+    // Hardcoded HTML sections
+    flow_question: "What's your flow today? 🌊",
+    security_info:
+      "All data is encrypted with your PIN before being stored. Cycle Keeper uses the <strong>Web Crypto API</strong> — the same standard used by browsers for HTTPS.<br><br>Zero data is sent to any server. No accounts. No analytics.",
+    data_persistence:
+      '⚠️ <strong>Data Persistence:</strong> Your data is stored in IndexedDB. Clearing browser cache is safe, but clearing "site data" or "cookies and site data" in your browser settings WILL erase all your cycle data. Always export a backup first!',
+    about_info_html:
+      'Your Cycle Keeper is free software built with care for privacy. Based on the <strong>Calendar Rhythm Method</strong> and <strong>Standard Days Method</strong> for cycle estimation. For informational purposes only.<br><br><strong>Version:</strong> 1.0.0-beta<br><strong>License:</strong> GNU General Public License v3.0<br><strong>Developer:</strong> <a href="https://github.com/pythonime-lab" target="_blank" rel="noopener" class="accessibility-link">pythonime-lab</a><br><br>Found a bug or have a suggestion? Visit our <a href="https://github.com/pythonime-lab/yourcyclekeeper" target="_blank" rel="noopener" class="accessibility-link">GitHub repository</a>.',
+    support_info:
+      "Your Cycle Keeper is <strong>free forever</strong> with no ads, no tracking, and no data collection. If you find it helpful and would like to support continued development, you can buy me a coffee!",
+    support_via: "Support via",
+    support_footer:
+      "Your support helps keep this project maintained and ad-free for everyone. Thank you! 💜",
+    privacy_info_html:
+      "Your Cycle Keeper collects <strong>zero data</strong>. This app:<br>&nbsp;• Stores all data locally on your device only<br>&nbsp;• Has no servers, no accounts, no cloud storage<br>&nbsp;• Has no analytics, no tracking, no telemetry<br>&nbsp;• Has no ads, no third-party code<br>&nbsp;• Never transmits any data anywhere<br>&nbsp;• Is encrypted with your PIN via AES-256-GCM<br><br>Your health data is yours alone.",
+    disclaimer_info_html:
+      "⚠️ <strong>This app provides cycle estimations based on average biological patterns.</strong> It is <em>not</em> medical advice and must not be used as a substitute for professional medical consultation.<br><br>Your Cycle Keeper predicts your cycle by tracking patterns and estimating ovulation timing. Actual cycle timing can vary due to stress, illness, medications, and many other factors.<br><br>Do <strong>not</strong> use this app as a contraceptive or fertility guarantee. Always consult a qualified healthcare professional for medical decisions.",
+    accessibility_info_html:
+      'Your Cycle Keeper follows <strong>WCAG 2.0 accessibility standards</strong>:<br><br>&nbsp;• <strong>Tab/Shift+Tab:</strong> Navigate forward/backward through all interactive elements<br>&nbsp;• <strong>Arrow Keys:</strong> Navigate calendar dates (complex grid component)<br>&nbsp;• <strong>Enter/Space:</strong> Activate buttons and links<br>&nbsp;• <strong>Escape:</strong> Close modals and return focus to trigger element<br>&nbsp;• <strong>PIN Entry:</strong> Type digits 0-9 and Backspace on all PIN screens<br>&nbsp;• <strong>Form Controls:</strong> Native keyboard support for inputs, selects, and textareas<br>&nbsp;• <strong>Screen Readers:</strong> Semantic HTML with proper ARIA labels and roles<br>&nbsp;• <strong>Focus Management:</strong> Visible focus indicators, logical tab order<br><br>Standards based on <a href="https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation" target="_blank" rel="noopener" class="accessibility-link">Salesforce Accessibility Guidelines</a>.',
   },
 
   // ── Russian ────────────────────────────────────────────────────────────────
@@ -326,7 +356,7 @@ const LOCALES = {
     db_error_title: "Ошибка базы данных",
     db_error_msg:
       "Не удалось инициализировать хранилище. Пожалуйста, обновите страницу.",
-      
+
     cycle_stats: "Статистика цикла",
     avg_length: "Средняя длина",
     cycles_logged: "Отмечено циклов",
@@ -346,7 +376,8 @@ const LOCALES = {
     disclaimer: "Отказ от ответственности",
     estimation_disclaimer:
       "⚠️ Это только инструмент для оценки. Не для контрацепции. Стресс, болезни и лекарства могут изменить сроки.",
-    no_symptoms_logged: "Симптомы пока не отмечены — начните отмечать их сегодня",
+    no_symptoms_logged:
+      "Симптомы пока не отмечены — начните отмечать их сегодня",
     cycle_history: "История цикла",
     all_months: "Все месяцы",
     cycle_day: "День цикла",
@@ -559,19 +590,23 @@ const LOCALES = {
 
     // Toast messages
     settings_saved_toast: "Настройки сохранены",
-    status_no_data_hint: "Укажите дату последней менструации в настройках для получения прогнозов.",
+    status_no_data_hint:
+      "Укажите дату последней менструации в настройках для получения прогнозов.",
 
     // Storage full error
     storage_full_title: "Хранилище заполнено",
-    storage_full_msg: "Хранилище устройства заполнено. Экспортируйте данные или удалите некоторые записи.",
+    storage_full_msg:
+      "Хранилище устройства заполнено. Экспортируйте данные или удалите некоторые записи.",
 
     // Forgot PIN second confirmation
     forgot_pin_confirm2_title: "Последнее предупреждение",
-    forgot_pin_confirm2_msg: "ВСЕ ваши данные отслеживания цикла будут безвозвратно удалены. Это действие нельзя отменить.",
+    forgot_pin_confirm2_msg:
+      "ВСЕ ваши данные отслеживания цикла будут безвозвратно удалены. Это действие нельзя отменить.",
     forgot_pin_confirm2_btn: "Да, удалить всё",
 
     // Cycle history
-    no_cycle_history: "История циклов пока отсутствует. Зафиксируйте хотя бы 2 менструации.",
+    no_cycle_history:
+      "История циклов пока отсутствует. Зафиксируйте хотя бы 2 менструации.",
     history_showing: "Показано последних {shown} из {total} циклов",
 
     // History legend
@@ -791,19 +826,23 @@ const LOCALES = {
 
     // Toast messages
     settings_saved_toast: "Налады захаваны",
-    status_no_data_hint: "Усталюйце дату апошняй менструацыі ў налатах для атрымання прагнозаў.",
+    status_no_data_hint:
+      "Усталюйце дату апошняй менструацыі ў налатах для атрымання прагнозаў.",
 
     // Storage full error
     storage_full_title: "Сховішча запоўнена",
-    storage_full_msg: "Сховішча прылады запоўнена. Экспартуйце дадзеныя або выдаліце некаторыя запісы.",
+    storage_full_msg:
+      "Сховішча прылады запоўнена. Экспартуйце дадзеныя або выдаліце некаторыя запісы.",
 
     // Forgot PIN second confirmation
     forgot_pin_confirm2_title: "Апошняе папярэджанне",
-    forgot_pin_confirm2_msg: "УСЕ вашы дадзеныя будуць назаўжды выдалены. Гэта дзеянне немагчыма адмяніць.",
+    forgot_pin_confirm2_msg:
+      "УСЕ вашы дадзеныя будуць назаўжды выдалены. Гэта дзеянне немагчыма адмяніць.",
     forgot_pin_confirm2_btn: "Так, выдаліць усё",
 
     // Cycle history
-    no_cycle_history: "Гісторыя цыклаў пакуль адсутнічае. Зафіксуйце хаця б 2 менструацыі.",
+    no_cycle_history:
+      "Гісторыя цыклаў пакуль адсутнічае. Зафіксуйце хаця б 2 менструацыі.",
     history_showing: "Паказана апошніх {shown} з {total} цыклаў",
 
     // History legend
@@ -823,12 +862,12 @@ const LOCALES = {
     cycles_logged: "Ciclos registrados",
     avg_period: "Período promedio",
     fertile_days: "Días fértiles",
-    symptom_tracking: "Seguimiento de síntomas",
+    symptom_tracking: "Gráfico de síntomas",
     period: "Período",
     ovulation: "Ovulación",
     flow: "Flujo",
     pain: "Dolor",
-    mood: "Estado de ánimo",
+    mood: "Ánimo",
     how_it_works: "Cómo funciona",
     how_it_works_p1:
       "Your Cycle Keeper estima tu ventana fértil rastreando patrones del ciclo. La ovulación se estima ~14 días antes de tu próximo período. Los días fértiles se calculan como el día 8 hasta (longitud del ciclo − 11).",
@@ -837,9 +876,10 @@ const LOCALES = {
     disclaimer: "Aviso",
     estimation_disclaimer:
       "⚠️ Esta es solo una herramienta de estimación. No es para anticoncepción. El estrés, las enfermedades y los medicamentos pueden cambiar los tiempos.",
-    no_symptoms_logged: "Aún no hay síntomas registrados — comienza registrando hoy",
+    no_symptoms_logged:
+      "Aún no hay síntomas registrados — comienza registrando hoy",
     cycle_history: "Historial del ciclo",
-    all_months: "Todos los meses",
+    all_months: "Año",
     cycle_day: "Día del ciclo",
     until_next: "Hasta el próximo",
     day_1: "Día 1",
@@ -887,6 +927,7 @@ const LOCALES = {
       "No se pudo completar la configuración. Por favor, recarga la página e inténtalo de nuevo.",
 
     note_count: "{count} / 500",
+    note_placeholder: "Añadir una nota…",
 
     set_flow: "Flujo",
     save: "Guardar",
@@ -898,7 +939,7 @@ const LOCALES = {
     mood_low: "Ánimo bajo",
     mood_happy: "Feliz",
     mood_neutral: "Neutral",
-    set_mood: "Estado de ánimo",
+    set_mood: "Ánimo",
 
     period_expected_in_one: "Periodo esperado en {n} día",
     period_expected_in_many: "Periodo esperado en {n} días",
@@ -1005,6 +1046,12 @@ const LOCALES = {
     lang_ru: "Русский",
     lang_es: "Español",
 
+    // Nav tabs
+    nav_calendar: "Calendario",
+    nav_insights: "Estadísticas",
+    nav_settings: "Ajustes",
+    nav_about: "Acerca de",
+
     settings_cycle_tab: "Configuración del ciclo",
     settings_security_tab: "Seguridad",
     settings_cycle_section: "Configuración del ciclo",
@@ -1048,32 +1095,59 @@ const LOCALES = {
 
     // Toast messages
     settings_saved_toast: "Ajustes guardados",
-    status_no_data_hint: "Configura la fecha de tu último período en Ajustes para obtener predicciones.",
+    status_no_data_hint:
+      "Configura la fecha de tu último período en Ajustes para obtener predicciones.",
 
     // Storage full error
     storage_full_title: "Almacenamiento lleno",
-    storage_full_msg: "El almacenamiento de tu dispositivo está lleno. Por favor exporta tus datos o elimina algunos registros.",
+    storage_full_msg:
+      "El almacenamiento de tu dispositivo está lleno. Por favor exporta tus datos o elimina algunos registros.",
 
     // Forgot PIN second confirmation
     forgot_pin_confirm2_title: "Última advertencia",
-    forgot_pin_confirm2_msg: "TODOS tus datos de seguimiento serán eliminados permanentemente y no podrán recuperarse. Esto no se puede deshacer.",
+    forgot_pin_confirm2_msg:
+      "TODOS tus datos de seguimiento serán eliminados permanentemente y no podrán recuperarse. Esto no se puede deshacer.",
     forgot_pin_confirm2_btn: "Sí, eliminar todo",
 
     // Cycle history
-    no_cycle_history: "Aún no hay historial de ciclos. Registra al menos 2 períodos para ver el historial.",
+    no_cycle_history:
+      "Aún no hay historial de ciclos. Registra al menos 2 períodos para ver el historial.",
     history_showing: "Mostrando los últimos {shown} de {total} ciclos",
 
     // History legend
     legend_short: "Corto (<26d)",
     legend_normal: "Normal (26–32d)",
     legend_long: "Largo (>32d)",
+
+    // Hardcoded HTML sections
+    flow_question: "¿Cómo es tu flujo hoy? 🌊",
+    security_info:
+      "Todos los datos se cifran con tu PIN antes de guardarse. Cycle Keeper usa la <strong>Web Crypto API</strong> — el mismo estándar que los navegadores usan para HTTPS.<br><br>No se envía ningún dato a ningún servidor. Sin cuentas. Sin analíticas.",
+    data_persistence:
+      '⚠️ <strong>Persistencia de datos:</strong> Tus datos se almacenan en IndexedDB. Limpiar el caché del navegador es seguro, pero limpiar los "datos del sitio" o "cookies y datos del sitio" en la configuración del navegador BORRARÁ todos tus datos del ciclo. ¡Siempre exporta una copia de seguridad primero!',
+    about_info_html:
+      'Your Cycle Keeper es software libre creado con atención a la privacidad. Basado en el <strong>Método del Ritmo del Calendario</strong> y el <strong>Método de Días Estándar</strong> para la estimación del ciclo. Solo con fines informativos.<br><br><strong>Versión:</strong> 1.0.0-beta<br><strong>Licencia:</strong> GNU General Public License v3.0<br><strong>Desarrollador:</strong> <a href="https://github.com/pythonime-lab" target="_blank" rel="noopener" class="accessibility-link">pythonime-lab</a><br><br>¿Encontraste un error o tienes una sugerencia? Visita nuestro <a href="https://github.com/pythonime-lab/yourcyclekeeper" target="_blank" rel="noopener" class="accessibility-link">repositorio de GitHub</a>.',
+    support_info:
+      "Your Cycle Keeper es <strong>gratis para siempre</strong> sin anuncios, sin rastreo y sin recopilación de datos. Si lo encuentras útil y quieres apoyar el desarrollo continuo, ¡puedes invitarme un café!",
+    support_via: "Apoyar vía",
+    support_footer:
+      "Tu apoyo ayuda a mantener este proyecto sin anuncios para todos. ¡Gracias! 💜",
+    privacy_title: "Garantía de privacidad",
+    privacy_info_html:
+      "Your Cycle Keeper recopila <strong>cero datos</strong>. Esta aplicación:<br>&nbsp;• Almacena todos los datos localmente solo en tu dispositivo<br>&nbsp;• No tiene servidores, cuentas ni almacenamiento en la nube<br>&nbsp;• No tiene analíticas, rastreo ni telemetría<br>&nbsp;• No tiene anuncios ni código de terceros<br>&nbsp;• Nunca transmite ningún dato<br>&nbsp;• Está cifrada con tu PIN mediante AES-256-GCM<br><br>Tus datos de salud son solo tuyos.",
+    disclaimer_title: "Aviso médico",
+    disclaimer_info_html:
+      "⚠️ <strong>Esta aplicación proporciona estimaciones del ciclo basadas en patrones biológicos promedio.</strong> <em>No</em> es consejo médico y no debe usarse como sustituto de la consulta médica profesional.<br><br>Your Cycle Keeper predice tu ciclo rastreando patrones y estimando el momento de ovulación. El momento real del ciclo puede variar debido al estrés, enfermedades, medicamentos y muchos otros factores.<br><br><strong>No</strong> uses esta aplicación como anticonceptivo ni como garantía de fertilidad. Consulta siempre a un profesional de la salud cualificado para decisiones médicas.",
+    accessibility_title: "Accesibilidad",
+    accessibility_info_html:
+      'Your Cycle Keeper sigue los <strong>estándares de accesibilidad WCAG 2.0</strong>:<br><br>&nbsp;• <strong>Tab/Shift+Tab:</strong> Navegar hacia adelante/atrás por todos los elementos interactivos<br>&nbsp;• <strong>Teclas de flecha:</strong> Navegar por las fechas del calendario<br>&nbsp;• <strong>Enter/Espacio:</strong> Activar botones y enlaces<br>&nbsp;• <strong>Escape:</strong> Cerrar modales y devolver el foco al elemento activador<br>&nbsp;• <strong>Entrada de PIN:</strong> Escribe dígitos 0-9 y Retroceso en todas las pantallas de PIN<br>&nbsp;• <strong>Controles de formulario:</strong> Soporte de teclado nativo para inputs, selects y textareas<br>&nbsp;• <strong>Lectores de pantalla:</strong> HTML semántico con etiquetas ARIA y roles apropiados<br>&nbsp;• <strong>Gestión del foco:</strong> Indicadores de foco visibles, orden de tabulación lógico<br><br>Estándares basados en las <a href="https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation" target="_blank" rel="noopener" class="accessibility-link">Directrices de Accesibilidad de Salesforce</a>.',
   },
 };
 
 // ─── State ────────────────────────────────────────────────────────────────────
 
 const LANG_STORAGE_KEY = "yck_lang";
-const SUPPORTED = ["en"];
+const SUPPORTED = ["en", "es"];
 
 function detectLanguage() {
   try {
@@ -1156,6 +1230,9 @@ export function tp(key, count, vars) {
 export function applyI18n() {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    el.innerHTML = t(el.dataset.i18nHtml);
   });
   document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
     el.placeholder = t(el.dataset.i18nPlaceholder);

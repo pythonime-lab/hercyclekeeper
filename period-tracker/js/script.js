@@ -1219,6 +1219,17 @@ function updatePainChart() {
   renderPainChart();
 }
 
+// Re-render chart when its container changes size (orientation, resize, tab switch)
+(function initChartResizeObserver() {
+  const container = document.getElementById("pain-chart-container");
+  if (!container || typeof ResizeObserver === "undefined") return;
+  let rafId;
+  new ResizeObserver(() => {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(renderPainChart);
+  }).observe(container);
+})();
+
 function renderPainChart() {
   const canvas = document.getElementById("pain-chart");
   if (!canvas) return;
@@ -1358,7 +1369,7 @@ function renderPainChart() {
       const startX = padding.left + i * barWidth + (barWidth - groupWidth) / 2;
 
       symptoms.forEach((symptom, idx) => {
-        const barHeight = chartHeight * 0.8 * symptom.intensity;
+        const barHeight = chartHeight * symptom.intensity;
 
         if (symptom.isGradient) {
           // Determine gradient scale based on the total possible height
@@ -1366,7 +1377,7 @@ function renderPainChart() {
             0,
             baseY,
             0,
-            baseY - chartHeight * 0.8
+            baseY - chartHeight
           );
           grad.addColorStop(0, symptom.gradientColors[0]);
           grad.addColorStop(1, symptom.gradientColors[1]);
@@ -1385,13 +1396,16 @@ function renderPainChart() {
     }
   });
 
-  // Draw labels
+  // Draw labels — skip some when too crowded
   ctx.fillStyle = "#999";
-  ctx.font =
-    data.length > 20 && chartWidth < 350 ? "9px sans-serif" : "11px sans-serif";
+  ctx.font = "11px sans-serif";
   ctx.textAlign = "center";
 
+  // Show every Nth label so they don't overlap (min ~18px per label)
+  const step = Math.ceil((data.length * 18) / chartWidth);
+
   data.forEach((point, i) => {
+    if (i % step !== 0) return;
     const x = padding.left + i * barWidth + barWidth / 2;
     ctx.fillText(point.label, x, padding.top + chartHeight + 20);
   });
@@ -2414,8 +2428,8 @@ function switchTab(tab) {
     if (isAboutMode && !document.getElementById("official-version-notice")) {
       const notice = document.createElement("div");
       notice.id = "official-version-notice";
-      notice.style.cssText = "margin:1.5rem 0 0 0;padding:0.75rem 1.25rem;background:#221a33;color:#A78BFA;border-radius:8px;font-size:1rem;text-align:center;opacity:0.92;";
-      notice.textContent = "Official version: yourcyclekeeper.web.app";
+      notice.style.cssText = "margin:1.5rem 0 0 0;padding:0.75rem 1.25rem;background:#221a33;color:#A78BFA;border-radius:8px;font-size:0.9rem;text-align:center;opacity:0.92;";
+      notice.innerHTML = "Official version: yourcyclekeeper.web.app &nbsp;·&nbsp; yourcyclekeeper.com";
       aboutView.appendChild(notice);
     }
   }

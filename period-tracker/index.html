@@ -21,11 +21,11 @@
     />
     <meta
       name="description"
-      content="Your Cycle Keeper — a free, private period tracker with AES-256 encryption. Track your cycle, flow, mood, and symptoms entirely on your device. No accounts, no servers, no data collection. Forever free and ad-free."
+      content="Free menstruation & period tracker. Predict your next period, track ovulation, flow, mood and symptoms. Know what's normal for your cycle — 100% private, no account needed."
     />
     <meta
       name="keywords"
-      content="period tracker, cycle tracker, private period tracker, free period app, menstrual cycle tracker, ovulation tracker, fertility tracker, encrypted health app, offline period tracker, no account period tracker, privacy first, AES-256, PWA"
+      content="menstruation tracker, period tracker, menstrual cycle tracker, period calculator, cycle calculator, ovulation tracker, predict period, when will my period start, menstrual calendar, fertility tracker, private period tracker, free period app, offline period tracker, no account period tracker"
     />
     <meta name="author" content="Your Cycle Keeper" />
 
@@ -35,16 +35,16 @@
     <meta property="og:locale" content="en_US" />
     <meta
       property="og:title"
-      content="Your Cycle Keeper — Free Private Period & Cycle Tracker"
+      content="Your Cycle Keeper — Free Period & Menstruation Tracker"
     />
     <meta
       property="og:description"
-      content="Track your period, flow, mood and symptoms privately. AES-256 encrypted, no accounts, no servers, no data collection. Free forever."
+      content="Predict your next period and ovulation, track flow, mood and symptoms. Spot patterns in your cycle — 100% private, no account, no data collection."
     />
-    <meta property="og:url" content="https://yourcyclekeeper.web.app/period-tracker/" />
+    <meta property="og:url" content="https://yourcyclekeeper.com/period-tracker/" />
     <meta
       property="og:image"
-      content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+      content="https://yourcyclekeeper.com/icons/favicon-512x512.png"
     />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
@@ -57,25 +57,25 @@
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:title"
-      content="Your Cycle Keeper — Free Private Period Tracker"
+      content="Your Cycle Keeper — Free Period & Menstruation Tracker"
     />
     <meta
       name="twitter:description"
-      content="Track your period, flow, mood and symptoms privately. AES-256 encrypted, no accounts, no servers. Free forever."
+      content="Predict your next period and ovulation, track flow, mood and symptoms. Spot patterns in your cycle — 100% private, no account needed."
     />
     <meta
       name="twitter:image"
-      content="https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+      content="https://yourcyclekeeper.com/icons/favicon-512x512.png"
     />
     <meta name="twitter:image:alt" content="Your Cycle Keeper logo" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://yourcyclekeeper.web.app/period-tracker/" />
+    <link rel="canonical" href="https://yourcyclekeeper.com/period-tracker/" />
 
-    <link rel="stylesheet" href="style.css?v=20260316" />
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
-      href="style-desktop.css?v=20260316"
+      href="style-desktop.css"
       media="screen and (min-width: 1024px)"
     />
     <link rel="manifest" href="manifest.json" />
@@ -85,8 +85,8 @@
       sizes="16x16"
       href="../icons/favicon-16x16.png"
     />
-    <script src="js/indexeddb-storage.js?v=20260316" defer></script>
-    <script type="module" src="js/script.js?v=20260316"></script>
+    <script src="js/indexeddb-storage.js" defer></script>
+    <script type="module" src="js/script.js"></script>
     <link
       rel="icon"
       type="image/png"
@@ -150,7 +150,7 @@
       sizes="144x144"
       href="../icons/favicon-144x144.png"
     />
-    <title>Your Cycle Keeper — Private Period & Cycle Tracker</title>
+    <title>Your Cycle Keeper — Free Period & Menstruation Tracker</title>
 
     <!-- JSON-LD Schema for Search Engines -->
     <script type="application/ld+json">
@@ -159,8 +159,8 @@
         "@type": "SoftwareApplication",
         "name": "Your Cycle Keeper",
         "alternateName": "Cycle Keeper",
-        "description": "Free, private period and cycle tracker with AES-256 encryption. Track your flow, mood, and symptoms entirely on your device. No accounts, no servers, no data collection.",
-        "url": "https://yourcyclekeeper.web.app/period-tracker/",
+        "description": "Free menstruation and period tracker. Predict your next period, track ovulation, flow, mood and symptoms. Know what's normal for your cycle — 100% private, no account needed, no data collection.",
+        "url": "https://yourcyclekeeper.com/period-tracker/",
         "applicationCategory": "HealthApplication",
         "operatingSystem": "Web",
         "browserRequirements": "Requires JavaScript, Web Crypto API",
@@ -172,19 +172,20 @@
           "availability": "https://schema.org/InStock"
         },
         "featureList": [
-          "AES-256-GCM encryption",
-          "Offline-first PWA",
-          "Period tracking",
+          "Menstruation tracker",
+          "Period calculator — predict your next period",
+          "Ovulation tracker and fertile window estimator",
+          "Menstrual cycle calendar",
           "Flow intensity tracking",
-          "Mood tracking",
-          "Pain tracking",
-          "Cycle predictions",
-          "Ovulation estimation",
+          "Mood and pain symptom tracking",
+          "Cycle pattern analysis",
+          "No account required",
+          "100% private — data never leaves your device",
           "Encrypted backup & restore",
-          "Zero data collection"
+          "Free forever, no ads"
         ],
-        "screenshot": "https://yourcyclekeeper.web.app/icons/favicon-512x512.png",
-        "image": "https://yourcyclekeeper.web.app/icons/favicon-512x512.png"
+        "screenshot": "https://yourcyclekeeper.com/icons/favicon-512x512.png",
+        "image": "https://yourcyclekeeper.com/icons/favicon-512x512.png"
       }
     </script>
 
@@ -255,91 +256,97 @@
     <div id="onboarding" class="hidden">
       <div class="onboard-moon">
         <img
-          src="../icons/favicon-64x64.png"
-          srcset="../icons/favicon-64x64.png 1x, ../icons/favicon-192x192.png 3x"
+          src="../icons/favicon-96x96.png"
+          srcset="../icons/favicon-96x96.png 1x, ../icons/favicon-192x192.png 2x, ../icons/favicon-256x256.png 3x"
           alt="Your Cycle Keeper Logo"
           class="logo-onboard"
-          width="64"
-          height="64"
+          width="80"
+          height="80"
         />
       </div>
-      <h1 class="onboard-logo">Your <span>Cycle</span> Keeper</h1>
-      <p class="onboard-sub">Track Your Period and Cycle Privately</p>
-      <p class="onboard-tagline">
-        Track your flow, mood, and symptoms — all on your device. Free, ad-free,
-        fully accessible, and privacy-first.
-      </p>
-      <div class="beta-warning">
-        ⚠️ <strong>Beta</strong> — This app is currently in active development.
-        Features may change and bugs may occur.
+      <div class="desktop column-left">
+        <h1 class="onboard-logo">Your <span>Cycle</span> Keeper</h1>
+        <p class="onboard-sub">Track Your Period and Cycle Privately</p>
+        <p class="onboard-tagline">
+          Track your flow, mood, and symptoms — all on your device. Free, ad-free,
+          fully accessible, and privacy-first.
+        </p>
+        <div class="beta-warning">
+          ⚠️ <strong>Beta</strong> — This app is currently in active development.
+          Features may change and bugs may occur.
+        </div>
+        <div class="onboard-form">
+          <label for="ob-last-period">First day of your last period</label>
+          <input type="date" id="ob-last-period" autocomplete="off" />
+          <label for="ob-cycle-len">Average cycle length (days)</label>
+          <input
+            type="number"
+            id="ob-cycle-len"
+            value="28"
+            min="20"
+            max="45"
+            autocomplete="off"
+          />
+          <label for="ob-period-dur">Average period duration (days)</label>
+          <input
+            type="number"
+            id="ob-period-dur"
+            value="5"
+            min="1"
+            max="10"
+            autocomplete="off"
+          />
+        </div>
       </div>
-      <div class="onboard-form">
-        <label for="ob-last-period">First day of your last period</label>
-        <input type="date" id="ob-last-period" autocomplete="off" />
-        <label for="ob-cycle-len">Average cycle length (days)</label>
-        <input
-          type="number"
-          id="ob-cycle-len"
-          value="28"
-          min="20"
-          max="45"
-          autocomplete="off"
-        />
-        <label for="ob-period-dur">Average period duration (days)</label>
-        <input
-          type="number"
-          id="ob-period-dur"
-          value="5"
-          min="1"
-          max="10"
-          autocomplete="off"
-        />
-
-        <div class="pin-setup-title">🔒 Set a 4-digit PIN</div>
-        <div class="pin-setup-sub">
-          Your PIN encrypts all data locally.
-          <strong>Your Cycle Keeper never sends data anywhere.</strong> If you
-          forget your PIN, data will be erased.
+      <div class="desktop column-right">
+        <div class="onboard-form">
+          <div class="pin-setup-title">🔒 Set a 4-digit PIN</div>
+            <div class="pin-setup-sub">
+              Your PIN encrypts all data locally.
+              <strong>Your Cycle Keeper never sends data anywhere.</strong> If you
+              forget your PIN, data will be erased.
+            </div>
+            <div class="setup-pin-wrap" id="setup-pin-dots">
+              <div class="setup-pin-dot" id="sp0"></div>
+              <div class="setup-pin-dot" id="sp1"></div>
+              <div class="setup-pin-dot" id="sp2"></div>
+              <div class="setup-pin-dot" id="sp3"></div>
+            </div>
+            <div class="onboard-numpad">
+              <div class="num-btn" onclick="setupPinInput('1')">1</div>
+              <div class="num-btn" onclick="setupPinInput('2')">2</div>
+              <div class="num-btn" onclick="setupPinInput('3')">3</div>
+              <div class="num-btn" onclick="setupPinInput('4')">4</div>
+              <div class="num-btn" onclick="setupPinInput('5')">5</div>
+              <div class="num-btn" onclick="setupPinInput('6')">6</div>
+              <div class="num-btn" onclick="setupPinInput('7')">7</div>
+              <div class="num-btn" onclick="setupPinInput('8')">8</div>
+              <div class="num-btn" onclick="setupPinInput('9')">9</div>
+              <div class="num-btn empty"></div>
+              <div class="num-btn" onclick="setupPinInput('0')">0</div>
+              <div class="num-btn del" onclick="setupPinDelete()">⌫</div>
+            </div>
+            <button
+              class="onboard-start"
+              id="onboard-start-btn"
+              onclick="startApp()"
+              disabled
+            >
+              Start Tracking ✨
+            </button>
+          </div>
+          <p class="privacy-note">
+            🔒 <span>AES-256-GCM encrypted.</span> Data never leaves your device. No
+            accounts, no tracking, forever free.
+          </p>
+          </div>
         </div>
-        <div class="setup-pin-wrap" id="setup-pin-dots">
-          <div class="setup-pin-dot" id="sp0"></div>
-          <div class="setup-pin-dot" id="sp1"></div>
-          <div class="setup-pin-dot" id="sp2"></div>
-          <div class="setup-pin-dot" id="sp3"></div>
-        </div>
-        <div class="onboard-numpad">
-          <div class="num-btn" onclick="setupPinInput('1')">1</div>
-          <div class="num-btn" onclick="setupPinInput('2')">2</div>
-          <div class="num-btn" onclick="setupPinInput('3')">3</div>
-          <div class="num-btn" onclick="setupPinInput('4')">4</div>
-          <div class="num-btn" onclick="setupPinInput('5')">5</div>
-          <div class="num-btn" onclick="setupPinInput('6')">6</div>
-          <div class="num-btn" onclick="setupPinInput('7')">7</div>
-          <div class="num-btn" onclick="setupPinInput('8')">8</div>
-          <div class="num-btn" onclick="setupPinInput('9')">9</div>
-          <div class="num-btn empty"></div>
-          <div class="num-btn" onclick="setupPinInput('0')">0</div>
-          <div class="num-btn del" onclick="setupPinDelete()">⌫</div>
-        </div>
-        <button
-          class="onboard-start"
-          id="onboard-start-btn"
-          onclick="startApp()"
-          disabled
-        >
-          Start Tracking ✨
-        </button>
-      </div>
-      <p class="privacy-note">
-        🔒 <span>AES-256-GCM encrypted.</span> Data never leaves your device. No
-        accounts, no tracking, forever free.
-      </p>
     </div>
 
     <!-- MAIN APP -->
     <div id="app" style="display: none">
       <div class="header">
-        <div class="logo">Your <span>Cycle</span> Keeper</div>
+        <a href="/" class="logo" style="text-decoration:none;">Your <span>Cycle</span> Keeper</a>
         <div class="bottom-nav" id="bottom-nav">
           <div
             class="bnav-item active"
@@ -364,7 +371,7 @@
                 <line x1="16" y1="2" x2="16" y2="6"></line>
                 <line x1="8" y1="2" x2="8" y2="6"></line>
                 <line x1="3" y1="10" x2="21" y2="10"></line></svg></span
-            >Calendar
+            ><span data-i18n="nav_calendar">Calendar</span>
           </div>
           <div
             class="bnav-item"
@@ -398,7 +405,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 ></path></svg></span
-            >Insights
+            ><span data-i18n="nav_insights">Insights</span>
           </div>
           <div
             class="bnav-item"
@@ -419,7 +426,7 @@
                 <path
                   d="M 22.205078 2 A 1.0001 1.0001 0 0 0 21.21875 2.8378906 L 20.246094 8.7929688 C 19.076509 9.1331971 17.961243 9.5922728 16.910156 10.164062 L 11.996094 6.6542969 A 1.0001 1.0001 0 0 0 10.708984 6.7597656 L 6.8183594 10.646484 A 1.0001 1.0001 0 0 0 6.7070312 11.927734 L 10.164062 16.873047 C 9.583454 17.930271 9.1142098 19.051824 8.765625 20.232422 L 2.8359375 21.21875 A 1.0001 1.0001 0 0 0 2.0019531 22.205078 L 2.0019531 27.705078 A 1.0001 1.0001 0 0 0 2.8261719 28.691406 L 8.7597656 29.742188 C 9.1064607 30.920739 9.5727226 32.043065 10.154297 33.101562 L 6.6542969 37.998047 A 1.0001 1.0001 0 0 0 6.7597656 39.285156 L 10.648438 43.175781 A 1.0001 1.0001 0 0 0 11.927734 43.289062 L 16.882812 39.820312 C 17.936999 40.39548 19.054994 40.857928 20.228516 41.201172 L 21.21875 47.164062 A 1.0001 1.0001 0 0 0 22.205078 48 L 27.705078 48 A 1.0001 1.0001 0 0 0 28.691406 47.173828 L 29.751953 41.1875 C 30.920633 40.838997 32.033372 40.369697 33.082031 39.791016 L 38.070312 43.291016 A 1.0001 1.0001 0 0 0 39.351562 43.179688 L 43.240234 39.287109 A 1.0001 1.0001 0 0 0 43.34375 37.996094 L 39.787109 33.058594 C 40.355783 32.014958 40.813915 30.908875 41.154297 29.748047 L 47.171875 28.693359 A 1.0001 1.0001 0 0 0 47.998047 27.707031 L 47.998047 22.207031 A 1.0001 1.0001 0 0 0 47.160156 21.220703 L 41.152344 20.238281 C 40.80968 19.078827 40.350281 17.974723 39.78125 16.931641 L 43.289062 11.933594 A 1.0001 1.0001 0 0 0 43.177734 10.652344 L 39.287109 6.7636719 A 1.0001 1.0001 0 0 0 37.996094 6.6601562 L 33.072266 10.201172 C 32.023186 9.6248101 30.909713 9.1579916 29.738281 8.8125 L 28.691406 2.828125 A 1.0001 1.0001 0 0 0 27.705078 2 L 22.205078 2 z M 23.056641 4 L 26.865234 4 L 27.861328 9.6855469 A 1.0001 1.0001 0 0 0 28.603516 10.484375 C 30.066026 10.848832 31.439607 11.426549 32.693359 12.185547 A 1.0001 1.0001 0 0 0 33.794922 12.142578 L 38.474609 8.7792969 L 41.167969 11.472656 L 37.835938 16.220703 A 1.0001 1.0001 0 0 0 37.796875 17.310547 C 38.548366 18.561471 39.118333 19.926379 39.482422 21.380859 A 1.0001 1.0001 0 0 0 40.291016 22.125 L 45.998047 23.058594 L 45.998047 26.867188 L 40.279297 27.871094 A 1.0001 1.0001 0 0 0 39.482422 28.617188 C 39.122545 30.069817 38.552234 31.434687 37.800781 32.685547 A 1.0001 1.0001 0 0 0 37.845703 33.785156 L 41.224609 38.474609 L 38.53125 41.169922 L 33.791016 37.84375 A 1.0001 1.0001 0 0 0 32.697266 37.808594 C 31.44975 38.567585 30.074755 39.148028 28.617188 39.517578 A 1.0001 1.0001 0 0 0 27.876953 40.3125 L 26.867188 46 L 23.052734 46 L 22.111328 40.337891 A 1.0001 1.0001 0 0 0 21.365234 39.53125 C 19.90185 39.170557 18.522094 38.59371 17.259766 37.835938 A 1.0001 1.0001 0 0 0 16.171875 37.875 L 11.46875 41.169922 L 8.7734375 38.470703 L 12.097656 33.824219 A 1.0001 1.0001 0 0 0 12.138672 32.724609 C 11.372652 31.458855 10.793319 30.079213 10.427734 28.609375 A 1.0001 1.0001 0 0 0 9.6328125 27.867188 L 4.0019531 26.867188 L 4.0019531 23.052734 L 9.6289062 22.117188 A 1.0001 1.0001 0 0 0 10.435547 21.373047 C 10.804273 19.898143 11.383325 18.518729 12.146484 17.255859 A 1.0001 1.0001 0 0 0 12.111328 16.164062 L 8.8261719 11.46875 L 11.523438 8.7734375 L 16.185547 12.105469 A 1.0001 1.0001 0 0 0 17.28125 12.148438 C 18.536908 11.394293 19.919867 10.822081 21.384766 10.462891 A 1.0001 1.0001 0 0 0 22.132812 9.6523438 L 23.056641 4 z M 25 17 C 20.593567 17 17 20.593567 17 25 C 17 29.406433 20.593567 33 25 33 C 29.406433 33 33 29.406433 33 25 C 33 20.593567 29.406433 17 25 17 z M 25 19 C 28.325553 19 31 21.674447 31 25 C 31 28.325553 28.325553 31 25 31 C 21.674447 31 19 28.325553 19 25 C 19 21.674447 21.674447 19 25 19 z"
                 ></path></svg></span
-            >Settings
+            ><span data-i18n="nav_settings">Settings</span>
           </div>
           <div
             class="bnav-item"
@@ -447,7 +454,7 @@
                 />
               </svg>
             </span>
-            About
+            <span data-i18n="nav_about">About</span>
           </div>
         </div>
       </div>
@@ -543,7 +550,7 @@
                 </div>
                 <button class="close-btn" onclick="closeLogPanel()" aria-label="Close">×</button>
               </div>
-              <p class="calendar-empty-text">What's your flow today? 🌊</p>
+              <p class="calendar-empty-text" data-i18n="flow_question">What's your flow today? 🌊</p>
               <div class="log-options">
                 <div
                   class="log-btn"
@@ -554,7 +561,7 @@
                   aria-label="Set flow intensity"
                   onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showFlowModal();}"
                 >
-                  <span class="icon" id="log-flow-icon">🩸</span>Flow
+                  <span class="icon" id="log-flow-icon">🩸</span><span data-i18n="flow">Flow</span>
                 </div>
                 <div
                   class="log-btn"
@@ -565,7 +572,7 @@
                   aria-label="Set pain level"
                   onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPainModal();}"
                 >
-                  <span class="icon" id="log-pain-icon">🤕</span><span id="log-pain-label">Pain</span>
+                  <span class="icon" id="log-pain-icon">🤕</span><span id="log-pain-label" data-i18n="pain">Pain</span>
                 </div>
                 <div
                   class="log-btn mood-btn"
@@ -576,14 +583,14 @@
                   aria-label="Set mood"
                   onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showMoodModal();}"
                 >
-                  <span class="icon" id="log-mood-icon">😐</span>Mood
+                  <span class="icon" id="log-mood-icon">😐</span><span data-i18n="mood">Mood</span>
                 </div>
               </div>
               <textarea
                 class="log-note"
                 id="log-note"
                 rows="2"
-                placeholder="Add a note…"
+                data-i18n-placeholder="note_placeholder" placeholder="Add a note…"
                 maxlength="500"
                 oninput="updateNoteCount(); scheduleAutoSaveNote()"
               ></textarea>
@@ -671,7 +678,6 @@
                 aria-label="Select year to view"
                 class="chart-select"
               ></select>
-              <div class="flex-spacer"></div>
               <button
                 onclick="downloadChart()"
                 aria-label="Export chart as image"
@@ -777,9 +783,9 @@
             </div>
             <div id="history-count" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;"></div>
             <div class="history-legend">
-              <span class="legend-dot" style="background:var(--fertile-green)"></span><span data-i18n="legend_short">Short (&lt;26d)</span>
-              <span class="legend-dot" style="background:var(--lavender)"></span><span data-i18n="legend_normal">Normal (26–32d)</span>
-              <span class="legend-dot" style="background:var(--rose)"></span><span data-i18n="legend_long">Long (&gt;32d)</span>
+              <span class="legend-item"><span class="legend-dot" style="background:var(--fertile-green)"></span><span data-i18n="legend_short">Short (&lt;26d)</span></span>
+              <span class="legend-item"><span class="legend-dot" style="background:var(--lavender)"></span><span data-i18n="legend_normal">Normal (26–32d)</span></span>
+              <span class="legend-item"><span class="legend-dot" style="background:var(--rose)"></span><span data-i18n="legend_long">Long (&gt;32d)</span></span>
             </div>
           </div>
         </div>
@@ -804,45 +810,32 @@
         <div id="about-tab-developer" class="settings-tab-content active">
           <div class="settings-section" id="about-core-section">
             <h3 data-i18n="about_title">About Your Cycle Keeper</h3>
-            <div class="info-box">
+            <div class="info-box" data-i18n-html="about_info_html">
               Your Cycle Keeper is free software built with care for privacy.
-              Based on the
-              <strong>Calendar Rhythm Method</strong> and
+              Based on the <strong>Calendar Rhythm Method</strong> and
               <strong>Standard Days Method</strong> for cycle estimation. For
               informational purposes only.<br /><br />
               <strong>Version:</strong> 1.0.0-beta<br />
               <strong>License:</strong> GNU General Public License v3.0<br />
               <strong>Developer:</strong>
-              <a
-                href="https://github.com/pythonime-lab"
-                target="_blank"
-                rel="noopener"
-                class="accessibility-link"
-                >pythonime-lab</a
-              ><br /><br />
+              <a href="https://github.com/pythonime-lab" target="_blank" rel="noopener" class="accessibility-link">pythonime-lab</a><br /><br />
               Found a bug or have a suggestion? Visit our
-              <a
-                href="https://github.com/pythonime-lab/yourcyclekeeper"
-                target="_blank"
-                rel="noopener"
-                class="accessibility-link"
-                >GitHub repository</a
-              >.
+              <a href="https://github.com/pythonime-lab/yourcyclekeeper" target="_blank" rel="noopener" class="accessibility-link">GitHub repository</a>.
             </div>
           </div>
           <div class="settings-section" id="support-section">
             <h3 data-i18n="support_title">Support Development</h3>
             <div class="info-box info-box--success">
-              Your Cycle Keeper is <strong>free forever</strong> with no ads, no
+              <span data-i18n-html="support_info">Your Cycle Keeper is <strong>free forever</strong> with no ads, no
               tracking, and no data collection. If you find it helpful and would
-              like to support continued development, you can buy me a coffee!<br /><br />
+              like to support continued development, you can buy me a coffee!</span><br /><br />
               <a
                 href="https://paypal.me/pythonime"
                 target="_blank"
                 rel="noopener"
                 class="support-link"
               >
-                <span>Support via</span>
+                <span data-i18n="support_via">Support via</span>
                 <span class="support-paypal-logo" aria-hidden="true"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -880,7 +873,7 @@
                   ></span>
               </a>
               <br /><br />
-              <small style="color: var(--text-muted)"
+              <small style="color: var(--text-muted)" data-i18n="support_footer"
                 >Your support helps keep this project maintained and ad-free for
                 everyone. Thank you! 💜</small
               >
@@ -891,7 +884,7 @@
         <div id="about-tab-privacy" class="settings-tab-content">
           <div class="settings-section">
             <h3 data-i18n="privacy_title">Privacy Guarantee</h3>
-            <div class="info-box info-box--success">
+            <div class="info-box info-box--success" data-i18n-html="privacy_info_html">
               Your Cycle Keeper collects <strong>zero data</strong>. This app:<br />
               &nbsp;• Stores all data locally on your device only<br />
               &nbsp;• Has no servers, no accounts, no cloud storage<br />
@@ -907,12 +900,9 @@
         <div id="about-tab-disclaimer" class="settings-tab-content">
           <div class="settings-section">
             <h3 data-i18n="disclaimer_title">Medical Disclaimer</h3>
-            <div class="info-box info-box--warning">
+            <div class="info-box info-box--warning" data-i18n-html="disclaimer_info_html">
               ⚠️
-              <strong
-                >This app provides cycle estimations based on average biological
-                patterns.</strong
-              >
+              <strong>This app provides cycle estimations based on average biological patterns.</strong>
               It is <em>not</em> medical advice and must not be used as a
               substitute for professional medical consultation.<br /><br />
               Your Cycle Keeper predicts your cycle by tracking patterns and
@@ -925,7 +915,7 @@
           </div>
           <div class="settings-section">
             <h3 data-i18n="accessibility_title">Accessibility</h3>
-            <div class="info-box">
+            <div class="info-box" data-i18n-html="accessibility_info_html">
               Your Cycle Keeper follows
               <strong>WCAG 2.0 accessibility standards</strong>:<br /><br />
               &nbsp;• <strong>Tab/Shift+Tab:</strong> Navigate forward/backward
@@ -944,13 +934,7 @@
               &nbsp;• <strong>Focus Management:</strong> Visible focus indicators,
               logical tab order<br /><br />
               Standards based on
-              <a
-                href="https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation"
-                target="_blank"
-                rel="noopener"
-                class="accessibility-link"
-                >Salesforce Accessibility Guidelines</a
-              >.
+              <a href="https://trailhead.salesforce.com/content/learn/modules/coding-for-web-accessibility/understand-accessible-navigation" target="_blank" rel="noopener" class="accessibility-link">Salesforce Accessibility Guidelines</a>.
             </div>
           </div>
         </div>
@@ -1004,6 +988,7 @@
             <h3 data-i18n="language_label">Language</h3>
             <select id="lang-switcher" class="field-input">
               <option value="en" data-i18n="lang_en">English</option>
+              <option value="es" data-i18n="lang_es">Español</option>
             </select>
           </div>
         </div>
@@ -1012,7 +997,7 @@
           <div class="settings-section">
             <h3 data-i18n="settings_security_section">Security &amp; Privacy</h3>
             <div class="sec-badge">AES-256-GCM Encrypted</div>
-            <div class="info-box info-box--margin">
+            <div class="info-box info-box--margin" data-i18n-html="security_info">
               All data is encrypted with your PIN before being stored. Cycle
               Keeper uses the <strong>Web Crypto API</strong> — the same standard
               used by browsers for HTTPS.<br /><br />
@@ -1036,7 +1021,7 @@
               <strong data-i18n="settings_storage_label">Storage used:</strong>
               <span id="storage-usage">Calculating...</span>
             </div>
-            <div class="info-box info-box--data-warning">
+            <div class="info-box info-box--data-warning" data-i18n-html="data_persistence">
               ⚠️ <strong>Data Persistence:</strong> Your data is stored in
               IndexedDB. Clearing browser cache is safe, but clearing "site data"
               or "cookies and site data" in your browser settings WILL erase all
